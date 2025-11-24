@@ -20,6 +20,7 @@
                 :badgeStyle="tabbar.badgeStyle"
                 :isCenter="getTabbarCenter(index)"
                 :centerImage="sheep.$url.cdn(item.iconUrl)"
+                :icon="item.icon"
                 @tap="sheep.$router.go(item.url)"
             >
                 <template v-slot:active-icon>
@@ -40,12 +41,41 @@
 </template>
 
 <script setup>
-    import { computed, unref } from 'vue';
+    import { computed, unref, ref } from 'vue';
     import sheep from '@/sheep';
     import SuTabbar from '@/sheep/ui/su-tabbar/su-tabbar.vue';
 
-    const tabbar = computed(() => {
-        return sheep.$store('app').template.basic?.tabbar;
+    const tabbar = ref({
+        mode: 1,
+        theme: 'red',
+        style: {
+            bgType: 'color',
+            bgColor: '#fff',
+            color: '#282828',
+            activeColor: '#409EFF',
+        },
+        items: [
+            {
+                text: '首页',
+                url: '/pages/index/index',
+                icon: 'home',
+            },
+            {
+                text: '房源',
+                url: '/pages/index/house',
+                icon: 'fangdong',
+            },
+            {
+                text: '租约',
+                url: '/pages/index/contract',
+                icon: 'hetong',
+            },
+            {
+                text: '我的',
+                url: '/pages/index/mine',
+                icon: 'yonghu',
+            },
+        ],
     });
 
     const tabbarStyle = computed(() => {

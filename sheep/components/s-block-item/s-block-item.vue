@@ -10,6 +10,10 @@
         <s-menu-list v-if="type === 'MenuList'" :data="data" />
         <!-- 基础组件：宫格导航 -->
         <s-menu-grid v-if="type === 'MenuGrid'" :data="data" :styles="styles" />
+        <!-- 基础组件：宫格导航带标题 -->
+        <s-menu-grid-with-title v-if="type === 'MenuGridWithTitle'" :data="data" :styles="styles" />
+        <!-- 基础组件：宫格统计版 -->
+        <s-menu-grid-statistic v-if="type === 'MenuGridStatistic'" :data="data" :styles="styles" />
         <!-- 基础组件：弹窗广告 -->
         <s-popup-image v-if="type === 'Popover'" :data="data" />
         <!-- 基础组件：悬浮按钮 -->

@@ -13,7 +13,7 @@
                     :customStyle="badgeStyle"
                     :isDot="dot"
                 >
-                    <image
+                    <!-- <image
                         v-if="icon"
                         :name="icon"
                         :color="isActive ? parentData.activeColor : parentData.inactiveColor"
@@ -22,7 +22,12 @@
                     <block v-else>
                         <slot v-if="isActive" name="active-icon" />
                         <slot v-else name="inactive-icon" />
-                    </block>
+                    </block> -->
+                    <s-icon
+                        :name="icon"
+                        :color="isActive ? parentData.activeColor : parentData.inactiveColor"
+                        :size="40"
+                    ></s-icon>
                 </uni-badge>
             </view>
 
@@ -54,8 +59,10 @@
      *
      */
     import { $parent, addStyle } from '@/sheep/helper';
+    import sIcon from '@/sheep/components/s-icon/s-icon.vue';
 
     export default {
+        components: { sIcon },
         name: 'su-tabbar-item',
         props: {
             customStyle: {
@@ -197,11 +204,6 @@
         transform: scale(1.3) translateY(-6px);
         position: absolute;
         z-index: 2;
-
-        .center-image {
-            width: 25px;
-            height: 25px;
-        }
     }
 
     .u-tabbar-item {
