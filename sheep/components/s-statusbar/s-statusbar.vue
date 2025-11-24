@@ -1,10 +1,10 @@
 <template>
-  <view class="status_bar" />
+    <view class="status_bar" />
 </template>
 
 <style>
-  .status_bar {
-    height: var(--status-bar-height);
-    width: 100%;
-  }
+    .status_bar {
+        height: var(--status-bar-height);
+        width: 100%;
+    }
 </style>

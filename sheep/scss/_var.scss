@@ -1,42 +1,42 @@
 @import './mixins';
 
 //颜色 ，渐变背景60%
-$red: #d10019;      // 中国红
-$orange: #f37b1d;   // 桔橙
-$gold: #fbbd08;     // 明黄
-$green: #8dc63f;    // 橄榄绿
-$cyan: #1cbbb4;     // 天青
-$blue: #0081ff;     // 海蓝
-$purple: #6739b6;   // 姹紫
-$brightRed: #e54d42;  // 嫣红
+$red: #d10019; // 中国红
+$orange: #f37b1d; // 桔橙
+$gold: #fbbd08; // 明黄
+$green: #8dc63f; // 橄榄绿
+$cyan: #1cbbb4; // 天青
+$blue: #0081ff; // 海蓝
+$purple: #6739b6; // 姹紫
+$brightRed: #e54d42; // 嫣红
 $forestGreen: #39b54a; // 森绿
-$mauve: #9c26b0;    // 木槿
-$pink: #e03997;     // 桃粉
-$brown: #a5673f;    // 棕褐
-$grey: #8799a3;     // 玄灰
-$gray: #aaaaaa;     // 草灰
-$black: #333333;    // 墨黑
+$mauve: #9c26b0; // 木槿
+$pink: #e03997; // 桃粉
+$brown: #a5673f; // 棕褐
+$grey: #8799a3; // 玄灰
+$gray: #aaaaaa; // 草灰
+$black: #333333; // 墨黑
 
 $colors: ();
 $colors: map-merge(
-  (
-    'red':$red,
-    'orange':$orange,
-    'gold':$gold,
-    'green':$green,
-    'cyan':$cyan,
-    'blue':$blue,
-    'purple':$purple,
-    'brightRed':$brightRed,
-    'forestGreen':$forestGreen,
-    'mauve':$mauve,
-    'pink':$pink,
-    'brown':$brown,
-    'grey':$grey,
-    'gray':$gray,
-    'black':$black,
-  ),
-  $colors
+    (
+        'red': $red,
+        'orange': $orange,
+        'gold': $gold,
+        'green': $green,
+        'cyan': $cyan,
+        'blue': $blue,
+        'purple': $purple,
+        'brightRed': $brightRed,
+        'forestGreen': $forestGreen,
+        'mauve': $mauve,
+        'pink': $pink,
+        'brown': $brown,
+        'grey': $grey,
+        'gray': $gray,
+        'black': $black,
+    ),
+    $colors
 );
 
 //灰度
@@ -61,34 +61,34 @@ $black: #000000;
 
 $grays: ();
 $grays: map-merge(
-  (
-    'white': $white,
-    'gray-f': $gray-f,
-    'gray-e': $gray-e,
-    'gray-d': $gray-d,
-    'gray-c': $gray-c,
-    'gray-b': $gray-b,
-    'gray-a': $gray-a,
-    'gray': $gray-a,
-  ),
-  $grays
+    (
+        'white': $white,
+        'gray-f': $gray-f,
+        'gray-e': $gray-e,
+        'gray-d': $gray-d,
+        'gray-c': $gray-c,
+        'gray-b': $gray-b,
+        'gray-a': $gray-a,
+        'gray': $gray-a,
+    ),
+    $grays
 );
 
 $darks: ();
 $darks: map-merge(
-  (
-    'dark-9': $dark-9,
-    'dark-8': $dark-8,
-    'dark-7': $dark-7,
-    'dark-6': $dark-6,
-    'dark-5': $dark-5,
-    'dark-4': $dark-4,
-    'dark-3': $dark-3,
-    'dark-2': $dark-2,
-    'dark-1': $dark-1,
-    'black': $black,
-  ),
-  $darks
+    (
+        'dark-9': $dark-9,
+        'dark-8': $dark-8,
+        'dark-7': $dark-7,
+        'dark-6': $dark-6,
+        'dark-5': $dark-5,
+        'dark-4': $dark-4,
+        'dark-3': $dark-3,
+        'dark-2': $dark-2,
+        'dark-1': $dark-1,
+        'black': $black,
+    ),
+    $darks
 );
 
 // 边框
@@ -111,16 +111,16 @@ $transition-collapse: height 0.35s ease !default; // 收缩过渡
 $spacer: 20rpx !default;
 $spacers: () !default;
 $spacers: map-merge(
-  (
-    0: 0,
-    1: $spacer * 0.25,
-    2: $spacer * 0.5,
-    3: $spacer,
-    4: $spacer * 1.5,
-    5: $spacer * 3,
-    6: $spacer * 5,
-  ),
-  $spacers
+    (
+        0: 0,
+        1: $spacer * 0.25,
+        2: $spacer * 0.5,
+        3: $spacer,
+        4: $spacer * 1.5,
+        5: $spacer * 3,
+        6: $spacer * 5,
+    ),
+    $spacers
 );
 // 字形
 $font-weight-lighter: lighter !default;
@@ -130,17 +130,17 @@ $font-weight-bold: 700 !default;
 $font-weight-bolder: 900 !default;
 $fontsize: () !default;
 $fontsize: map-merge(
-  (
-    xs: 20,
-    sm: 24,
-    df: 28,
-    lg: 32,
-    xl: 36,
-    xxl: 44,
-    sl: 80,
-    xsl: 120,
-  ),
-  $fontsize
+    (
+        xs: 20,
+        sm: 24,
+        df: 28,
+        lg: 32,
+        xl: 36,
+        xxl: 44,
+        sl: 80,
+        xsl: 120,
+    ),
+    $fontsize
 );
 // 段落
 $line-height-base: 1.5 !default;
@@ -149,15 +149,15 @@ $line-height-sm: 1.25 !default;
 // 图标
 $iconsize: () !default;
 $iconsize: map-merge(
-  (
-    xs: 0.5,
-    sm: 0.75,
-    df: 1,
-    lg: 1.25,
-    xl: 1.5,
-    xxl: 2,
-    sl: 6,
-    xsl: 10,
-  ),
-  $iconsize
+    (
+        xs: 0.5,
+        sm: 0.75,
+        df: 1,
+        lg: 1.25,
+        xl: 1.5,
+        xxl: 2,
+        sl: 6,
+        xsl: 10,
+    ),
+    $iconsize
 );

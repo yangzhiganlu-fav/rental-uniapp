@@ -6,7 +6,7 @@ export default {
         return request({
             url: '/promotion/article/get',
             method: 'GET',
-            params: { id, title }
+            params: { id, title },
         });
-    }
-}
+    },
+};
