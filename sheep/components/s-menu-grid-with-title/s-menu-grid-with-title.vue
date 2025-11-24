@@ -1,6 +1,30 @@
 <!-- 装修基础组件：宫格导航 -->
 <template>
     <view :style="[bgStyle, { marginLeft: `${data.space}px` }]">
+        <view v-if="data.title" class="menu-title-row">
+            <view
+                v-if="data.titleIconBgColor"
+                class="menu-title-bg"
+                :style="{ backgroundColor: data.titleIconBgColor }"
+            >
+                <s-icon
+                    v-if="data.titleIcon"
+                    :name="data.titleIcon"
+                    :size="data.titleIconSize || 36"
+                    color="#fff"
+                />
+            </view>
+            <s-icon
+                v-else-if="data.titleIcon"
+                :name="data.titleIcon"
+                :size="data.titleIconSize || 36"
+                :color="data.titleIconColor || '#333'"
+            />
+            <view class="menu-title-text" :style="{ color: data.titleColor || '#333' }">
+                {{ data.title }}
+            </view>
+        </view>
+
         <uni-grid :showBorder="Boolean(data.border)" :column="data.column">
             <uni-grid-item
                 v-for="(item, index) in data.list"
@@ -18,8 +42,19 @@
                         >
                             {{ item.badge.text }}
                         </view>
-                        <!-- <image class="menu-image" :src="sheep.$url.cdn(item.iconUrl)"></image> -->
+                        <view
+                            v-if="item.iconBgColor"
+                            class="menu-bg"
+                            :style="{ backgroundColor: item.iconBgColor }"
+                        >
+                            <s-icon
+                                :name="item.iconUrl"
+                                :size="item.iconSize"
+                                color="#fff"
+                            ></s-icon>
+                        </view>
                         <s-icon
+                            v-else
                             :name="item.iconUrl"
                             :size="item.iconSize"
                             :color="item.iconColor"
@@ -75,6 +110,22 @@
         height: 24px;
     }
 
+    .menu-title-row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10rpx;
+        /* 向左偏移一些，使标题位置比 grid 略左，不影响 grid 布局 */
+        transform: translateX(-8rpx);
+        /* 保证标题不会遮挡其他内容 */
+        z-index: 1;
+    }
+
+    .menu-title-text {
+        font-size: 30rpx;
+        font-weight: 600;
+        margin-left: 10rpx;
+    }
+
     .grid-item-box {
         flex: 1;
         display: flex;
@@ -108,5 +159,20 @@
                 text-align: center;
             }
         }
+    }
+    .menu-title-bg {
+        padding: 16rpx;
+        margin-bottom: 8rpx;
+        border-radius: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .menu-bg {
+        padding: 16rpx;
+        border-radius: 24rpx;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 </style>
