@@ -1,13 +1,6 @@
 <template>
     <s-layout title="录入房源" :bgStyle="{ color: '#fff' }">
         <template #navbarRight>
-            <!-- <view
-                class="ss-flex ss-row-center ss-col-center"
-                style="height: 100%; padding-right: 30rpx"
-                @tap="onSave"
-            >
-                <text style="color: #333; font-size: 28rpx">保存</text>
-            </view> -->
             <button type="primary" size="mini" @tap="onSave">保存</button>
         </template>
         <su-sticky>
@@ -19,7 +12,7 @@
             />
         </su-sticky>
         <s-empty
-            v-if="community?.id"
+            v-if="!community?.id"
             showAction
             actionText="请选择小区"
             action-url="/pages/house/select"

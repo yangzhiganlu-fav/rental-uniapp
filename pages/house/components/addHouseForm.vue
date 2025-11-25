@@ -320,11 +320,11 @@
     onShow(() => {
         const route = sheep.$router.getCurrentRoute();
         const data = JSON.parse(route?.options?.data || '{}');
-        if (data.communityId) {
-            formData.communityId = data.communityId;
+        if (data.id) {
+            formData.value.communityId = data.id;
         }
-        if (data.communityName) {
-            formData.communityName = data.communityName;
+        if (data.name) {
+            formData.value.communityName = data.name;
         }
     });
 
