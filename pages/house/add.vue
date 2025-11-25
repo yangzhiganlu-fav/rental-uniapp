@@ -50,15 +50,13 @@
 
     const addHouseFormRef = ref(null);
 
-    const onSave = async () => {
-        if (addHouseFormRef.value) {
-            const data = await addHouseFormRef.value.validateAndReturnData();
-            if (data) {
-                uni.showToast({
-                    title: '保存成功',
-                    icon: 'success',
-                });
-            }
+    const onSave = () => {
+        const data = addHouseFormRef.value?.validateAndReturnData();
+        if (data) {
+            uni.showToast({
+                title: '保存成功',
+                icon: 'success',
+            });
         }
     };
 </script>

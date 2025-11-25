@@ -1,12 +1,6 @@
 <template>
     <view class="form-container">
-        <uni-forms
-            ref="formRef"
-            :model="formData"
-            :rules="rules"
-            label-width="140"
-            label-align="left"
-        >
+        <uni-forms ref="formRef" :model="formData" label-width="140" label-align="left">
             <uni-forms-item label="小区" name="communityName">
                 <view
                     class="trigger"
@@ -63,7 +57,9 @@
                     <view class="trigger">
                         <text v-if="formData.currentRoomType?.length" class="value-text">
                             {{
-                                `${formData.currentRoomType[0]}室${formData.currentRoomType[1]}厅${formData.currentRoomType[2]}卫`
+                                `${formData.currentRoomType[0] + 1}室${
+                                    formData.currentRoomType[1]
+                                }厅${formData.currentRoomType[2]}卫`
                             }}
                         </text>
                         <text v-else class="placeholder">请选择户型</text>
@@ -88,7 +84,9 @@
                     <view class="trigger">
                         <text v-if="formData.originalRoomType?.length" class="value-text">
                             {{
-                                `${formData.originalRoomType[0]}室${formData.originalRoomType[1]}厅${formData.originalRoomType[2]}卫`
+                                `${formData.originalRoomType[0] + 1}室${
+                                    formData.originalRoomType[1]
+                                }厅${formData.originalRoomType[2]}卫`
                             }}
                         </text>
                         <text v-else class="placeholder">请选择户型</text>
@@ -118,7 +116,7 @@
                     >
                         <view class="trigger">
                             <text v-if="formData.floor?.length" class="value-text">
-                                {{ `第${formData.floor[0]}层，共${formData.floor[1]}层` }}
+                                {{ `第${formData.floor[0] + 1}层，共${formData.floor[1] + 1}层` }}
                             </text>
                             <text v-else class="placeholder">请选择</text>
                             <uni-icons type="right" color="#999" size="16" class="icon-trigger" />
@@ -221,35 +219,6 @@
         contacts: [],
     });
 
-    const validateEmpty = (msg) => {
-        return (rule, value, data, callback) => {
-            if (!value || (Array.isArray(value) && value.length === 0)) {
-                callback(msg);
-            }
-            return true;
-        };
-    };
-
-    const rules = computed(() => ({
-        communityName: { rules: [{ validator: validateEmpty('请选择小区') }] },
-        building: { rules: [{ validator: validateEmpty('请输入楼号') }] },
-        unit: { rules: [{ validator: validateEmpty('请输入单元号') }] },
-        room: { rules: [{ validator: validateEmpty('请输入室号') }] },
-        currentRoomType: { rules: [{ validator: validateEmpty('请选择当前户型') }] },
-        originalRoomType: { rules: [{ validator: validateEmpty('请选择原始户型') }] },
-        floor: { rules: [{ validator: validateEmpty('请选择楼层') }] },
-        area: {
-            rules: props.tab === 1 ? [{ validator: validateEmpty('请输入整套面积') }] : [],
-        },
-        price: {
-            rules: props.tab === 1 ? [{ validator: validateEmpty('请输入租金') }] : [],
-        },
-        rentStatus: {
-            rules: props.tab === 1 ? [{ validator: validateEmpty('请选择出租状态') }] : [],
-        },
-        contacts: { rules: [{ validator: validateEmpty('请添加带看联系人') }] },
-    }));
-
     const houseTypeRange = [
         new Array(24).fill(0).map((_, i) => `${(i + 1).toString()}室`),
         new Array(25).fill(0).map((_, i) => `${i.toString()}厅`),
@@ -288,33 +257,49 @@
         formData.value.contacts.push(contact);
     };
 
-    const validateAndReturnData = async () => {
-        if (!formData.value.communityId) {
+    const validateAndReturnData = () => {
+        let errorMessage = '';
+        if (!formData.value.communityName) {
+            errorMessage = '请选择小区';
+        } else if (!formData.value.building) {
+            errorMessage = '请输入楼号';
+        } else if (!formData.value.unit) {
+            errorMessage = '请输入单元号';
+        } else if (!formData.value.room) {
+            errorMessage = '请输入室号';
+        } else if (
+            !Array.isArray(formData.value.currentRoomType) ||
+            !formData.value.currentRoomType.length
+        ) {
+            errorMessage = '请选择当前户型';
+        } else if (
+            !Array.isArray(formData.value.originalRoomType) ||
+            !formData.value.originalRoomType.length
+        ) {
+            errorMessage = '请选择原始户型';
+        } else if (!formData.value.hasElevator) {
+            errorMessage = '请选择楼层类型';
+        } else if (!Array.isArray(formData.value.floor) || !formData.value.floor.length) {
+            errorMessage = '请选择楼层';
+        } else if (props.tab === 1 && !formData.value.area) {
+            errorMessage = '请输入整套面积';
+        } else if (props.tab === 1 && !formData.value.price) {
+            errorMessage = '请输入租金';
+        } else if (props.tab === 1 && !formData.value.rentStatus) {
+            errorMessage = '请选择出租状态';
+        } else if (!Array.isArray(formData.value.contacts) || !formData.value.contacts.length) {
+            errorMessage = '请添加带看联系人';
+        }
+
+        if (errorMessage) {
             uni.showToast({
-                title: '请选择小区',
+                title: errorMessage,
                 icon: 'none',
             });
             return null;
         }
-        if (!formData.value.contacts?.length) {
-            uni.showToast({
-                title: '请添加带看联系人',
-                icon: 'none',
-            });
-            return null;
-        }
-        try {
-            await formRef.value?.validate();
-            return { ...formData.value };
-        } catch (e) {
-            if (e && e.length) {
-                uni.showToast({
-                    title: e[0].errorMessage || '表单验证失败',
-                    icon: 'none',
-                });
-            }
-            return null;
-        }
+
+        return formData.value;
     };
 
     onShow(() => {
@@ -372,7 +357,8 @@
     }
 
     .floor-picker {
-        margin-top: 30rpx;
+        display: block;
+        margin-top: 24rpx;
         text-align: right;
     }
 

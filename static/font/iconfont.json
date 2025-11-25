@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "44063352",
+      "name": "history",
+      "font_class": "history",
+      "unicode": "ea03",
+      "unicode_decimal": 59907
+    },
+    {
       "icon_id": "26313774",
       "name": "住宅小区",
       "font_class": "zhuzhaixiaoqu",

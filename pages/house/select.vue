@@ -10,6 +10,7 @@
                         cancelButton="always"
                         :cancelButtonStyle="{ color: '#409eff' }"
                         bgColor="#eeeeee"
+                        v-model="state.communityName"
                         @clear="onClear"
                         @cancel="onCancel"
                         @input="onInput"
@@ -33,8 +34,14 @@
                             class="ss-flex ss-p-y-20 border-b"
                             @tap="selectHouse(item)"
                         >
-                            <s-icon name="zhuzhaixiaoqu" size="40" color="#409eff" />
-                            <text class="ss-text-28 ss-m-l-20">{{ item.name }}</text>
+                            <s-icon
+                                v-if="!state.communityName"
+                                name="history"
+                                size="34"
+                                color="#ddd"
+                                class="ss-m-r-20"
+                            />
+                            <text class="ss-text-28">{{ item.name }}</text>
                         </view>
                         <s-empty
                             v-if="houseList.length === 0 && state.listParams.status !== 'loading'"
