@@ -54,7 +54,7 @@
                             iconUrl: 'lurufangyuan',
                             iconSize: 64,
                             iconColor: '#409EFF',
-                            url: '/pages/house/add-house',
+                            url: '/pages/house/add',
                         },
                         {
                             title: '添加租约',
@@ -67,7 +67,7 @@
                             iconUrl: 'tianjiazuyue',
                             iconSize: 64,
                             iconColor: '#67C23A',
-                            url: '/pages/house/add-house',
+                            url: '/pages/house/add',
                         },
                         {
                             title: '房态维护',
@@ -80,7 +80,7 @@
                             iconUrl: 'fangtaiweihu',
                             iconSize: 64,
                             iconColor: '#FFB020',
-                            url: '/pages/house/add-house',
+                            url: '/pages/house/add',
                         },
                         {
                             title: '联系客服',
@@ -93,7 +93,7 @@
                             iconUrl: 'kefu',
                             iconSize: 64,
                             iconColor: '#F56C6C',
-                            url: '/pages/house/add-house',
+                            url: '/pages/house/add',
                         },
                     ],
                     style: {
@@ -139,7 +139,7 @@
                             iconUrl: 'qianyuequeren',
                             iconSize: 48,
                             iconBgColor: '#409EFF',
-                            url: '/pages/house/add-house',
+                            url: '/pages/house/add',
                         },
                         {
                             title: '转租确认',
@@ -155,7 +155,7 @@
                             iconUrl: 'zhuanzuqueren',
                             iconSize: 48,
                             iconBgColor: '#67C23A',
-                            url: '/pages/house/add-house',
+                            url: '/pages/house/add',
                         },
                         {
                             title: '代付列表',
@@ -171,7 +171,7 @@
                             iconUrl: 'daifuliebiao',
                             iconSize: 48,
                             iconBgColor: '#FFB020',
-                            url: '/pages/house/add-house',
+                            url: '/pages/house/add',
                         },
                         {
                             title: '逾期账单',
@@ -187,7 +187,7 @@
                             iconUrl: 'yuqizhangdan',
                             iconSize: 48,
                             iconBgColor: '#FF6B35',
-                            url: '/pages/house/add-house',
+                            url: '/pages/house/add',
                         },
                         {
                             title: '待收账单',
@@ -203,7 +203,7 @@
                             iconUrl: 'daishouzhangdan',
                             iconSize: 48,
                             iconBgColor: '#8E6EFF',
-                            url: '/pages/house/add-house',
+                            url: '/pages/house/add',
                         },
                     ],
                     style: {

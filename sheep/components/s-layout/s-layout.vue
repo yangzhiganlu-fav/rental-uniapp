@@ -14,7 +14,11 @@
                 :opacityBgUi="opacityBgUi"
                 @search="(e) => emits('search', e)"
                 :defaultSearch="defaultSearch"
-            />
+            >
+                <template #right>
+                    <slot name="navbarRight"></slot>
+                </template>
+            </su-navbar>
 
             <!-- 顶部导航栏-情况2：装修组件导航栏-标准 -->
             <s-custom-navbar

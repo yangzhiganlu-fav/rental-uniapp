@@ -59,56 +59,56 @@
         }
     ],
     "subPackages": [
-        // {
-        //     "root": "pages/house",
-        //     "pages": [
-        //         {
-        //             "path": "index",
-        //             "style": {
-        //                 "navigationBarTitleText": "房源"
-        //             },
-        //             "meta": {
-        //                 "sync": true,
-        //                 "title": "房源列表",
-        //                 "group": "房源"
-        //             }
-        //         },
-        //         {
-        //             "path": "add-house",
-        //             "style": {
-        //                 "navigationBarTitleText": "录入房源"
-        //             },
-        //             "meta": {
-        //                 "sync": true,
-        //                 "title": "录入房源",
-        //                 "group": "房源"
-        //             }
-        //         },
-        //         {
-        //             "path": "select-house",
-        //             "style": {
-        //                 "navigationBarTitleText": "选择房源",
-        //                 "navigationStyle": "custom"
-        //             },
-        //             "meta": {
-        //                 "sync": true,
-        //                 "title": "选择房源",
-        //                 "group": "房源"
-        //             }
-        //         },
-        //         {
-        //             "path": "house-detail",
-        //             "style": {
-        //                 "navigationBarTitleText": "房源详情"
-        //             },
-        //             "meta": {
-        //                 "sync": true,
-        //                 "title": "房源详情",
-        //                 "group": "房源"
-        //             }
-        //         }
-        //     ]
-        // }
+        {
+            "root": "pages/house",
+            "pages": [
+                {
+                    "path": "list",
+                    "style": {
+                        "navigationBarTitleText": "房源"
+                    },
+                    "meta": {
+                        "sync": true,
+                        "title": "房源列表",
+                        "group": "房源"
+                    }
+                },
+                {
+                    "path": "add",
+                    "style": {
+                        "navigationBarTitleText": "录入房源"
+                    },
+                    "meta": {
+                        "sync": true,
+                        "title": "录入房源",
+                        "group": "房源"
+                    }
+                },
+                {
+                    "path": "select",
+                    "style": {
+                        "navigationBarTitleText": "选择房源",
+                        "navigationStyle": "custom"
+                    },
+                    "meta": {
+                        "sync": true,
+                        "title": "选择房源",
+                        "group": "房源"
+                    }
+                },
+                {
+                    "path": "detail",
+                    "style": {
+                        "navigationBarTitleText": "房源详情"
+                    },
+                    "meta": {
+                        "sync": true,
+                        "title": "房源详情",
+                        "group": "房源"
+                    }
+                }
+            ]
+        }
     ],
     "globalStyle": {
         "navigationBarTextStyle": "black",

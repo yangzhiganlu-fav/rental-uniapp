@@ -181,7 +181,7 @@
         /* #endif */
         flex-direction: row;
         justify-content: center;
-        padding-top: 25px;
+        padding: 24rpx 0;
     }
 
     .uni-dialog-title-text {

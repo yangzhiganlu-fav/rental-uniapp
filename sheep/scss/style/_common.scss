@@ -32,3 +32,47 @@
     right: -80rpx;
     background: linear-gradient(135deg, rgba(42, 245, 152, 0.1), rgba(42, 245, 152, 0.05));
 }
+
+/* 公共表单样式 */
+.form-container {
+    padding-left: 40rpx;
+    padding-right: 20rpx;
+
+    input {
+        text-align: right;
+        direction: ltr;
+    }
+
+    .uni-forms-item {
+        border-bottom: 1rpx solid #ccc;
+        margin-bottom: 0;
+    }
+
+    .uni-forms-item__inner {
+        padding: 12rpx 0 !important ;
+    }
+
+    .uni-forms-item__content {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+    }
+
+    .trigger {
+        padding: 10rpx;
+        background-color: #fff;
+        font-size: 28rpx;
+
+        .placeholder {
+            color: #868686;
+        }
+
+        .value-text {
+            color: inherit;
+        }
+
+        .icon-trigger {
+            margin-left: 16rpx;
+        }
+    }
+}

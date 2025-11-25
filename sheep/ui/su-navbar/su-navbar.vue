@@ -83,6 +83,9 @@
                         </view>
                     </slot>
                 </view>
+                <view class="uni-navbar__header-btns uni-navbar__header-btns-right">
+                    <slot name="right"></slot>
+                </view>
             </view>
         </view>
         <view class="uni-navbar__placeholder" v-if="placeholder">

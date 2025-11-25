@@ -12,11 +12,12 @@ const sys = defineStore({
     getters: {},
     actions: {
         setTheme(theme = '') {
-            if (theme === '') {
-                this.theme = app().template?.basic.theme || 'orange';
-            } else {
-                this.theme = theme;
-            }
+            // if (theme === '') {
+            //     this.theme = app().template?.basic.theme || 'orange';
+            // } else {
+            //     this.theme = theme;
+            // }
+            this.theme = 'cyan';
         },
     },
     persist: {
