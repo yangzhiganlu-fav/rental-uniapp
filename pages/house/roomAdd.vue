@@ -109,11 +109,7 @@
                             <view class="form-item-label">
                                 <text class="main-text">带看联系人</text>
                                 <view class="add-contact-btn" @click.stop="showAddContactPopup">
-                                    <uni-icons
-                                        type="plusempty"
-                                        size="12"
-                                        color="#ff9900"
-                                    ></uni-icons>
+                                    <s-icon name="plus" size="24" color="#ff9900" />
                                     <text>添加</text>
                                 </view>
                             </view>
@@ -246,7 +242,7 @@
         display: flex;
         flex-direction: column;
         align-items: flex-end;
-        color: #999;
+        color: $dark-9;
 
         .address-detail {
             margin-top: 16rpx;
@@ -260,61 +256,23 @@
 
     .content-wrapper {
         height: 100%;
-        background-color: #fff;
+        background-color: $white;
     }
 
     .form-container {
         padding: 0 30rpx;
     }
 
-    .form-item-label {
-        display: flex;
-        align-items: center;
-
-        .main-text {
-            flex-shrink: 0;
-            font-size: 28rpx;
-            color: #333;
-        }
-
-        .bold-text {
-            flex-shrink: 0;
-            font-size: 28rpx;
-            font-weight: bold;
-            color: #333;
-            margin-left: 8rpx;
-        }
-
-        .add-contact-btn {
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            padding: 6rpx 16rpx;
-            border: 1rpx solid #ff9900;
-            border-radius: 24rpx;
-            margin-left: 16rpx;
-            background-color: transparent;
-            position: relative;
-            z-index: 10;
-
-            text {
-                font-size: 24rpx;
-                color: #ff9900;
-                margin-left: 2rpx;
-            }
-        }
-    }
-
     .edit-fee-btn {
         font-size: 24rpx;
-        color: #ff9900;
-        border: 1rpx solid #ff9900;
+        color: $orange-light;
+        border: 1rpx solid $orange-light;
         padding: 6rpx 20rpx;
         border-radius: 24rpx;
     }
 
     :deep(.uni-forms-item__label) {
-        color: #333;
+        color: $black;
     }
 
     :deep(.checklist-box.is--tag) {
@@ -331,6 +289,6 @@
 
     :deep(.u-cell__title-text) {
         font-size: 28rpx;
-        color: #333;
+        color: $black;
     }
 </style>

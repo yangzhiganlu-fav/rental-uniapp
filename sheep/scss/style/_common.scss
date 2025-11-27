@@ -6,7 +6,7 @@
     width: 200rpx;
     height: 200rpx;
     border-radius: 50%;
-    background: linear-gradient(135deg, rgba(74, 144, 226, 0.1), rgba(80, 227, 194, 0.1));
+    background: linear-gradient(135deg, rgba($blue-light, 0.1), rgba($green-light, 0.1));
     z-index: -1;
 }
 
@@ -33,6 +33,69 @@
     background: linear-gradient(135deg, rgba(42, 245, 152, 0.1), rgba(42, 245, 152, 0.05));
 }
 
+/* 登录页面头部 */
+.header-section {
+    margin-top: 120rpx;
+    margin-bottom: 40rpx;
+    padding: 0 40rpx;
+    position: relative;
+    z-index: 2;
+
+    .title-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .main-title {
+        font-size: 56rpx;
+        font-weight: 800;
+        color: $black;
+        margin-bottom: 16rpx;
+        letter-spacing: 2rpx;
+    }
+
+    .sub-title {
+        font-size: 30rpx;
+        color: $dark-9;
+        font-weight: 400;
+    }
+}
+
+/* 登录页面底部 */
+.footer-section {
+    padding: 60rpx 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+
+    .footer-text {
+        font-size: 24rpx;
+        color: $gray-c;
+        text-align: center;
+        margin-left: 10rpx;
+
+        .highlighted-text {
+            color: $blue-light;
+            text-decoration: underline;
+        }
+    }
+}
+
+/* 渐变按钮 */
+.btn-gradient {
+    margin-top: 60rpx;
+    background: linear-gradient(90deg, $blue-light, $green-light);
+    color: $white;
+    border-radius: 40rpx;
+    font-size: 32rpx;
+    font-weight: bold;
+    &::after {
+        border: none;
+    }
+}
+
 /* 公共表单样式 */
 .form-container {
     padding-left: 40rpx;
@@ -47,7 +110,7 @@
     }
 
     .uni-forms-item {
-        border-bottom: 1rpx solid #ccc;
+        border-bottom: 1rpx solid $gray-c;
         margin-bottom: 0;
     }
 
@@ -62,11 +125,15 @@
     }
 
     .trigger {
-        background-color: #fff;
+        background-color: $white;
         font-size: 28rpx;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        min-height: 72rpx; // 36px * 2
 
         .placeholder {
-            color: #868686;
+            color: $dark-8;
         }
 
         .value-text {
@@ -79,23 +146,70 @@
     }
 }
 
+/* 表单标签样式 */
+.form-item-label {
+    display: flex;
+    align-items: center;
+
+    .main-text {
+        flex-shrink: 0;
+        font-size: 28rpx;
+        color: $black;
+    }
+
+    .sub-text {
+        flex-shrink: 0;
+        font-size: 22rpx;
+        margin-left: 4rpx;
+        margin-top: 4rpx;
+    }
+
+    .bold-text {
+        flex-shrink: 0;
+        font-size: 28rpx;
+        font-weight: bold;
+        color: $black;
+        margin-left: 8rpx;
+    }
+}
+
+/* 添加联系人按钮 */
+.add-contact-btn {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    padding: 6rpx 16rpx;
+    border: 1rpx solid $orange-light;
+    border-radius: 24rpx;
+    margin-left: 16rpx;
+    background-color: transparent;
+    position: relative;
+    z-index: 10;
+
+    text {
+        font-size: 24rpx;
+        color: $orange-light;
+        margin-left: 2rpx;
+    }
+}
+
 /* 下拉列表样式 */
 .dropdown {
     .dropdown-trigger {
         display: flex;
         align-items: center;
         font-size: 28rpx;
-        color: #333;
+        color: $black;
 
         text {
             margin-right: 4rpx;
             &.active {
-                color: #4a90e2;
+                color: $blue-light;
             }
         }
     }
     .dropdown-list {
-        background-color: #fff;
+        background-color: $white;
         padding: 20rpx 0;
 
         .dropdown-item {
@@ -104,14 +218,14 @@
             justify-content: space-between;
             padding: 24rpx 30rpx;
             font-size: 28rpx;
-            color: #333;
+            color: $black;
 
             &.active {
-                color: #4a90e2;
+                color: $blue-light;
             }
 
             &:active {
-                background-color: #f5f5f5;
+                background-color: $gray-f;
             }
         }
     }
@@ -124,17 +238,17 @@
         position: relative;
         text-align: center;
         padding-bottom: 20rpx;
-        border-bottom: 1rpx solid #eee;
-        background-color: #eee;
+        border-bottom: 1rpx solid $gray-e;
+        background-color: $gray-e;
 
         .popup-title {
             font-size: 30rpx;
-            color: #2979ff;
+            color: $blue;
         }
 
         .popup-cancel {
             font-size: 28rpx;
-            color: #2979ff;
+            color: $blue;
             position: absolute;
             right: 32rpx;
         }
@@ -146,41 +260,41 @@
 
 /* u-modal 样式覆盖 */
 .u-modal__title {
-    padding: 18px 0 !important;
-    background-color: #eee;
+    padding: 36rpx 0 !important;
+    background-color: $gray-e;
     font-weight: normal !important;
-    color: #2979ff !important;
+    color: $blue !important;
 }
 
 .u-modal__content {
-    padding: 12px 16px !important;
+    padding: 24rpx 32rpx !important;
 }
 
 .dropdown-slot-content {
-    background-color: #fff;
+    background-color: $white;
 }
 .filter-box {
-    padding: 10px;
+    padding: 20rpx;
     .filter-title {
         font-weight: bold;
-        margin-bottom: 10px;
-        font-size: 14px;
-        color: #333;
+        margin-bottom: 20rpx;
+        font-size: 28rpx;
+        color: $black;
     }
     .filter-tags {
         display: flex;
         flex-wrap: wrap;
-        gap: 10px;
+        gap: 20rpx;
     }
     .tag-item {
-        padding: 6px 12px;
-        background-color: #f5f5f5;
-        border-radius: 4px;
-        font-size: 12px;
-        color: #666;
+        padding: 12rpx 24rpx;
+        background-color: $gray-f;
+        border-radius: 8rpx;
+        font-size: 24rpx;
+        color: $dark-6;
         &.active {
-            background-color: #2979ff;
-            color: #fff;
+            background-color: $blue;
+            color: $white;
         }
     }
 }
@@ -188,30 +302,35 @@
 .dropdown-footer {
     display: flex;
     justify-content: space-between;
-    margin-top: 16px;
+    margin-top: 32rpx;
     gap: 0;
 
     button {
-        font-size: 14px;
-        height: 40px;
-        line-height: 40px;
+        font-size: 28rpx;
+        height: 80rpx;
+        line-height: 80rpx;
         border-radius: 0;
         margin: 0;
         &.btn-reset {
             flex: 1;
-            background-color: #f5f5f5;
-            color: #666;
+            background-color: $gray-f;
+            color: $dark-6;
             &::after {
                 border: none;
             }
         }
         &.btn-confirm {
             flex: 2;
-            background-color: #2979ff;
-            color: #fff;
+            background-color: $blue;
+            color: $white;
             &::after {
                 border: none;
             }
         }
     }
+}
+
+/* 高亮文本 */
+.highlight-red {
+    color: $red;
 }

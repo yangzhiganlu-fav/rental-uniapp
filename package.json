@@ -97,6 +97,7 @@
     "weixin-js-sdk": "^1.6.0"
   },
   "devDependencies": {
+    "postcss-pxtorpx-pro": "^2.0.0",
     "prettier": "^2.8.7",
     "sass": "^1.94.2",
     "sass-loader": "^10.5.2",

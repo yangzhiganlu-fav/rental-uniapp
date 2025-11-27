@@ -144,7 +144,7 @@
         align-items: center;
 
         .uni-icons {
-            margin-left: 6px;
+            margin-left: 12rpx;
         }
 
         .-rotate-90 {
@@ -161,7 +161,7 @@
     .options-container {
         display: flex;
         align-items: center;
-        gap: 12px;
-        padding: 0 12px;
+        gap: 24rpx;
+        padding: 0 24rpx;
     }
 </style>

@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "21823904",
+      "name": "plus",
+      "font_class": "plus",
+      "unicode": "e678",
+      "unicode_decimal": 59000
+    },
+    {
       "icon_id": "28330222",
       "name": "新增房间",
       "font_class": "xinzengfangjian",

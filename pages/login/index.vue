@@ -57,7 +57,7 @@
                         />
                     </view>
                 </uni-forms-item>
-                <button class="login-btn" @tap="onAccountLogin">登录</button>
+                <button class="btn-gradient" @tap="onAccountLogin">登录</button>
             </uni-forms>
 
             <uni-forms
@@ -102,7 +102,7 @@
                         </uni-easyinput>
                     </view>
                 </uni-forms-item>
-                <button class="login-btn" @tap="onMobileLogin">登录</button>
+                <button class="btn-gradient" @tap="onMobileLogin">登录</button>
             </uni-forms>
         </view>
 
@@ -224,38 +224,11 @@
 <style lang="scss" scoped>
     .login-page {
         min-height: 100vh;
-        background-color: #fff;
+        background-color: $white;
         display: flex;
         flex-direction: column;
         position: relative;
         overflow: hidden;
-    }
-
-    .header-section {
-        margin-top: 120rpx;
-        margin-bottom: 40rpx;
-        padding: 0 40rpx;
-        position: relative;
-        z-index: 2;
-
-        .title-wrapper {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .main-title {
-            font-size: 56rpx;
-            font-weight: 800;
-            color: #333;
-            margin-bottom: 16rpx;
-            letter-spacing: 2rpx;
-        }
-
-        .sub-title {
-            font-size: 30rpx;
-            color: #999;
-            font-weight: 400;
-        }
     }
 
     .tabs-section {
@@ -266,14 +239,14 @@
         .tab-item {
             font-size: 32rpx;
             line-height: 50rpx;
-            color: #999;
+            color: $dark-9;
             margin-right: 40rpx;
             padding-bottom: 10rpx;
             position: relative;
             transition: all 0.3s;
 
             &.active {
-                color: #333;
+                color: $black;
                 font-weight: bold;
                 font-size: 36rpx;
 
@@ -285,7 +258,7 @@
                     transform: translateX(-50%);
                     width: 40rpx;
                     height: 6rpx;
-                    background: linear-gradient(90deg, #4a90e2, #50e3c2);
+                    background: linear-gradient(90deg, $blue-light, $green-light);
                     border-radius: 3rpx;
                 }
             }
@@ -303,44 +276,12 @@
             display: flex;
             align-items: center;
             gap: 20rpx;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1rpx solid $gray-e;
             padding: 20rpx 0;
             &.code-item {
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-            }
-        }
-        .login-btn {
-            margin-top: 60rpx;
-            background: linear-gradient(90deg, #4a90e2, #50e3c2);
-            color: #fff;
-            border-radius: 40rpx;
-            font-size: 32rpx;
-            font-weight: bold;
-            &::after {
-                border: none;
-            }
-        }
-    }
-
-    .footer-section {
-        padding: 60rpx 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        z-index: 2;
-
-        .footer-text {
-            font-size: 24rpx;
-            color: #ccc;
-            text-align: center;
-            margin-left: 10rpx;
-
-            .highlighted-text {
-                color: #4a90e2;
-                text-decoration: underline;
             }
         }
     }

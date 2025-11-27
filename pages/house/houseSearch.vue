@@ -167,10 +167,6 @@
         }
     }
 
-    .highlight-red {
-        color: $red;
-    }
-
     :deep(.uni-group__content) {
         padding: 0 !important;
     }

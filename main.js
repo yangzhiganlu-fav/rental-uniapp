@@ -6,7 +6,15 @@ import uviewPlus from '@/uni_modules/uview-plus';
 export function createApp() {
     const app = createSSRApp(App);
 
-    app.use(uviewPlus);
+    app.use(uviewPlus, () => {
+        return {
+            options: {
+                config: {
+                    unit: 'rpx',
+                },
+            },
+        };
+    });
 
     setupPinia(app);
 
