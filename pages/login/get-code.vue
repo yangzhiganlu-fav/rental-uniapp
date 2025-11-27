@@ -20,14 +20,16 @@
                             type="number"
                             maxlength="4"
                             :inputBorder="false"
+                            :clearable="false"
                         >
-                            <template v-slot:right>
-                                <button
-                                    class="ss-reset-button code-btn code-btn-start"
-                                    @tap="getSmsCode('smsLogin', verifyForm.mobile)"
-                                >
-                                    {{ getSmsTimer('smsLogin') }}
-                                </button>
+                            <template #right>
+                                <up-code ref="uCodeRef" @change="codeChange"></up-code>
+                                <up-text
+                                    :type="loading ? 'info' : 'primary'"
+                                    :text="tips"
+                                    style="width: auto; flex: 0 0 auto; flex-direction: row-reverse"
+                                    @tap="getCode"
+                                ></up-text>
                             </template>
                         </uni-easyinput>
                     </view>
@@ -47,10 +49,9 @@
 </template>
 
 <script setup>
-    import { ref, onMounted } from 'vue';
     import sheep from '@/sheep';
+    import { ref, onMounted } from 'vue';
     import { code } from '@/sheep/validate/form';
-    import { getSmsCode, getSmsTimer } from '@/sheep/hooks/useModal';
 
     const verifyForm = ref({
         code: '',
@@ -63,11 +64,38 @@
     const verifyRef = ref(null);
 
     const onConfirm = async () => {
-        const validate = await verifyRef.value.validate().catch((err) => {
-            console.log('validate error', err);
-        });
-        if (!validate) return;
-        sheep.$router.go('/pages/index/index');
+        try {
+            await verifyRef.value.validate();
+            sheep.$router.go('/pages/index/index');
+        } catch (error) {
+            if (error && error.length > 0) {
+                uni.showToast({
+                    title: error[0].errorMessage,
+                    icon: 'none',
+                });
+            }
+        }
+    };
+
+    const uCodeRef = ref(null);
+
+    const tips = ref('获取验证码');
+
+    const loading = ref(false);
+
+    const codeChange = (text) => {
+        tips.value = text;
+    };
+
+    const getCode = () => {
+        if (uCodeRef.value?.canGetCode) {
+            loading.value = true;
+            setTimeout(() => {
+                uni.hideLoading();
+                uCodeRef.value?.start();
+                loading.value = false;
+            }, 2000);
+        }
     };
 </script>
 
@@ -108,17 +136,6 @@
         }
     }
 
-    .login-decoration-circle {
-        position: absolute;
-        top: -60rpx;
-        right: -60rpx;
-        width: 200rpx;
-        height: 200rpx;
-        border-radius: 50%;
-        background: linear-gradient(135deg, rgba(74, 144, 226, 0.1), rgba(80, 227, 194, 0.1));
-        z-index: -1;
-    }
-
     .tabs-section {
         display: none;
     }
@@ -136,17 +153,6 @@
             gap: 20rpx;
             border-bottom: 1px solid #eee;
             padding: 20rpx 0;
-            &.code-item {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-            }
-        }
-        .get-code {
-            color: #4a90e2;
-            font-size: 28rpx;
-            white-space: nowrap;
-            margin-left: 20rpx;
         }
         .login-btn {
             margin-top: 60rpx;
@@ -175,28 +181,5 @@
             text-align: center;
             margin-left: 10rpx;
         }
-    }
-
-    .login-bottom-decoration {
-        position: absolute;
-        border-radius: 50%;
-        z-index: 0;
-        pointer-events: none;
-    }
-
-    .login-circle-left {
-        width: 500rpx;
-        height: 500rpx;
-        bottom: -150rpx;
-        left: -150rpx;
-        background: linear-gradient(135deg, rgba(118, 75, 162, 0.1), rgba(118, 75, 162, 0.05));
-    }
-
-    .login-circle-right {
-        width: 300rpx;
-        height: 300rpx;
-        bottom: 150rpx;
-        right: -80rpx;
-        background: linear-gradient(135deg, rgba(42, 245, 152, 0.1), rgba(42, 245, 152, 0.05));
     }
 </style>

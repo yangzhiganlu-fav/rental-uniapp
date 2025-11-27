@@ -51,9 +51,11 @@
                                 sheep.$platform.name !== 'WechatOfficialAccount'
                             "
                         >
-                            <text :style="{ color: themeColor, fontSize: '18px' }">{{
-                                title
-                            }}</text>
+                            <slot>
+                                <text :style="{ color: themeColor, fontSize: '16px' }">
+                                    {{ title }}
+                                </text>
+                            </slot>
                         </view>
                     </slot>
                 </view>
@@ -62,9 +64,11 @@
                         <uni-search-bar
                             class="ss-flex-1 search-box"
                             :radius="20"
-                            placeholder="请输入关键词"
-                            cancelButton="none"
+                            :placeholder="placeholderText"
+                            :clearButton="searchClearButton"
+                            :cancelButton="searchCancelButton"
                             v-model="searchModel"
+                            @input="onInput"
                             @confirm="onSearch"
                         />
                     </slot>
@@ -76,10 +80,11 @@
                             class="uni-navbar__header-container-inner"
                         >
                             <text
-                                :style="{ color: themeColor, fontSize: '36rpx' }"
+                                :style="{ color: themeColor, fontSize: '32rpx' }"
                                 class="ss-line-1"
-                                >{{ title }}</text
                             >
+                                {{ title }}
+                            </text>
                         </view>
                     </slot>
                 </view>
@@ -125,7 +130,7 @@
 
     const getVal = (val) => (typeof val === 'number' ? val + 'px' : val);
 
-    const emits = defineEmits(['clickLeft', 'clickRight', 'clickTitle', 'search']);
+    const emits = defineEmits(['clickLeft', 'clickRight', 'clickTitle', 'search', 'searchInput']);
     const props = defineProps({
         dark: {
             type: Boolean,
@@ -211,6 +216,18 @@
             type: String,
             default: '',
         },
+        placeholderText: {
+            type: String,
+            default: '请输入关键词',
+        },
+        searchClearButton: {
+            type: String,
+            default: 'none',
+        },
+        searchCancelButton: {
+            type: String,
+            default: 'none',
+        },
     });
 
     const capsuleStyle = computed(() => {
@@ -222,9 +239,10 @@
         };
     });
 
-    const searchModel = computed(() => {
-        return props.defaultSearch;
-    });
+    const searchModel = ref(props.defaultSearch);
+    // const searchModel = computed(() => {
+    //     return props.defaultSearch;
+    // });
 
     const themeBgColor = computed(() => {
         if (props.dark) {
@@ -257,6 +275,10 @@
     const rightIconWidth = computed(() => {
         return getVal(props.rightWidth);
     });
+
+    const onInput = (e) => {
+        emits('searchInput', e);
+    };
 
     function onSearch(e) {
         emits('search', e.value);
@@ -394,13 +416,13 @@
 
     .uni-navbar__header-btns {
         /* #ifndef APP-NVUE */
-        overflow: hidden;
+        // overflow: hidden;
         display: flex;
         /* #endif */
         flex-wrap: nowrap;
         flex-direction: row;
         // min-width: 120rpx;
-        min-width: 40rpx;
+        min-width: 0rpx;
         // padding: 0 6px;
         justify-content: center;
         align-items: center;

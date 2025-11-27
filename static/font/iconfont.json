@@ -6,11 +6,32 @@
   "description": "",
   "glyphs": [
     {
-      "icon_id": "44063352",
+      "icon_id": "28330222",
+      "name": "新增房间",
+      "font_class": "xinzengfangjian",
+      "unicode": "e778",
+      "unicode_decimal": 59256
+    },
+    {
+      "icon_id": "2360221",
       "name": "history",
       "font_class": "history",
-      "unicode": "ea03",
-      "unicode_decimal": 59907
+      "unicode": "e74d",
+      "unicode_decimal": 59213
+    },
+    {
+      "icon_id": "15838525",
+      "name": "search",
+      "font_class": "search",
+      "unicode": "e67d",
+      "unicode_decimal": 59005
+    },
+    {
+      "icon_id": "813027",
+      "name": "home",
+      "font_class": "home",
+      "unicode": "e618",
+      "unicode_decimal": 58904
     },
     {
       "icon_id": "26313774",
@@ -102,13 +123,6 @@
       "font_class": "mobile",
       "unicode": "e67e",
       "unicode_decimal": 59006
-    },
-    {
-      "icon_id": "14655897",
-      "name": "主页",
-      "font_class": "home",
-      "unicode": "e606",
-      "unicode_decimal": 58886
     },
     {
       "icon_id": "14667693",

@@ -1,40 +1,35 @@
 <template>
-    <su-dialog :show="show" title="添加联系人" @close="close" @confirm="onConfirm">
+    <up-modal :show="show" showCancelButton title="添加联系人" @confirm="onConfirm" @cancel="close">
         <view class="contact-form">
-            <uni-forms
+            <up-form
                 ref="formRef"
                 :model="formData"
                 :rules="rules"
-                label-width="80px"
-                label-align="left"
+                labelWidth="80"
+                labelPosition="top"
+                borderBottom
+                errorType="toast"
             >
-                <uni-forms-item label="姓名" name="name">
-                    <uni-easyinput
-                        v-model="formData.name"
-                        placeholder="请输入姓名"
-                        :inputBorder="false"
-                        trim="both"
-                    />
-                </uni-forms-item>
-                <uni-forms-item label="联系方式" name="phone">
-                    <uni-easyinput
+                <up-form-item label="姓名" prop="name">
+                    <up-input v-model="formData.name" placeholder="请输入姓名" border="bottom" />
+                </up-form-item>
+                <up-form-item label="联系方式" prop="phone">
+                    <up-input
                         v-model="formData.phone"
                         placeholder="请输入联系方式"
-                        :inputBorder="false"
+                        border="bottom"
                         type="number"
-                        trim="both"
-                        :maxlength="11"
+                        maxlength="11"
                     />
-                </uni-forms-item>
-            </uni-forms>
+                </up-form-item>
+            </up-form>
         </view>
-    </su-dialog>
+    </up-modal>
 </template>
 
 <script setup>
     import sheep from '@/sheep';
-    import { ref } from 'vue';
-    import { mobile } from '@/sheep/validate/form';
+    import { ref, unref } from 'vue';
 
     const emit = defineEmits(['confirm']);
 
@@ -47,9 +42,22 @@
 
     const rules = {
         name: {
-            rules: [{ required: true, errorMessage: '请输入姓名' }],
+            required: true,
+            message: '请输入姓名',
+            trigger: ['blur', 'change'],
         },
-        phone: mobile,
+        phone: [
+            {
+                required: true,
+                message: '请输入联系方式',
+                trigger: ['blur', 'change'],
+            },
+            {
+                pattern: /^1[3-9]\d{9}$/,
+                message: '手机号格式不正确',
+                trigger: ['blur', 'change'],
+            },
+        ],
     };
 
     const open = () => {
@@ -59,21 +67,17 @@
 
     const close = () => {
         show.value = false;
+        formRef.value?.resetFields();
     };
 
-    const onConfirm = async () => {
-        try {
-            await formRef.value.validate();
-            emit('confirm', { ...formData.value });
-            close();
-        } catch (e) {
-            if (e && e.length) {
-                uni.showToast({
-                    title: e[0].errorMessage || '表单验证失败',
-                    icon: 'none',
-                });
-            }
-        }
+    const onConfirm = () => {
+        unref(formRef)
+            .validate()
+            .then(() => {
+                emit('confirm', { ...formData.value });
+                close();
+            })
+            .catch(() => {});
     };
 
     defineExpose({
@@ -87,15 +91,7 @@
         width: 100%;
     }
 
-    :deep(.uni-dialog-title-text) {
-        color: #3d9bff !important;
-    }
-
-    :deep(.uni-forms-item__label) {
-        color: #333;
-    }
-
-    :deep(.uni-error-message) {
+    :deep(.u-form-item__body__right__message) {
         display: none;
     }
 </style>

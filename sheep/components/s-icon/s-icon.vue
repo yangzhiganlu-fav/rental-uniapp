@@ -7,43 +7,41 @@
     ></view>
 </template>
 
-<script>
+<script setup>
+    import { computed } from 'vue';
     import { addUnit } from '@/sheep/helper';
 
-    export default {
-        name: 's-icon',
-        props: {
-            name: {
-                type: String,
-                default: '',
-            },
-            color: {
-                type: String,
-                default: '',
-            },
-            size: {
-                type: [Number, String],
-                default: 32,
-            },
-            customStyle: {
-                type: Object,
-                default: () => ({}),
-            },
+    const props = defineProps({
+        name: {
+            type: String,
+            default: '',
         },
-        computed: {
-            iconStyle() {
-                return {
-                    color: this.color,
-                    fontSize: addUnit(this.size, 'rpx'),
-                    ...this.customStyle,
-                };
-            },
+        color: {
+            type: String,
+            default: '',
         },
-        methods: {
-            onClick(e) {
-                this.$emit('click', e);
-            },
+        size: {
+            type: [Number, String],
+            default: 32,
         },
+        customStyle: {
+            type: Object,
+            default: () => ({}),
+        },
+    });
+
+    const emits = defineEmits(['click']);
+
+    const iconStyle = computed(() => {
+        return {
+            color: props.color,
+            fontSize: addUnit(props.size, 'rpx'),
+            ...props.customStyle,
+        };
+    });
+
+    const onClick = (e) => {
+        emits('click', e);
     };
 </script>
 

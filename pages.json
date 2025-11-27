@@ -3,24 +3,15 @@
         "autoscan": true,
         "custom": {
             "^s-(.*)": "@/sheep/components/s-$1/s-$1.vue",
-            "^su-(.*)": "@/sheep/ui/su-$1/su-$1.vue"
+            "^su-(.*)": "@/sheep/ui/su-$1/su-$1.vue",
+            "^u--(.*)": "@/uni_modules/uview-plus/components/u-$1/u-$1.vue",
+            "^up-(.*)": "@/uni_modules/uview-plus/components/u-$1/u-$1.vue",
+            "^u-([^-].*)": "@/uni_modules/uview-plus/components/u-$1/u-$1.vue"
         }
     },
     "pages": [
         {
             "path": "pages/login/index",
-            "style": {
-                "navigationBarTitleText": "角色选择"
-            },
-            "meta": {
-                "auth": false,
-                "sync": true,
-                "title": "角色选择",
-                "group": "登录"
-            }
-        },
-        {
-            "path": "pages/login/login",
             "style": {
                 "navigationBarTitleText": "登录"
             },
@@ -56,6 +47,18 @@
                 "title": "首页",
                 "group": "首页"
             }
+        },
+        {
+            "path": "pages/house/houseList",
+            "style": {
+                "navigationBarTitleText": "房源"
+            },
+            "meta": {
+                "auth": false,
+                "sync": true,
+                "title": "房源",
+                "group": "房源"
+            }
         }
     ],
     "subPackages": [
@@ -63,18 +66,7 @@
             "root": "pages/house",
             "pages": [
                 {
-                    "path": "list",
-                    "style": {
-                        "navigationBarTitleText": "房源"
-                    },
-                    "meta": {
-                        "sync": true,
-                        "title": "房源列表",
-                        "group": "房源"
-                    }
-                },
-                {
-                    "path": "add",
+                    "path": "houseAdd",
                     "style": {
                         "navigationBarTitleText": "录入房源"
                     },
@@ -85,7 +77,7 @@
                     }
                 },
                 {
-                    "path": "select",
+                    "path": "communitySelect",
                     "style": {
                         "navigationBarTitleText": "选择房源",
                         "navigationStyle": "custom"
@@ -97,13 +89,36 @@
                     }
                 },
                 {
-                    "path": "detail",
+                    "path": "houseDetail",
                     "style": {
                         "navigationBarTitleText": "房源详情"
                     },
                     "meta": {
                         "sync": true,
                         "title": "房源详情",
+                        "group": "房源"
+                    }
+                },
+                {
+                    "path": "houseSearch",
+                    "style": {
+                        "navigationBarTitleText": "搜索房源",
+                        "navigationStyle": "custom"
+                    },
+                    "meta": {
+                        "sync": true,
+                        "title": "搜索房源",
+                        "group": "房源"
+                    }
+                },
+                {
+                    "path": "roomAdd",
+                    "style": {
+                        "navigationBarTitleText": "添加房间"
+                    },
+                    "meta": {
+                        "sync": true,
+                        "title": "添加房间",
                         "group": "房源"
                     }
                 }

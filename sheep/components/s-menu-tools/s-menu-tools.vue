@@ -43,36 +43,36 @@
             icon: '/static/img/shop/tools/home.png',
             title: '首页',
         },
+        // {
+        //     url: '/pages/index/search',
+        //     icon: '/static/img/shop/tools/search.png',
+        //     title: '搜索',
+        // },
         {
-            url: '/pages/index/search',
-            icon: '/static/img/shop/tools/search.png',
-            title: '搜索',
-        },
-        {
-            url: '/pages/index/user',
+            url: '/pages/mine/index',
             icon: '/static/img/shop/tools/user.png',
             title: '个人中心',
         },
-        {
-            url: '/pages/index/cart',
-            icon: '/static/img/shop/tools/cart.png',
-            title: '购物车',
-        },
-        {
-            url: '/pages/user/goods-log',
-            icon: '/static/img/shop/tools/browse.png',
-            title: '浏览记录',
-        },
-        {
-            url: '/pages/user/goods-collect',
-            icon: '/static/img/shop/tools/collect.png',
-            title: '我的收藏',
-        },
-        {
-            url: '/pages/chat/index',
-            icon: '/static/img/shop/tools/service.png',
-            title: '客服',
-        },
+        // {
+        //     url: '/pages/index/cart',
+        //     icon: '/static/img/shop/tools/cart.png',
+        //     title: '购物车',
+        // },
+        // {
+        //     url: '/pages/user/goods-log',
+        //     icon: '/static/img/shop/tools/browse.png',
+        //     title: '浏览记录',
+        // },
+        // {
+        //     url: '/pages/user/goods-collect',
+        //     icon: '/static/img/shop/tools/collect.png',
+        //     title: '我的收藏',
+        // },
+        // {
+        //     url: '/pages/chat/index',
+        //     icon: '/static/img/shop/tools/service.png',
+        //     title: '客服',
+        // },
     ];
 </script>
 
@@ -84,7 +84,7 @@
         // border-radius: 0 0 20rpx 20rpx;
 
         .title {
-            font-size: 36rpx;
+            font-size: 28rpx;
             font-weight: bold;
             color: #333333;
         }
@@ -93,19 +93,19 @@
             width: calc(25vw - 20rpx);
 
             .list-image {
-                width: 104rpx;
-                height: 104rpx;
+                width: 90rpx;
+                height: 90rpx;
                 border-radius: 52rpx;
                 background: var(--ui-BG);
 
                 .list-icon {
-                    width: 54rpx;
-                    height: 54rpx;
+                    width: 40rpx;
+                    height: 40rpx;
                 }
             }
 
             .list-title {
-                font-size: 26rpx;
+                font-size: 22rpx;
                 font-weight: 500;
                 color: #333333;
             }

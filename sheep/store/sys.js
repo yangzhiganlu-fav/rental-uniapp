@@ -17,7 +17,7 @@ const sys = defineStore({
             // } else {
             //     this.theme = theme;
             // }
-            this.theme = 'cyan';
+            this.theme = 'blue';
         },
     },
     persist: {

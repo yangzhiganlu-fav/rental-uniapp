@@ -62,17 +62,17 @@
             },
             {
                 text: '房源',
-                url: '/pages/index/house',
+                url: '/pages/house/houseList',
                 icon: 'fangdong',
             },
             {
                 text: '租约',
-                url: '/pages/index/contract',
+                url: '/pages/contract/index',
                 icon: 'hetong',
             },
             {
                 text: '我的',
-                url: '/pages/index/mine',
+                url: '/pages/mine/index',
                 icon: 'yonghu',
             },
         ],

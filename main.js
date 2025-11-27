@@ -1,15 +1,16 @@
 import App from './App';
 import { createSSRApp } from 'vue';
 import { setupPinia } from './sheep/store';
-
+import uviewPlus from '@/uni_modules/uview-plus';
 
 export function createApp() {
+    const app = createSSRApp(App);
 
-  const app = createSSRApp(App);
-  
-  setupPinia(app);
+    app.use(uviewPlus);
 
-  return {
-    app,
-  };
+    setupPinia(app);
+
+    return {
+        app,
+    };
 }

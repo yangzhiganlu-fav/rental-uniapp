@@ -1,19 +1,23 @@
 <template>
-    <su-popup :show="show" round="20" @maskClick="close">
+    <up-popup :show="show" @close="close">
         <view class="popup-content">
             <view class="popup-header">
                 <text class="popup-title">房源联系人</text>
                 <text class="popup-cancel" @tap="close">取消</text>
             </view>
             <view class="popup-body">
-                <view class="contact-item" v-for="(item, index) in contacts" :key="index">
-                    <text class="contact-name">{{ item.name }}</text>
-                    <text class="contact-phone">{{ item.phone }}</text>
-                </view>
-                <view v-if="!contacts.length" class="empty-tip"> 暂无联系人 </view>
+                <up-list v-if="contacts.length" height="400rpx">
+                    <up-list-item v-for="(item, index) in contacts" :key="index">
+                        <view class="contact-item">
+                            <text class="contact-name">{{ item.name }}</text>
+                            <text class="contact-phone">{{ item.phone }}</text>
+                        </view>
+                    </up-list-item>
+                </up-list>
+                <view v-else class="empty-tip">暂无联系人</view>
             </view>
         </view>
-    </su-popup>
+    </up-popup>
 </template>
 
 <script setup>
@@ -43,45 +47,20 @@
 </script>
 
 <style lang="scss" scoped>
-    .popup-content {
-        .popup-header {
-            padding: 30rpx 0;
-            position: relative;
-            text-align: center;
-            padding-bottom: 20rpx;
-            border-bottom: 1rpx solid #eee;
-            background-color: #eee;
+    .contact-item {
+        text-align: center;
+        padding: 20rpx 0;
+        border-bottom: 1rpx solid #f0f0f0;
 
-            .popup-title {
-                font-size: 30rpx;
-                color: #3d9bff;
-            }
-
-            .popup-cancel {
-                font-size: 28rpx;
-                color: #3d9bff;
-                position: absolute;
-                right: 32rpx;
-            }
+        .contact-name {
+            font-size: 28rpx;
+            color: #333;
         }
 
-        .popup-body {
-            .contact-item {
-                text-align: center;
-                padding: 20rpx 0;
-                border-bottom: 1rpx solid #f0f0f0;
-
-                .contact-name {
-                    font-size: 28rpx;
-                    color: #333;
-                }
-
-                .contact-phone {
-                    margin-left: 15rpx;
-                    font-size: 28rpx;
-                    color: #666;
-                }
-            }
+        .contact-phone {
+            margin-left: 15rpx;
+            font-size: 28rpx;
+            color: #666;
         }
     }
 

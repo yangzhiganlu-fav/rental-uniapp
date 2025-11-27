@@ -11,12 +11,19 @@
                 statusBar
                 :color="color"
                 :tools="tools"
+                :placeholderText="placeholderText"
                 :opacityBgUi="opacityBgUi"
+                :searchClearButton="searchClearButton"
+                :searchCancelButton="searchCancelButton"
                 @search="(e) => emits('search', e)"
+                @searchInput="(e) => emits('searchInput', e)"
                 :defaultSearch="defaultSearch"
             >
+                <template #center>
+                    <slot name="center"></slot>
+                </template>
                 <template #right>
-                    <slot name="navbarRight"></slot>
+                    <slot name="right"></slot>
                 </template>
             </su-navbar>
 
@@ -139,8 +146,20 @@
             type: Boolean,
             default: false,
         },
+        placeholderText: {
+            type: String,
+            default: '请输入关键词',
+        },
+        searchClearButton: {
+            type: String,
+            default: 'none',
+        },
+        searchCancelButton: {
+            type: String,
+            default: 'none',
+        },
     });
-    const emits = defineEmits(['search']);
+    const emits = defineEmits(['search', 'searchInput']);
 
     const sysStore = sheep.$store('sys');
     const userStore = sheep.$store('user');
@@ -236,7 +255,8 @@
         z-index: 2;
         display: flex;
         width: 100%;
-        height: 100vh;
+        height: 100%;
+        overflow: hidden;
 
         .page-main {
             position: absolute;
@@ -245,12 +265,16 @@
             min-height: 100%;
             display: flex;
             flex-direction: column;
+            height: 100%;
 
             .page-body {
                 width: 100%;
                 position: relative;
                 z-index: 1;
                 flex: 1;
+                min-height: 0;
+                display: flex;
+                flex-direction: column;
             }
 
             .page-img {
