@@ -11,10 +11,16 @@
         <template #body>
             <up-grid :border="false" col="2" gap="12rpx">
                 <up-grid-item v-for="(item, index) in data.roomList" :key="index">
-                    <s-room-item :data="item" @click="onRoomClick" />
+                    <s-room
+                        :data="item"
+                        :checkable="checkable"
+                        :checked="isChecked(item.id)"
+                        @click="onRoomClick"
+                        @longpress="onRoomLongPress"
+                    />
                 </up-grid-item>
-                <up-grid-item v-if="props.showAddPicture">
-                    <s-room-item isAdd @click="addRoom" />
+                <up-grid-item v-if="showAddPicture">
+                    <s-room type="add" @click="addRoom" />
                 </up-grid-item>
             </up-grid>
         </template>
@@ -22,8 +28,6 @@
 </template>
 
 <script setup>
-    import { onLoad } from '@dcloudio/uni-app';
-
     const props = defineProps({
         data: {
             type: Object,
@@ -33,16 +37,33 @@
             type: Boolean,
             default: true,
         },
+        // 是否处于可选择（编辑）状态
+        checkable: {
+            type: Boolean,
+            default: false,
+        },
+        selectedIds: {
+            type: Array,
+            default: () => [],
+        },
     });
 
-    const emits = defineEmits(['roomClick']);
+    const emits = defineEmits(['roomClick', 'roomLongPress', 'addClick']);
+
+    const isChecked = (id) => {
+        return props.selectedIds.includes(id);
+    };
 
     const onRoomClick = (room) => {
-        emits('roomClick', 'detail', { houseId: props.data.id, id: room.id });
+        emits('roomClick', room);
+    };
+
+    const onRoomLongPress = (room) => {
+        emits('roomLongPress', room);
     };
 
     const addRoom = () => {
-        emits('roomClick', 'add', { houseId: props.data.id, id: '' });
+        emits('addClick', props.data.id);
     };
 </script>
 

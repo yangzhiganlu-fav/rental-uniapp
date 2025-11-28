@@ -121,6 +121,17 @@
                         "title": "添加房间",
                         "group": "房源"
                     }
+                },
+                {
+                    "path": "roomDetail",
+                    "style": {
+                        "navigationBarTitleText": "房间详情"
+                    },
+                    "meta": {
+                        "sync": true,
+                        "title": "房间详情",
+                        "group": "房源"
+                    }
                 }
             ]
         }
