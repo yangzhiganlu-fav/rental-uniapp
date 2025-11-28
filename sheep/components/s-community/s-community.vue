@@ -13,6 +13,7 @@
             @roomClick="(room) => onRoomClick(house.id, room)"
             @roomLongPress="onRoomLongPress"
             @addClick="onAddClick"
+            @editClick="onEditClick"
         />
     </uni-group>
 </template>
@@ -36,7 +37,7 @@
         },
     });
 
-    const emits = defineEmits(['roomClick', 'roomLongPress', 'addClick']);
+    const emits = defineEmits(['roomClick', 'roomLongPress', 'addClick', 'editClick']);
 
     const onRoomClick = (houseId, room) => {
         // 包装一下，带上 houseId，方便上层业务处理
@@ -49,6 +50,10 @@
 
     const onAddClick = (houseId) => {
         emits('addClick', houseId);
+    };
+
+    const onEditClick = (house) => {
+        emits('editClick', house);
     };
 </script>
 

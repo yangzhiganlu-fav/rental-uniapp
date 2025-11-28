@@ -1,5 +1,12 @@
 <template>
-    <up-modal :show="show" showCancelButton title="添加联系人" @confirm="onConfirm" @cancel="close">
+    <up-modal
+        :show="show"
+        showCancelButton
+        title="添加联系人"
+        width="500rpx"
+        @confirm="onConfirm"
+        @cancel="close"
+    >
         <view class="contact-form">
             <up-form
                 ref="formRef"

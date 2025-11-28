@@ -67,6 +67,7 @@
                 @roomClick="handleRoomClick"
                 @roomLongPress="handleRoomLongPress"
                 @addClick="handleAddClick"
+                @editClick="handleEditClick"
             />
         </scroll-view>
 
@@ -84,6 +85,14 @@
                 <button class="action-btn delete-btn" @tap="handleBatchDelete">删除</button>
             </view>
         </view>
+
+        <!-- 编辑房间信息弹框 -->
+        <edit-room-dialog
+            v-if="showEditRoomDialog"
+            v-model="showEditRoomDialog"
+            :roomData="currentRoomData"
+            @save="handleSaveRoomData"
+        />
     </s-layout>
 </template>
 
@@ -98,6 +107,7 @@
     import HouseFilter from './components/houseFilter.vue';
     import MyHouseCountPopup from './components/myHouseCountPopup.vue';
     import sCommunity from '@/sheep/components/s-community/s-community.vue';
+    import EditRoomDialog from './components/editRoomDialog.vue';
 
     // 3. 导入静态资源
     import room1 from '/static/room/room1.jpg';
@@ -109,6 +119,7 @@
     const showHouseCountPopup = ref(false); // 是否显示房源统计弹窗
     const showFilterPopup = ref(false); // 是否显示筛选弹窗
     const isEditing = ref(false); // 是否处于编辑模式
+    const showEditRoomDialog = ref(false); // 是否显示编辑房间弹窗
 
     // 4.2 数据状态
     const selectedRooms = ref([]); // 选中的房间ID列表
@@ -117,6 +128,7 @@
     const searchForm = ref({
         selectedCommunity: null, // 当前选中的小区（搜索结果）
     });
+    const currentRoomData = reactive({}); // 当前房间数据
 
     // 计算属性：是否全选
     const isAllSelected = computed(() => {
@@ -197,6 +209,20 @@
     // 处理添加按钮点击
     const handleAddClick = (houseId) => {
         sheep.$router.go('/pages/house/roomAdd', { houseId });
+    };
+
+    // 处理编辑按钮点击
+    const handleEditClick = (roomData) => {
+        currentRoomData.buildingNumber = roomData.buildingNumber;
+        currentRoomData.unitNumber = roomData.unitNumber;
+        currentRoomData.roomNumber = roomData.roomNumber;
+        showEditRoomDialog.value = true;
+    };
+
+    // 保存房间数据
+    const handleSaveRoomData = (updatedData) => {
+        console.log('保存的房间数据:', updatedData);
+        // TODO: 调用接口保存数据
     };
 
     // 退出编辑模式

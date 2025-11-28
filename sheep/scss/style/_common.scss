@@ -296,14 +296,20 @@
 
 /* u-modal 样式覆盖 */
 .u-modal__title {
-    padding: 36rpx 0 !important;
+    padding: 24rpx 0 !important;
     background-color: $gray-e;
     font-weight: normal !important;
-    color: $blue !important;
+    font-size: 28rpx !important;
 }
 
 .u-modal__content {
     padding: 24rpx 32rpx !important;
+}
+
+.u-modal__button-group__wrapper__text {
+    font-size: 28rpx !important;
+    // height: 80rpx !important;
+    // line-height: 80rpx !important;
 }
 
 .dropdown-slot-content {
