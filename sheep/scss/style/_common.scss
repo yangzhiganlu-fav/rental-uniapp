@@ -137,11 +137,19 @@
         }
 
         .value-text {
-            color: inherit;
+            color: $dark-3;
         }
 
         .icon-trigger {
             margin-left: 16rpx;
+        }
+
+        .edit-fee-btn {
+            font-size: 24rpx;
+            color: $orange-light;
+            border: 1rpx solid $orange-light;
+            padding: 6rpx 20rpx;
+            border-radius: 24rpx;
         }
     }
 }
@@ -239,11 +247,11 @@
         text-align: center;
         padding-bottom: 20rpx;
         border-bottom: 1rpx solid $gray-e;
-        background-color: $gray-e;
+        background-color: $gray-f;
 
         .popup-title {
             font-size: 30rpx;
-            color: $blue;
+            color: $dark-6;
         }
 
         .popup-cancel {
@@ -256,6 +264,34 @@
 
     // .popup-body {
     // }
+
+    .popup-footer {
+        padding: 24rpx 32rpx;
+        border-top: 1rpx solid $gray-e;
+        background-color: $gray-f;
+        display: flex;
+        align-items: center;
+
+        .btn-cancel {
+            flex: 1;
+            background-color: $white;
+            color: $dark-6;
+            border-radius: 8rpx;
+            font-size: 28rpx;
+            height: 80rpx;
+            line-height: 80rpx;
+            text-align: center;
+            margin-right: 16rpx;
+        }
+        .btn-confirm {
+            flex: 1;
+            background-color: $blue;
+            color: $white;
+            &::after {
+                border: none;
+            }
+        }
+    }
 }
 
 /* u-modal 样式覆盖 */

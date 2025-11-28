@@ -63,7 +63,7 @@
     .org-list-item {
         text-align: center;
         font-size: 12px !important;
-        color: #2979ff;
+        color: $blue-light;
     }
 
     :deep(.checklist-group) {

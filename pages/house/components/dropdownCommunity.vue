@@ -111,17 +111,17 @@
     .community-list {
         display: flex;
         flex-direction: column;
-        padding: 0 10px;
+        padding: 0 20rpx;
     }
 
     .community-item {
-        padding: 10px 0;
+        padding: 20rpx 0;
         border-bottom: 1px solid #f5f5f5;
-        font-size: 12px;
-        color: #333;
+        font-size: 24rpx;
+        color: $dark-3;
 
         &.active {
-            color: #2979ff;
+            color: $blue-light;
             font-weight: bold;
         }
 
@@ -131,6 +131,6 @@
     }
 
     :deep(.u-cell__title) {
-        font-size: 12px !important;
+        font-size: 24rpx !important;
     }
 </style>

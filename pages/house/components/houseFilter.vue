@@ -70,4 +70,8 @@
     };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+    :deep(.u-cell__title-text) {
+        font-size: 24rpx !important;
+    }
+</style>

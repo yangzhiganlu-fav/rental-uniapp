@@ -54,20 +54,20 @@
 
         .contact-name {
             font-size: 28rpx;
-            color: #333;
+            color: $dark-3;
         }
 
         .contact-phone {
             margin-left: 15rpx;
             font-size: 28rpx;
-            color: #666;
+            color: $dark-6;
         }
     }
 
     .empty-tip {
         text-align: center;
         padding: 40rpx 0;
-        color: #999;
+        color: $dark-9;
         font-size: 28rpx;
     }
 </style>

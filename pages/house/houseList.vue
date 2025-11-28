@@ -78,7 +78,7 @@
                         <up-radio label="全选" name="toggle"> </up-radio>
                     </up-radio-group>
                 </view>
-                <text>已选 {{ selectedRooms.length }} 个房间</text>
+                <text class="selected-count">已选 {{ selectedRooms.length }} 个房间</text>
             </view>
             <view class="action-bar-right">
                 <button class="action-btn delete-btn" @tap="handleBatchDelete">删除</button>
@@ -331,12 +331,12 @@
         left: 0;
         width: 100%;
         height: 100rpx;
-        background-color: #fff;
+        background-color: $white;
         z-index: 1000;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 0 30rpx;
+        padding: 0 30rpx 0 40rpx;
         box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
         box-sizing: border-box;
         padding-bottom: constant(safe-area-inset-bottom);
@@ -344,7 +344,12 @@
 
         .action-bar-left {
             font-size: 28rpx;
-            color: #333;
+            color: $dark-3;
+
+            .selected-count {
+                color: $dark-9;
+                font-size: 24rpx;
+            }
         }
 
         .action-bar-right {
@@ -354,8 +359,8 @@
                 height: 60rpx;
                 line-height: 60rpx;
                 border-radius: 30rpx;
-                background-color: #ff4d4f;
-                color: #fff;
+                background-color: $red;
+                color: $white;
                 border: none;
                 display: flex;
                 align-items: center;

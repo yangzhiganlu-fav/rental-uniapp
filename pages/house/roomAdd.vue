@@ -70,7 +70,7 @@
                                 {{ `${formData.orientation[0]} ${formData.orientation[1]}` }}
                             </text>
                             <text v-else class="placeholder">请选择</text>
-                            <uni-icons type="right" color="#999" size="16" class="icon-trigger" />
+                            <uni-icons type="right" color="#333" size="16" class="icon-trigger" />
                         </view>
                     </uni-forms-item>
 
@@ -261,14 +261,6 @@
 
     .form-container {
         padding: 0 30rpx;
-    }
-
-    .edit-fee-btn {
-        font-size: 24rpx;
-        color: $orange-light;
-        border: 1rpx solid $orange-light;
-        padding: 6rpx 20rpx;
-        border-radius: 24rpx;
     }
 
     :deep(.uni-forms-item__label) {

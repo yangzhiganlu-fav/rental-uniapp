@@ -34,7 +34,7 @@
                             {{ formData.communityName }}
                         </text>
                         <text v-else class="placeholder">请选择小区</text>
-                        <uni-icons type="right" color="#999" size="16" class="icon-trigger" />
+                        <uni-icons type="right" color="#333" size="16" class="icon-trigger" />
                     </view>
                 </uni-forms-item>
 
@@ -68,7 +68,7 @@
                 </uni-forms-item>
 
                 <uni-forms-item label="当前户型" name="currentRoomType">
-                    <view class="trigger" @click="showCurrentRoomTypePicker = true">
+                    <view class="trigger" @tap="showCurrentRoomTypePicker = true">
                         <text v-if="formData.currentRoomType?.length" class="value-text">
                             {{
                                 `${formData.currentRoomType[0] + 1}室 ${
@@ -77,7 +77,7 @@
                             }}
                         </text>
                         <text v-else class="placeholder">请选择户型</text>
-                        <uni-icons type="right" color="#999" size="16" class="icon-trigger" />
+                        <uni-icons type="right" color="#333" size="16" class="icon-trigger" />
                     </view>
                 </uni-forms-item>
 
@@ -88,7 +88,7 @@
                             <text class="sub-text">(选填)</text>
                         </view>
                     </template>
-                    <view class="trigger" @click="showOriginalRoomTypePicker = true">
+                    <view class="trigger" @tap="showOriginalRoomTypePicker = true">
                         <text v-if="formData.originalRoomType?.length" class="value-text">
                             {{
                                 `${formData.originalRoomType[0] + 1}室 ${
@@ -97,7 +97,7 @@
                             }}
                         </text>
                         <text v-else class="placeholder">请选择户型</text>
-                        <uni-icons type="right" color="#999" size="16" class="icon-trigger" />
+                        <uni-icons type="right" color="#333" size="16" class="icon-trigger" />
                     </view>
                 </uni-forms-item>
 
@@ -113,12 +113,12 @@
                             selectedColor="#45cbb9"
                             selectedTextColor="#fff"
                         />
-                        <view class="trigger floor-picker" @click="openFloorPicker">
+                        <view class="trigger floor-picker" @tap="openFloorPicker">
                             <text v-if="formData.floor?.length" class="value-text">
                                 {{ `第${formData.floor[0] + 1}层，共${formData.floor[1] + 1}层` }}
                             </text>
                             <text v-else class="placeholder">请选择</text>
-                            <uni-icons type="right" color="#999" size="16" class="icon-trigger" />
+                            <uni-icons type="right" color="#333" size="16" class="icon-trigger" />
                         </view>
                     </view>
                 </uni-forms-item>
@@ -168,7 +168,7 @@
                     <template #label>
                         <view class="form-item-label">
                             <text class="main-text">带看联系人</text>
-                            <view class="add-contact-btn" @click.stop="showAddContactPopup">
+                            <view class="add-contact-btn" @tap.stop="showAddContactPopup">
                                 <s-icon name="plus" size="24" color="#ff9900" />
                                 <text>添加</text>
                             </view>
@@ -430,7 +430,7 @@
 
 <style lang="scss" scoped>
     .form-container {
-        padding: 20rpx;
+        padding: 0 20rpx 240rpx 20rpx;
         background-color: $white;
     }
 
