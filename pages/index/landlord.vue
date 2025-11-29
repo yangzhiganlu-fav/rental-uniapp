@@ -1,126 +1,55 @@
 <template>
-    <s-block
-        v-for="(item, index) in template.components"
-        :key="index"
-        :styles="item.property.style"
+    <up-swiper
+        :list="list"
+        height="400rpx"
+        previousMargin="30"
+        nextMargin="30"
+        circular
+        radius="5"
+        bgColor="#ffffff"
     >
-        <s-block-item :type="item.id" :data="item.property" :styles="item.property.style" />
-    </s-block>
+    </up-swiper>
+
+    <up-box height="160px" gap="12px" :bgColors="['#EEFCFF', '#FCF8FF', '#FDF8F2']">
+        <template #left>
+            <view>
+                <s-icon name="qianyuequeren" size="32" color="#409EFF" />
+                <view>签约确认</view>
+            </view>
+        </template>
+        <template #rightTop>
+            <view>
+                <s-icon name="zhuanzuqueren" size="32" color="#67C23A" />
+                <view>转租确认</view>
+            </view>
+        </template>
+        <template #rightBottom>
+            <view>
+                <s-icon name="daifuliebiao" size="32" color="#FFB020" />
+                <view>代付列表</view>
+            </view>
+        </template>
+    </up-box>
 </template>
 
 <script setup>
-    import { computed } from 'vue';
+    import { computed, reactive } from 'vue';
     import { onLoad, onPageScroll, onPullDownRefresh } from '@dcloudio/uni-app';
     import sheep from '@/sheep';
     import $share from '@/sheep/platform/share';
 
+    const list = reactive([
+        '/static/room/room1.jpg',
+        '/static/room/room2.jpeg',
+        '/static/room/room3.jpeg',
+    ]);
+
     const template = {
         components: [
-            {
-                id: 'Carousel',
-                property: {
-                    indicator: 'dot',
-                    autoplay: true,
-                    interval: 3,
-                    type: 'default',
-                    items: [
-                        { type: 'img', imgUrl: '/static/room/room1.png', url: '' },
-                        { type: 'img', imgUrl: '/static/room/room2.png', url: '' },
-                        { type: 'img', imgUrl: '/static/room/room3.png', url: '' },
-                    ],
-                    style: {
-                        bgType: 'color',
-                        bgColor: '#fff',
-                        marginBottom: 8,
-                    },
-                },
-            },
-            // {
-            //     id: 'MenuGrid',
-            //     property: {
-            //         column: 4,
-            //         list: [
-            //             {
-            //                 title: '录入房源',
-            //                 titleColor: '#333',
-            //                 subtitle: '',
-            //                 subtitleColor: '#bbb',
-            //                 badge: {
-            //                     show: false,
-            //                 },
-            //                 iconUrl: 'lurufangyuan',
-            //                 iconSize: 64,
-            //                 iconColor: '#409EFF',
-            //                 url: '/pages/house/houseAdd',
-            //             },
-            //             {
-            //                 title: '添加租约',
-            //                 titleColor: '#333',
-            //                 subtitle: '',
-            //                 subtitleColor: '#bbb',
-            //                 badge: {
-            //                     show: false,
-            //                 },
-            //                 iconUrl: 'tianjiazuyue',
-            //                 iconSize: 64,
-            //                 iconColor: '#67C23A',
-            //                 url: '/pages/house/houseAdd',
-            //             },
-            //             {
-            //                 title: '房态维护',
-            //                 titleColor: '#333',
-            //                 subtitle: '',
-            //                 subtitleColor: '#bbb',
-            //                 badge: {
-            //                     show: false,
-            //                 },
-            //                 iconUrl: 'fangtaiweihu',
-            //                 iconSize: 64,
-            //                 iconColor: '#FFB020',
-            //                 url: '/pages/house/houseAdd',
-            //             },
-            //             {
-            //                 title: '联系客服',
-            //                 titleColor: '#333',
-            //                 subtitle: '',
-            //                 subtitleColor: '#bbb',
-            //                 badge: {
-            //                     show: false,
-            //                 },
-            //                 iconUrl: 'kefu',
-            //                 iconSize: 64,
-            //                 iconColor: '#F56C6C',
-            //                 url: '/pages/house/houseAdd',
-            //             },
-            //         ],
-            //         style: {
-            //             bgType: 'color',
-            //             bgColor: '#fff',
-            //             marginBottom: 8,
-            //             marginLeft: 8,
-            //             marginRight: 8,
-            //             padding: 8,
-            //             paddingTop: 8,
-            //             paddingRight: 8,
-            //             paddingBottom: 8,
-            //             paddingLeft: 8,
-            //             borderRadius: 8,
-            //             borderTopLeftRadius: 8,
-            //             borderTopRightRadius: 8,
-            //             borderBottomRightRadius: 8,
-            //             borderBottomLeftRadius: 8,
-            //         },
-            //     },
-            // },
             {
                 id: 'MenuGridWithTitle',
                 property: {
                     column: 5,
-                    // title: '待办事项',
-                    // titleIcon: 'daibanshixiang',
-                    // titleIconSize: 38,
-                    // titleIconBgColor: '#8E6EFF',
-                    // titleColor: '#333',
                     list: [
                         {
                             title: '签约确认',

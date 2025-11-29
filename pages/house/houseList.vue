@@ -88,7 +88,6 @@
 
         <!-- 编辑房间信息弹框 -->
         <edit-room-dialog
-            v-if="showEditRoomDialog"
             v-model="showEditRoomDialog"
             :roomData="currentRoomData"
             @save="handleSaveRoomData"
@@ -342,8 +341,8 @@
     .options-container {
         display: flex;
         align-items: center;
-        gap: 24rpx;
-        padding: 0 24rpx;
+        gap: $tx-sm;
+        padding: 0 $tx-sm;
     }
 
     .community-list-page {
@@ -369,18 +368,18 @@
         padding-bottom: env(safe-area-inset-bottom);
 
         .action-bar-left {
-            font-size: 28rpx;
+            font-size: $tx-base;
             color: $dark-3;
 
             .selected-count {
                 color: $dark-9;
-                font-size: 24rpx;
+                font-size: $tx-sm;
             }
         }
 
         .action-bar-right {
             .action-btn {
-                font-size: 28rpx;
+                font-size: $tx-base;
                 padding: 0 30rpx;
                 height: 60rpx;
                 line-height: 60rpx;

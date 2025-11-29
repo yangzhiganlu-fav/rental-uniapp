@@ -12,15 +12,16 @@
                 ref="formRef"
                 :model="formData"
                 :rules="rules"
-                labelWidth="80"
-                labelPosition="top"
                 borderBottom
                 errorType="toast"
+                labelWidth="60"
+                labelAlign="right"
+                class="modal-form"
             >
-                <up-form-item label="姓名" prop="name">
+                <up-form-item prop="name" label="姓名">
                     <up-input v-model="formData.name" placeholder="请输入姓名" border="bottom" />
                 </up-form-item>
-                <up-form-item label="联系方式" prop="phone">
+                <up-form-item prop="phone" label="联系方式">
                     <up-input
                         v-model="formData.phone"
                         placeholder="请输入联系方式"
@@ -92,13 +93,3 @@
         close,
     });
 </script>
-
-<style lang="scss" scoped>
-    .contact-form {
-        width: 100%;
-    }
-
-    :deep(.u-form-item__body__right__message) {
-        display: none;
-    }
-</style>

@@ -89,17 +89,6 @@
                     }
                 },
                 {
-                    "path": "houseDetail",
-                    "style": {
-                        "navigationBarTitleText": "房源详情"
-                    },
-                    "meta": {
-                        "sync": true,
-                        "title": "房源详情",
-                        "group": "房源"
-                    }
-                },
-                {
                     "path": "houseSearch",
                     "style": {
                         "navigationBarTitleText": "搜索房源",

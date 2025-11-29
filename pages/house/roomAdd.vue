@@ -246,7 +246,7 @@
 
         .address-detail {
             margin-top: 16rpx;
-            font-size: 24rpx;
+            font-size: $tx-sm;
         }
     }
 
@@ -280,7 +280,7 @@
     }
 
     :deep(.u-cell__title-text) {
-        font-size: 28rpx;
+        font-size: $tx-base;
         color: $black;
     }
 </style>

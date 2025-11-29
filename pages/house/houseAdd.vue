@@ -436,7 +436,7 @@
 
     .floor-picker {
         display: block;
-        margin-top: 24rpx;
+        margin-top: $tx-sm;
         text-align: right;
     }
 

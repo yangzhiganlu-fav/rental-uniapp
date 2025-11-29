@@ -117,7 +117,7 @@
     .community-item {
         padding: 20rpx 0;
         border-bottom: 1px solid #f5f5f5;
-        font-size: 24rpx;
+        font-size: $tx-sm;
         color: $dark-3;
 
         &.active {
@@ -131,6 +131,6 @@
     }
 
     :deep(.u-cell__title) {
-        font-size: 24rpx !important;
+        font-size: $tx-sm !important;
     }
 </style>

@@ -123,7 +123,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            font-size: 24rpx;
+            font-size: $tx-sm;
             color: $dark-9;
 
             .key-location-content {

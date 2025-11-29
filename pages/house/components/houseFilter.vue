@@ -72,6 +72,6 @@
 
 <style lang="scss" scoped>
     :deep(.u-cell__title-text) {
-        font-size: 24rpx !important;
+        font-size: $tx-sm !important;
     }
 </style>

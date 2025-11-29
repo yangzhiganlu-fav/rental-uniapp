@@ -53,13 +53,13 @@
         border-bottom: 1rpx solid #f0f0f0;
 
         .contact-name {
-            font-size: 28rpx;
+            font-size: $tx-base;
             color: $dark-3;
         }
 
         .contact-phone {
             margin-left: 15rpx;
-            font-size: 28rpx;
+            font-size: $tx-base;
             color: $dark-6;
         }
     }
@@ -68,6 +68,6 @@
         text-align: center;
         padding: 40rpx 0;
         color: $dark-9;
-        font-size: 28rpx;
+        font-size: $tx-base;
     }
 </style>

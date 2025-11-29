@@ -126,7 +126,7 @@
 
     .trigger {
         background-color: $white;
-        font-size: 28rpx;
+        font-size: $tx-base;
         display: flex;
         align-items: center;
         justify-content: flex-end;
@@ -161,7 +161,7 @@
 
     .main-text {
         flex-shrink: 0;
-        font-size: 28rpx;
+        font-size: $tx-base;
         color: $black;
     }
 
@@ -174,7 +174,7 @@
 
     .bold-text {
         flex-shrink: 0;
-        font-size: 28rpx;
+        font-size: $tx-base;
         font-weight: bold;
         color: $black;
         margin-left: 8rpx;
@@ -206,7 +206,7 @@
     .dropdown-trigger {
         display: flex;
         align-items: center;
-        font-size: 28rpx;
+        font-size: $tx-base;
         color: $black;
 
         text {
@@ -225,7 +225,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 24rpx 30rpx;
-            font-size: 28rpx;
+            font-size: $tx-base;
             color: $black;
 
             &.active {
@@ -255,7 +255,7 @@
         }
 
         .popup-cancel {
-            font-size: 28rpx;
+            font-size: $tx-base;
             color: $blue;
             position: absolute;
             right: 32rpx;
@@ -277,7 +277,7 @@
             background-color: $white;
             color: $dark-6;
             border-radius: 8rpx;
-            font-size: 28rpx;
+            font-size: $tx-base;
             height: 80rpx;
             line-height: 80rpx;
             text-align: center;
@@ -299,7 +299,7 @@
     padding: 24rpx 0 !important;
     background-color: $gray-e;
     font-weight: normal !important;
-    font-size: 28rpx !important;
+    font-size: $tx-base !important;
 }
 
 .u-modal__content {
@@ -307,11 +307,28 @@
 }
 
 .u-modal__button-group__wrapper__text {
-    font-size: 28rpx !important;
-    // height: 80rpx !important;
-    // line-height: 80rpx !important;
+    font-size: $tx-base !important;
 }
 
+.u-modal__button-group__wrapper {
+    height: 80rpx !important;
+}
+
+.modal-form {
+    :deep(.u-form-item__body__left__content__label) {
+        font-size: $tx-sm !important;
+    }
+
+    :deep(.uni-input-placeholder) {
+        font-size: $tx-sm !important;
+    }
+
+    :deep(.u-input__content__subfix-icon) {
+        font-size: $tx-sm !important;
+    }
+}
+
+/* 筛选下拉框样式 */
 .dropdown-slot-content {
     background-color: $white;
 }
@@ -320,7 +337,7 @@
     .filter-title {
         font-weight: bold;
         margin-bottom: 20rpx;
-        font-size: 28rpx;
+        font-size: $tx-base;
         color: $black;
     }
     .filter-tags {
@@ -348,7 +365,7 @@
     gap: 0;
 
     button {
-        font-size: 28rpx;
+        font-size: $tx-base;
         height: 80rpx;
         line-height: 80rpx;
         border-radius: 0;
@@ -375,4 +392,8 @@
 /* 高亮文本 */
 .highlight-red {
     color: $red;
+}
+
+:deep(.u-popup) {
+    flex: none !important;
 }
