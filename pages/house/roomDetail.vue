@@ -369,12 +369,12 @@
 </template>
 
 <script setup>
-    // 引入依赖
+    import sheep from '@/sheep';
     import { reactive, ref } from 'vue';
     import { onShareAppMessage, onLoad } from '@dcloudio/uni-app';
+    import { useRoomDetail } from './hooks/useRoomDetail';
     import RoomSwiper from './components/roomSwiper.vue';
     import EditRoomModal from './components/modal/editRoomModal.vue';
-    import { useRoomDetail } from './hooks/useRoomDetail';
 
     // 页面标题，默认为'房源详情'
     const title = ref('房源详情');
@@ -450,7 +450,7 @@
     ]);
 
     const editRoomPhoto = () => {
-        console.log('editRoomPhoto');
+        sheep.$router.go('/pages/house/editRoomPhoto');
     };
 
     // 楼层选择器引用

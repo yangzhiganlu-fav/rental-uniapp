@@ -16,11 +16,12 @@
                         <view style="font-size: 24rpx">加载失败</view>
                     </template>
                 </up-image>
-                <!-- 选中标记：仅在 checkable 为 true 且 checked 为 true 时显示 -->
-                <view class="check-icon" v-if="checkable && checked">
-                    <uni-icons type="checkmarkempty" size="12" color="#fff"></uni-icons>
+                <!-- 选中标记 -->
+                <view class="check-icon" v-if="checkable">
+                    <up-radio-group :modelValue="checked ? data.id : ''" size="28rpx">
+                        <up-radio :name="data.id" :label="null"></up-radio>
+                    </up-radio-group>
                 </view>
-                <!-- 未选中标记（可选）：仅在 checkable 为 true 且 checked 为 false 时显示空圈，视设计需求而定，这里暂不加 -->
             </view>
             <view class="rental-status">{{ data.rentalStatus }}</view>
             <view class="price">￥{{ data.price }}</view>
@@ -92,17 +93,10 @@
 
             .check-icon {
                 position: absolute;
-                bottom: 0;
+                top: 0;
                 right: 0;
                 z-index: 10;
-                width: 40rpx;
-                height: 40rpx;
-                background: linear-gradient(135deg, transparent 50%, $blue 50%);
-                display: flex;
-                align-items: flex-end;
-                justify-content: flex-end;
-                padding-right: 2rpx;
-                padding-bottom: 2rpx;
+                pointer-events: none;
             }
         }
 
@@ -124,15 +118,15 @@
             color: $dark-3;
         }
 
-        // 右上角角标
+        // 左上角角标
         .rental-status {
             position: absolute;
             top: 0;
-            right: 0;
+            left: 0;
             background-color: $dark-4;
             color: $white;
             padding: 2px 6px;
-            border-radius: 0 0 0 8rpx;
+            border-radius: 0 0 8rpx 0;
             font-size: 20rpx;
             z-index: 1;
         }

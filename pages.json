@@ -121,6 +121,17 @@
                         "title": "房间详情",
                         "group": "房源"
                     }
+                },
+                {
+                    "path": "editRoomPhoto",
+                    "style": {
+                        "navigationBarTitleText": "编辑房间照片"
+                    },
+                    "meta": {
+                        "sync": true,
+                        "title": "编辑房间照片",
+                        "group": "房源"
+                    }
                 }
             ]
         }
