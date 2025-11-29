@@ -10,9 +10,24 @@
                 <up-cell class="hiden-line" title="房间状态"></up-cell>
                 <up-cell
                     title="出租状态"
-                    :value="formData.rentalStatus || '编辑'"
-                    class="grey-label blue-value"
+                    :value="formData.rentalStatus || '暂无'"
+                    class="grey-label blue-value hiden-line inner-cell"
                     @click="openRentalStatusPicker"
+                >
+                    <template #right-icon>
+                        <uni-icons type="arrowright" size="20" color="#999"></uni-icons>
+                    </template>
+                </up-cell>
+                <up-cell
+                    class="grey-label grey-value hiden-line inner-cell"
+                    title="房间号"
+                    value="1"
+                ></up-cell>
+                <up-cell
+                    class="grey-label blue-value inner-cell"
+                    title="房间名称"
+                    :value="formData.roomName || '暂无'"
+                    @click="openRoomNameModal"
                 >
                     <template #right-icon>
                         <uni-icons type="arrowright" size="20" color="#999"></uni-icons>
@@ -22,7 +37,7 @@
                 <up-cell
                     class="blue-value grey-label"
                     title="对外租金挂牌价"
-                    :value="formData.price ? `￥${formData.price}` : '编辑'"
+                    :value="formData.price ? `￥${formData.price}` : '暂无'"
                     @click="openPriceModal"
                 >
                     <template #right-icon>
@@ -44,6 +59,16 @@
                     value="11/01 23:40"
                     class="grey-label grey-value inner-cell"
                 ></up-cell>
+                <up-cell
+                    class="blue-value hiden-line"
+                    title="可开始带看时间"
+                    :value="formData.viewingDate || '暂无'"
+                    @click="openCalendar"
+                >
+                    <template #right-icon>
+                        <uni-icons type="arrowright" size="20" color="#999"></uni-icons>
+                    </template>
+                </up-cell>
                 <up-cell
                     class="blue-value"
                     :border="!formData.remark"
@@ -75,7 +100,7 @@
                     :value="
                         formData.buildingNumber
                             ? `${formData.buildingNumber}幢${formData.unitNumber}单元${formData.roomNumber}室`
-                            : '编辑'
+                            : '暂无'
                     "
                     @click="openRoomModal"
                 >
@@ -91,8 +116,32 @@
                 <up-cell
                     class="blue-value grey-label hiden-line inner-cell"
                     title="整套面积"
-                    :value="formData.area ? `${formData.area}平米` : '编辑'"
+                    :value="formData.area ? `${formData.area}平米` : '暂无'"
                     @click="openAreaModal"
+                >
+                    <template #right-icon>
+                        <uni-icons type="arrowright" size="20" color="#999"></uni-icons>
+                    </template>
+                </up-cell>
+                <up-cell
+                    class="blue-value grey-label hiden-line inner-cell"
+                    title="房间面积"
+                    :value="formData.roomArea ? `${formData.roomArea}平米` : '暂无'"
+                    @click="openRoomAreaModal"
+                >
+                    <template #right-icon>
+                        <uni-icons type="arrowright" size="20" color="#999"></uni-icons>
+                    </template>
+                </up-cell>
+                <up-cell
+                    class="blue-value grey-label hiden-line inner-cell"
+                    title="房间朝向"
+                    :value="
+                        formData.orientation?.length
+                            ? `${formData.orientation[0]} ${formData.orientation[1]}`
+                            : '暂无'
+                    "
+                    @click="openOrientationPicker"
                 >
                     <template #right-icon>
                         <uni-icons type="arrowright" size="20" color="#999"></uni-icons>
@@ -120,7 +169,7 @@
                                         `第${formData.floor[0] + 1}层，共${formData.floor[1] + 1}层`
                                     }}
                                 </text>
-                                <text v-else>编辑</text>
+                                <text v-else>暂无</text>
                                 <uni-icons type="arrowright" size="20" color="#999"></uni-icons>
                             </view>
                         </view>
@@ -235,6 +284,47 @@
             </up-input>
         </up-modal>
 
+        <!-- 房间面积弹窗 -->
+        <up-modal
+            :show="roomAreaModalShow"
+            showCancelButton
+            title="房间面积"
+            width="500rpx"
+            class="form-sm"
+            @confirm="onRoomAreaConfirm"
+            @cancel="roomAreaModalShow = false"
+            @close="onRoomAreaClose"
+        >
+            <up-input
+                v-model.trim="tempRoomArea"
+                placeholder="请输入房间面积"
+                border="bottom"
+                type="number"
+            >
+                <template #suffix>
+                    <view>平米</view>
+                </template>
+            </up-input>
+        </up-modal>
+
+        <!-- 房间名称弹窗 -->
+        <up-modal
+            :show="roomNameModalShow"
+            showCancelButton
+            title="房间名称"
+            width="500rpx"
+            class="form-sm"
+            @confirm="onRoomNameConfirm"
+            @cancel="roomNameModalShow = false"
+            @close="onRoomNameClose"
+        >
+            <up-input
+                v-model.trim="tempRoomName"
+                placeholder="请输入房间名称"
+                border="bottom"
+            ></up-input>
+        </up-modal>
+
         <!-- 编辑房间信息弹窗 -->
         <edit-room-modal
             v-model="roomModalShow"
@@ -253,6 +343,28 @@
             @cancel="showFloorPicker = false"
             @change="onFloorPickerChange"
         ></up-picker>
+
+        <!-- 房间朝向选择器 -->
+        <up-picker
+            :show="showOrientationPicker"
+            :columns="orientationRange"
+            :defaultIndex="[0, 0]"
+            @confirm="onOrientationConfirm"
+            @cancel="showOrientationPicker = false"
+        ></up-picker>
+
+        <!-- 日历组件 -->
+        <up-calendar
+            :show="showCalendar"
+            mode="single"
+            showLunar
+            closeOnClickOverlay
+            :monthNum="12"
+            :showTitle="false"
+            :defaultDate="formData.viewingDate"
+            @confirm="onCalendarConfirm"
+            @close="onCalendarClose"
+        ></up-calendar>
     </s-layout>
 </template>
 
@@ -311,6 +423,24 @@
         openAreaModal,
         onAreaConfirm,
         onAreaClose,
+        roomAreaModalShow,
+        tempRoomArea,
+        openRoomAreaModal,
+        onRoomAreaConfirm,
+        onRoomAreaClose,
+        showOrientationPicker,
+        orientationRange,
+        openOrientationPicker,
+        onOrientationConfirm,
+        roomNameModalShow,
+        tempRoomName,
+        openRoomNameModal,
+        onRoomNameConfirm,
+        onRoomNameClose,
+        showCalendar,
+        openCalendar,
+        onCalendarConfirm,
+        onCalendarClose,
     } = useRoomDetail();
 
     const list1 = reactive([

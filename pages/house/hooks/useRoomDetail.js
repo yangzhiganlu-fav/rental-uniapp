@@ -16,6 +16,9 @@ export function useRoomDetail() {
         hasElevator: 'hasElevator',
         floor: [],
         area: '',
+        roomArea: '',
+        orientation: [],
+        viewingDate: '',
     });
 
     // UI控制状态
@@ -38,6 +41,16 @@ export function useRoomDetail() {
 
     const areaModalShow = ref(false);
     const tempArea = ref('');
+
+    const roomAreaModalShow = ref(false);
+    const tempRoomArea = ref('');
+
+    const showOrientationPicker = ref(false);
+
+    const roomNameModalShow = ref(false);
+    const tempRoomName = ref('');
+
+    const showCalendar = ref(false);
 
     // =================================================================================================
     // 2. 选项数据
@@ -69,6 +82,11 @@ export function useRoomDetail() {
     const floorRange = [
         new Array(99).fill(0).map((_, i) => `第${i + 1}层`),
         new Array(99).fill(0).map((_, i) => `共${i + 1}层`),
+    ];
+
+    const orientationRange = [
+        ['主卧', '次卧'],
+        ['朝东', '朝南', '朝西', '朝北'],
     ];
 
     // =================================================================================================
@@ -187,6 +205,76 @@ export function useRoomDetail() {
         tempArea.value = '';
     };
 
+    // --- 房间面积逻辑 ---
+    const openRoomAreaModal = () => {
+        tempRoomArea.value = formData.roomArea;
+        roomAreaModalShow.value = true;
+    };
+
+    const onRoomAreaConfirm = () => {
+        if (!tempRoomArea.value) {
+            uni.showToast({
+                title: '请输入房间面积',
+                icon: 'none',
+            });
+            return;
+        }
+        formData.roomArea = tempRoomArea.value;
+        roomAreaModalShow.value = false;
+    };
+
+    const onRoomAreaClose = () => {
+        tempRoomArea.value = '';
+    };
+
+    // --- 房间朝向逻辑 ---
+    const openOrientationPicker = () => {
+        showOrientationPicker.value = true;
+    };
+
+    const onOrientationConfirm = (e) => {
+        formData.orientation = e.value;
+        showOrientationPicker.value = false;
+    };
+
+    // --- 房间名称逻辑 ---
+    const openRoomNameModal = () => {
+        tempRoomName.value = formData.roomName;
+        roomNameModalShow.value = true;
+    };
+
+    const onRoomNameConfirm = () => {
+        if (!tempRoomName.value) {
+            uni.showToast({
+                title: '请输入房间名称',
+                icon: 'none',
+            });
+            return;
+        }
+        formData.roomName = tempRoomName.value;
+        roomNameModalShow.value = false;
+    };
+
+    const onRoomNameClose = () => {
+        tempRoomName.value = '';
+    };
+
+    // --- 可开始带看时间逻辑 ---
+    const openCalendar = () => {
+        showCalendar.value = true;
+    };
+
+    const onCalendarConfirm = (e) => {
+        if (e && e.length > 0) {
+            formData.viewingDate = e[0];
+        }
+        showCalendar.value = false;
+    };
+
+    const onCalendarClose = () => {
+        showCalendar.value = false;
+    };
+
     return {
         // 状态
         formData,
@@ -203,11 +291,18 @@ export function useRoomDetail() {
         showFloorPicker,
         areaModalShow,
         tempArea,
+        roomAreaModalShow,
+        tempRoomArea,
+        showOrientationPicker,
+        roomNameModalShow,
+        tempRoomName,
+        showCalendar,
 
         // 选项
         rentalStatusOptions,
         keyLocationOptions,
         floorRange,
+        orientationRange,
 
         // 方法
         openRentalStatusPicker,
@@ -228,5 +323,16 @@ export function useRoomDetail() {
         openAreaModal,
         onAreaConfirm,
         onAreaClose,
+        openRoomAreaModal,
+        onRoomAreaConfirm,
+        onRoomAreaClose,
+        openOrientationPicker,
+        onOrientationConfirm,
+        openRoomNameModal,
+        onRoomNameConfirm,
+        onRoomNameClose,
+        openCalendar,
+        onCalendarConfirm,
+        onCalendarClose,
     };
 }
