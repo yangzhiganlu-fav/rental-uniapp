@@ -43,7 +43,7 @@
 
                     <uni-forms-item label="房间名称" name="roomName">
                         <uni-easyinput
-                            v-model="formData.roomName"
+                            v-model.trim="formData.roomName"
                             placeholder="请输入房间名称"
                             :inputBorder="false"
                             :clearable="false"
@@ -52,7 +52,7 @@
 
                     <uni-forms-item label="房间面积" name="area">
                         <uni-easyinput
-                            v-model="formData.area"
+                            v-model.trim="formData.area"
                             type="digit"
                             placeholder="请输入"
                             :inputBorder="false"
@@ -76,7 +76,7 @@
 
                     <uni-forms-item label="租金" name="price">
                         <uni-easyinput
-                            v-model="formData.price"
+                            v-model.trim="formData.price"
                             type="digit"
                             placeholder="请输入"
                             :inputBorder="false"
@@ -90,7 +90,7 @@
 
                     <uni-forms-item label="短租费用" name="shortTermPrice">
                         <uni-easyinput
-                            v-model="formData.shortTermPrice"
+                            v-model.trim="formData.shortTermPrice"
                             type="digit"
                             placeholder="请输入"
                             :inputBorder="false"

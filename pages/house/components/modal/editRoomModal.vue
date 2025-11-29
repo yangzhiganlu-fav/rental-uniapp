@@ -8,16 +8,10 @@
         @cancel="visible = false"
         @close="onClose"
     >
-        <up-form
-            ref="formRef"
-            :model="formData"
-            :rules="rules"
-            errorType="toast"
-            class="modal-form"
-        >
+        <up-form ref="formRef" :model="formData" :rules="rules" errorType="toast" class="form-sm">
             <up-form-item prop="buildingNumber">
                 <up-input
-                    v-model="formData.buildingNumber"
+                    v-model.trim="formData.buildingNumber"
                     placeholder="请输入幢/栋"
                     inputAlign="right"
                 >
@@ -27,14 +21,22 @@
                 </up-input>
             </up-form-item>
             <up-form-item prop="unitNumber">
-                <up-input v-model="formData.unitNumber" placeholder="请输入单元" inputAlign="right">
+                <up-input
+                    v-model.trim="formData.unitNumber"
+                    placeholder="请输入单元"
+                    inputAlign="right"
+                >
                     <template #suffix>
                         <view style="width: 80rpx; text-align: right">单元</view>
                     </template>
                 </up-input>
             </up-form-item>
             <up-form-item prop="roomNumber">
-                <up-input v-model="formData.roomNumber" placeholder="请输入室" inputAlign="right">
+                <up-input
+                    v-model.trim="formData.roomNumber"
+                    placeholder="请输入室"
+                    inputAlign="right"
+                >
                     <template #suffix>
                         <view style="width: 80rpx; text-align: right">室</view>
                     </template>
@@ -130,11 +132,3 @@
         init,
     });
 </script>
-
-<style lang="scss" scoped>
-    .unit-text {
-        width: 40px;
-        text-align: left;
-        margin-left: 10px;
-    }
-</style>

@@ -16,7 +16,7 @@
                         <s-icon name="renzheng" size="40" color="#999"></s-icon>
                         <uni-easyinput
                             placeholder="请输入验证码"
-                            v-model="verifyForm.code"
+                            v-model.trim="verifyForm.code"
                             type="number"
                             maxlength="4"
                             :inputBorder="false"

@@ -16,14 +16,14 @@
             errorType="toast"
             labelWidth="60"
             labelAlign="right"
-            class="modal-form"
+            class="form-sm"
         >
             <up-form-item prop="name" label="姓名">
-                <up-input v-model="formData.name" placeholder="请输入姓名" border="bottom" />
+                <up-input v-model.trim="formData.name" placeholder="请输入姓名" border="bottom" />
             </up-form-item>
             <up-form-item prop="phone" label="联系方式">
                 <up-input
-                    v-model="formData.phone"
+                    v-model.trim="formData.phone"
                     placeholder="请输入联系方式"
                     border="bottom"
                     type="number"

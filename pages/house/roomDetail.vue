@@ -181,13 +181,13 @@
             showCancelButton
             title="对外报价"
             width="500rpx"
-            class="modal-form"
+            class="form-sm"
             @confirm="onPriceConfirm"
             @cancel="priceModalShow = false"
             @close="onPriceClose"
         >
             <up-input
-                v-model="tempPrice"
+                v-model.trim="tempPrice"
                 placeholder="请输入对外报价"
                 border="bottom"
                 type="number"
@@ -204,12 +204,12 @@
             showCancelButton
             title="房东备注"
             width="500rpx"
-            class="modal-form"
+            class="form-sm"
             @confirm="onRemarkConfirm"
             @cancel="remarkModalShow = false"
             @close="onRemarkClose"
         >
-            <up-textarea v-model="tempRemark" placeholder="请输入房东备注"></up-textarea>
+            <up-textarea v-model.trim="tempRemark" placeholder="请输入房东备注"></up-textarea>
         </up-modal>
 
         <!-- 整套面积弹窗 -->
@@ -218,12 +218,17 @@
             showCancelButton
             title="整套面积"
             width="500rpx"
-            class="modal-form"
+            class="form-sm"
             @confirm="onAreaConfirm"
             @cancel="areaModalShow = false"
             @close="onAreaClose"
         >
-            <up-input v-model="tempArea" placeholder="请输入整套面积" border="bottom" type="number">
+            <up-input
+                v-model.trim="tempArea"
+                placeholder="请输入整套面积"
+                border="bottom"
+                type="number"
+            >
                 <template #suffix>
                     <view>平米</view>
                 </template>

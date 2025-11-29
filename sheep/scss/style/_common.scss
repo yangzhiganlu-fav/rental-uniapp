@@ -314,7 +314,7 @@
     height: 80rpx !important;
 }
 
-.modal-form {
+.form-sm {
     :deep(.u-form-item__body__left__content__label) {
         font-size: $tx-sm !important;
     }
@@ -328,6 +328,10 @@
     }
 
     :deep(.uni-textarea-textarea) {
+        font-size: $tx-sm !important;
+    }
+
+    :deep(.uni-input-input) {
         font-size: $tx-sm !important;
     }
 }

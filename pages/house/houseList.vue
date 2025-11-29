@@ -192,7 +192,7 @@
             sheep.$router.go('/pages/house/roomDetail', {
                 houseId: data.houseId,
                 id: data.id,
-                roomName: data.roomName,
+                roomName: data.roomName || '',
             });
         }
     };

@@ -38,7 +38,7 @@
                     <view class="form-item">
                         <s-icon name="yonghu" size="40" color="#999"></s-icon>
                         <uni-easyinput
-                            v-model="accountForm.username"
+                            v-model.trim="accountForm.username"
                             placeholder="请输入账号"
                             :inputBorder="false"
                             :clearable="false"
@@ -49,7 +49,7 @@
                     <view class="form-item">
                         <s-icon name="mima" size="40" color="#999"></s-icon>
                         <uni-easyinput
-                            v-model="accountForm.password"
+                            v-model.trim="accountForm.password"
                             type="password"
                             placeholder="请输入密码"
                             :inputBorder="false"
@@ -73,7 +73,7 @@
                         <uni-easyinput
                             type="number"
                             placeholder="请输入手机号"
-                            v-model="mobileForm.mobile"
+                            v-model.trim="mobileForm.mobile"
                             :inputBorder="false"
                             :clearable="false"
                         />
@@ -84,7 +84,7 @@
                         <s-icon name="renzheng" size="40" color="#999"></s-icon>
                         <uni-easyinput
                             placeholder="请输入验证码"
-                            v-model="mobileForm.code"
+                            v-model.trim="mobileForm.code"
                             type="number"
                             maxlength="4"
                             :inputBorder="false"
