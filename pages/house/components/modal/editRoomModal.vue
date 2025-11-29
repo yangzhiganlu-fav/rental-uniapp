@@ -45,13 +45,17 @@
 </template>
 
 <script setup>
-    import { ref, reactive, computed, defineProps, defineEmits, unref } from 'vue';
+    import { ref, reactive, computed, defineProps, defineEmits, unref, watch } from 'vue';
 
     // 接收父组件传递的属性
     const props = defineProps({
         modelValue: {
             type: Boolean,
             default: false,
+        },
+        roomData: {
+            type: Object,
+            default: () => ({}),
         },
     });
 
@@ -96,6 +100,14 @@
         formData.unitNumber = props.roomData.unitNumber || '';
         formData.roomNumber = props.roomData.roomNumber || '';
     };
+    watch(
+        () => props.modelValue,
+        (val) => {
+            if (val) {
+                init();
+            }
+        },
+    );
 
     // 取消操作
     const onClose = () => {

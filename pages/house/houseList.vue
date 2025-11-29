@@ -189,7 +189,11 @@
             }
         } else {
             // 非编辑模式下，跳转详情
-            sheep.$router.go('/pages/house/roomDetail', { houseId: data.houseId, id: data.id });
+            sheep.$router.go('/pages/house/roomDetail', {
+                houseId: data.houseId,
+                id: data.id,
+                roomName: data.roomName,
+            });
         }
     };
 

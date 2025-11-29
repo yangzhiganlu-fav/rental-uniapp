@@ -326,6 +326,10 @@
     :deep(.u-input__content__subfix-icon) {
         font-size: $tx-sm !important;
     }
+
+    :deep(.uni-textarea-textarea) {
+        font-size: $tx-sm !important;
+    }
 }
 
 /* 筛选下拉框样式 */
