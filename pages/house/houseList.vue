@@ -87,8 +87,8 @@
         </view>
 
         <!-- 编辑房间信息弹框 -->
-        <edit-room-dialog
-            v-model="showEditRoomDialog"
+        <edit-room-modal
+            v-model="showEditRoomModal"
             :roomData="currentRoomData"
             @save="handleSaveRoomData"
         />
@@ -104,9 +104,8 @@
 
     // 2. 导入组件
     import HouseFilter from './components/houseFilter.vue';
-    import MyHouseCountPopup from './components/myHouseCountPopup.vue';
-    import sCommunity from '@/sheep/components/s-community/s-community.vue';
-    import EditRoomDialog from './components/editRoomDialog.vue';
+    import MyHouseCountPopup from './components/popup/myHouseCountPopup.vue';
+    import EditRoomModal from './components/modal/editRoomModal.vue';
 
     // 3. 导入静态资源
     import room1 from '/static/room/room1.jpg';
@@ -118,7 +117,7 @@
     const showHouseCountPopup = ref(false); // 是否显示房源统计弹窗
     const showFilterPopup = ref(false); // 是否显示筛选弹窗
     const isEditing = ref(false); // 是否处于编辑模式
-    const showEditRoomDialog = ref(false); // 是否显示编辑房间弹窗
+    const showEditRoomModal = ref(false); // 是否显示编辑房间弹窗
 
     // 4.2 数据状态
     const selectedRooms = ref([]); // 选中的房间ID列表
@@ -215,7 +214,7 @@
         currentRoomData.buildingNumber = roomData.buildingNumber;
         currentRoomData.unitNumber = roomData.unitNumber;
         currentRoomData.roomNumber = roomData.roomNumber;
-        showEditRoomDialog.value = true;
+        showEditRoomModal.value = true;
     };
 
     // 保存房间数据

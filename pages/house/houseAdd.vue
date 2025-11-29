@@ -208,7 +208,7 @@
                 ></up-picker>
             </uni-forms>
 
-            <add-contact-dialog ref="addContactDialogRef" @confirm="onConfirmContact" />
+            <add-contact-modal ref="addContactModalRef" @confirm="onConfirmContact" />
 
             <contact-list-popup ref="contactListPopupRef" :contacts="formData.contacts" />
         </view>
@@ -219,8 +219,8 @@
     import sheep from '@/sheep';
     import { ref, watch } from 'vue';
     import { onLoad, onUnload } from '@dcloudio/uni-app';
-    import AddContactDialog from './components/addContactDialog.vue';
-    import ContactListPopup from './components/contactListPopup.vue';
+    import AddContactModal from './components/modal/addContactModal.vue';
+    import ContactListPopup from './components/popup/contactListPopup.vue';
 
     // =================================================================================================
     // 状态定义
@@ -320,12 +320,12 @@
     // =================================================================================================
     // 联系人逻辑
     // =================================================================================================
-    const addContactDialogRef = ref(null);
+    const addContactModalRef = ref(null);
     const contactListPopupRef = ref(null);
 
     // 显示添加联系人弹窗
     const showAddContactPopup = () => {
-        addContactDialogRef.value?.open();
+        addContactModalRef.value?.open();
     };
 
     // 显示联系人列表弹窗

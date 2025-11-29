@@ -131,15 +131,15 @@
             @cancel="showOrientationPicker = false"
         ></up-picker>
 
-        <add-contact-dialog ref="addContactDialogRef" @confirm="onConfirmContact" />
+        <add-contact-modal ref="addContactModalRef" @confirm="onConfirmContact" />
         <contact-list-popup ref="contactListPopupRef" :contacts="formData.contacts" />
     </s-layout>
 </template>
 
 <script setup>
     import { ref } from 'vue';
-    import AddContactDialog from './components/addContactDialog.vue';
-    import ContactListPopup from './components/contactListPopup.vue';
+    import AddContactModal from './components/modal/addContactModal.vue';
+    import ContactListPopup from './components/popup/contactListPopup.vue';
 
     // =================================================================================================
     // 表单数据定义
@@ -189,11 +189,11 @@
     // =================================================================================================
     // 联系人逻辑
     // =================================================================================================
-    const addContactDialogRef = ref(null);
+    const addContactModalRef = ref(null);
     const contactListPopupRef = ref(null);
 
     const showAddContactPopup = () => {
-        addContactDialogRef.value?.open();
+        addContactModalRef.value?.open();
     };
 
     const showContactList = () => {

@@ -4,34 +4,33 @@
         showCancelButton
         title="添加联系人"
         width="500rpx"
-        @confirm="onConfirm"
-        @cancel="close"
+        @confirm="confirm"
+        @cancel="show = false"
+        @close="close"
     >
-        <view class="contact-form">
-            <up-form
-                ref="formRef"
-                :model="formData"
-                :rules="rules"
-                borderBottom
-                errorType="toast"
-                labelWidth="60"
-                labelAlign="right"
-                class="modal-form"
-            >
-                <up-form-item prop="name" label="姓名">
-                    <up-input v-model="formData.name" placeholder="请输入姓名" border="bottom" />
-                </up-form-item>
-                <up-form-item prop="phone" label="联系方式">
-                    <up-input
-                        v-model="formData.phone"
-                        placeholder="请输入联系方式"
-                        border="bottom"
-                        type="number"
-                        maxlength="11"
-                    />
-                </up-form-item>
-            </up-form>
-        </view>
+        <up-form
+            ref="formRef"
+            :model="formData"
+            :rules="rules"
+            borderBottom
+            errorType="toast"
+            labelWidth="60"
+            labelAlign="right"
+            class="modal-form"
+        >
+            <up-form-item prop="name" label="姓名">
+                <up-input v-model="formData.name" placeholder="请输入姓名" border="bottom" />
+            </up-form-item>
+            <up-form-item prop="phone" label="联系方式">
+                <up-input
+                    v-model="formData.phone"
+                    placeholder="请输入联系方式"
+                    border="bottom"
+                    type="number"
+                    maxlength="11"
+                />
+            </up-form-item>
+        </up-form>
     </up-modal>
 </template>
 
@@ -78,7 +77,7 @@
         formRef.value?.resetFields();
     };
 
-    const onConfirm = () => {
+    const confirm = () => {
         unref(formRef)
             .validate()
             .then(() => {

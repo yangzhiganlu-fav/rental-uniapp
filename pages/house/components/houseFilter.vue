@@ -37,9 +37,9 @@
 <script setup>
     import { ref, reactive } from 'vue';
     import { cloneDeep } from 'lodash-es';
-    import DropdownCommunity from './dropdownCommunity.vue';
-    import DropdownFilter from './dropdownFilter.vue';
-    import DropdownBusinessStatus from './dropdownBusinessStatus.vue';
+    import DropdownCommunity from './dropdown/dropdownCommunity.vue';
+    import DropdownFilter from './dropdown/dropdownFilter.vue';
+    import DropdownBusinessStatus from './dropdown/dropdownBusinessStatus.vue';
 
     const emit = defineEmits(['search']);
 
