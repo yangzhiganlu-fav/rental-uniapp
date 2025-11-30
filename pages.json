@@ -39,7 +39,7 @@
             "aliasPath": "/",
             "style": {
                 "navigationBarTitleText": "首页",
-                "enablePullDownRefresh": true
+                "enablePullDownRefresh": false
             },
             "meta": {
                 "auth": false,

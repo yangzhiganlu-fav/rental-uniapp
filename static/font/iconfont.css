@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 5071371 */
-  src: url('iconfont.woff2?t=1764320544315') format('woff2'),
-       url('iconfont.woff?t=1764320544315') format('woff'),
-       url('iconfont.ttf?t=1764320544315') format('truetype');
+  src: url('iconfont.woff2?t=1764476211035') format('woff2'),
+       url('iconfont.woff?t=1764476211035') format('woff'),
+       url('iconfont.ttf?t=1764476211035') format('truetype');
 }
 
 .iconfont {
@@ -13,20 +13,44 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-plus:before {
+  content: "\ecd3";
+}
+
+.icon-weizu:before {
+  content: "\e6ca";
+}
+
+.icon-yuqi:before {
+  content: "\e614";
+}
+
+.icon-daishou:before {
+  content: "\e6a4";
+}
+
+.icon-qianyue:before {
+  content: "\e680";
+}
+
+.icon-yizu:before {
+  content: "\e82f";
+}
+
+.icon-yingshou:before {
+  content: "\e831";
+}
+
+.icon-history:before {
+  content: "\e613";
+}
+
 .icon-edit:before {
   content: "\e607";
 }
 
-.icon-plus:before {
-  content: "\e678";
-}
-
 .icon-xinzengfangjian:before {
   content: "\e778";
-}
-
-.icon-history:before {
-  content: "\e74d";
 }
 
 .icon-search:before {

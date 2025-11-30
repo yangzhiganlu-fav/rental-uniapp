@@ -6,6 +6,62 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "21096772",
+      "name": "plus",
+      "font_class": "plus",
+      "unicode": "ecd3",
+      "unicode_decimal": 60627
+    },
+    {
+      "icon_id": "1829523",
+      "name": "未租",
+      "font_class": "weizu",
+      "unicode": "e6ca",
+      "unicode_decimal": 59082
+    },
+    {
+      "icon_id": "1240767",
+      "name": "逾期",
+      "font_class": "yuqi",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    },
+    {
+      "icon_id": "5795342",
+      "name": "待收",
+      "font_class": "daishou",
+      "unicode": "e6a4",
+      "unicode_decimal": 59044
+    },
+    {
+      "icon_id": "10268578",
+      "name": "签约",
+      "font_class": "qianyue",
+      "unicode": "e680",
+      "unicode_decimal": 59008
+    },
+    {
+      "icon_id": "34452890",
+      "name": "已租",
+      "font_class": "yizu",
+      "unicode": "e82f",
+      "unicode_decimal": 59439
+    },
+    {
+      "icon_id": "34452908",
+      "name": "应收",
+      "font_class": "yingshou",
+      "unicode": "e831",
+      "unicode_decimal": 59441
+    },
+    {
+      "icon_id": "4630735",
+      "name": "history",
+      "font_class": "history",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
       "icon_id": "1194276",
       "name": "edit",
       "font_class": "edit",
@@ -13,25 +69,11 @@
       "unicode_decimal": 58887
     },
     {
-      "icon_id": "21823904",
-      "name": "plus",
-      "font_class": "plus",
-      "unicode": "e678",
-      "unicode_decimal": 59000
-    },
-    {
       "icon_id": "28330222",
       "name": "新增房间",
       "font_class": "xinzengfangjian",
       "unicode": "e778",
       "unicode_decimal": 59256
-    },
-    {
-      "icon_id": "2360221",
-      "name": "history",
-      "font_class": "history",
-      "unicode": "e74d",
-      "unicode_decimal": 59213
     },
     {
       "icon_id": "15838525",

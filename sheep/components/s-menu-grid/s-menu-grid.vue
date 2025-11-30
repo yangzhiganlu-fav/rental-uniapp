@@ -1,6 +1,6 @@
 <!-- 装修基础组件：宫格导航 -->
 <template>
-    <view :style="[bgStyle, { marginLeft: `${data.space}px` }]">
+    <view :style="[bgStyle, { marginLeft: `${data.space}rpx` }]">
         <uni-grid :showBorder="Boolean(data.border)" :column="data.column">
             <uni-grid-item
                 v-for="(item, index) in data.list"
@@ -71,8 +71,8 @@
 
 <style lang="scss" scoped>
     .menu-image {
-        width: 24px;
-        height: 24px;
+        width: 48rpx;
+        height: 48rpx;
     }
 
     .grid-item-box {
