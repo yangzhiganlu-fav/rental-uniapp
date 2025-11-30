@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "5083733",
+      "name": "用户协议",
+      "font_class": "yonghuxieyi",
+      "unicode": "e61a",
+      "unicode_decimal": 58906
+    },
+    {
+      "icon_id": "6684367",
+      "name": "修改密码",
+      "font_class": "xiugaimima",
+      "unicode": "e681",
+      "unicode_decimal": 59009
+    },
+    {
+      "icon_id": "10296657",
+      "name": "隐私政策",
+      "font_class": "yinsizhengce",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
       "icon_id": "21096772",
       "name": "plus",
       "font_class": "plus",

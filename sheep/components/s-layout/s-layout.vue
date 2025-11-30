@@ -6,7 +6,7 @@
         <view class="page-main" :style="[bgMain]">
             <!-- 顶部导航栏-情况1：默认通用顶部导航栏 -->
             <su-navbar
-                v-if="navbar === 'normal'"
+                v-if="showNavbar && navbar === 'normal'"
                 :title="title"
                 statusBar
                 :color="color"
@@ -29,21 +29,21 @@
 
             <!-- 顶部导航栏-情况2：装修组件导航栏-标准 -->
             <s-custom-navbar
-                v-else-if="navbar === 'custom' && navbarMode === 'normal'"
+                v-else-if="showNavbar && navbar === 'custom' && navbarMode === 'normal'"
                 :data="navbarStyle"
                 :showLeftButton="showLeftButton"
             />
             <view class="page-body" :style="[bgBody]">
                 <!-- 顶部导航栏-情况3：沉浸式头部 -->
-                <su-inner-navbar v-if="navbar === 'inner'" :title="title" />
+                <su-inner-navbar v-if="showNavbar && navbar === 'inner'" :title="title" />
                 <view
-                    v-if="navbar === 'inner'"
+                    v-if="showNavbar && navbar === 'inner'"
                     :style="[{ paddingTop: sheep?.$platform?.navbar + 'px' }]"
                 ></view>
 
                 <!-- 顶部导航栏-情况4：装修组件导航栏-沉浸式 -->
                 <s-custom-navbar
-                    v-if="navbar === 'custom' && navbarMode === 'inner'"
+                    v-if="showNavbar && navbar === 'custom' && navbarMode === 'inner'"
                     :data="navbarStyle"
                     :showLeftButton="showLeftButton"
                 />
@@ -157,6 +157,11 @@
         searchCancelButton: {
             type: String,
             default: 'none',
+        },
+        // 是否显示顶部导航栏
+        showNavbar: {
+            type: Boolean,
+            default: true,
         },
     });
     const emits = defineEmits(['search', 'searchInput']);

@@ -59,6 +59,18 @@
                 "title": "房源",
                 "group": "房源"
             }
+        },
+        {
+            "path": "pages/mine/index",
+            "style": {
+                "navigationBarTitleText": "我的"
+            },
+            "meta": {
+                "auth": false,
+                "sync": true,
+                "title": "我的",
+                "group": "我的"
+            }
         }
     ],
     "subPackages": [
