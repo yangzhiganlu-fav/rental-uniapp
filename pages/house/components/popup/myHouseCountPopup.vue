@@ -55,14 +55,14 @@
     .house-count-container {
         display: flex;
         align-items: center;
-        padding: 10px;
-        font-size: 14px;
-        border-top: 1px solid #e5e5e5;
+        padding: 20rpx;
+        font-size: $tx-sm;
+        border-top: 2rpx solid #e5e5e5;
     }
 
     .org-list-item {
         text-align: center;
-        font-size: 12px !important;
+        font-size: $tx-sm !important;
         color: $blue-light;
     }
 
@@ -70,12 +70,16 @@
         justify-content: flex-end;
     }
 
+    :deep(.uni-group__title-text) {
+        font-size: $tx-sm !important;
+    }
+
     :deep(.checklist-text) {
-        font-size: 14px !important;
+        font-size: $tx-sm !important;
     }
 
     :deep(.u-cell__title-text) {
-        font-size: 12px !important;
+        font-size: $tx-sm !important;
     }
 
     :deep(.uni-group__title) {

@@ -121,7 +121,6 @@
 
     // 4.2 数据状态
     const selectedRooms = ref([]); // 选中的房间ID列表
-    const houseCountType = ref('1'); // 房源统计维度值
     const communityList = ref([]); // 小区列表数据
     const searchForm = ref({
         selectedCommunity: null, // 当前选中的小区（搜索结果）
@@ -162,7 +161,7 @@
 
     // 5.3 业务逻辑 - 房源统计
     const onHouseCountTypeChange = (val) => {
-        houseCountType.value = val;
+        console.log('房源统计维度切换为:', val);
     };
 
     // 5.4 业务逻辑 - 搜索与筛选

@@ -1,5 +1,20 @@
 <template>
-    <s-layout title="首页" tabbar="/pages/index/index" :bgStyle="{ color: '#f5f5f5' }">
+    <s-layout tabbar="/pages/index/index">
+        <template #center>
+            <!-- 显示房源统计信息，点击可切换统计维度 -->
+            <view class="mine-house-count" @tap="toggleHouseCountPopup">
+                <view>王某某(分散式)(100000间)</view>
+                <uni-icons
+                    type="right"
+                    size="14"
+                    :class="[showHouseCountPopup ? '-rotate-90' : 'rotate-90']"
+                ></uni-icons>
+            </view>
+        </template>
+
+        <!-- 切换房东手中的房源统计维度弹窗 -->
+        <my-house-count-popup v-model:show="showHouseCountPopup" @change="onHouseCountTypeChange" />
+
         <scroll-view
             scroll-y
             refresher-enabled
@@ -21,9 +36,19 @@
     import Landlord from './landlord.vue';
     import $share from '@/sheep/platform/share';
     import { onLoad, onPageScroll, onPullDownRefresh } from '@dcloudio/uni-app';
+    import MyHouseCountPopup from '@/pages/house/components/popup/myHouseCountPopup.vue';
 
     const role = ref('landlord');
     const isTriggered = ref(false);
+    const showHouseCountPopup = ref(false);
+
+    const toggleHouseCountPopup = () => {
+        showHouseCountPopup.value = !showHouseCountPopup.value;
+    };
+
+    const onHouseCountTypeChange = (val) => {
+        console.log('房源统计维度切换为:', val);
+    };
 
     onLoad((options) => {
         uni.hideTabBar({
@@ -62,3 +87,24 @@
         }, 800);
     }
 </script>
+
+<style lang="scss" scoped>
+    .mine-house-count {
+        display: flex;
+        align-items: center;
+
+        .uni-icons {
+            margin-left: 12rpx;
+        }
+
+        .-rotate-90 {
+            transform: rotate(-90deg);
+            transition: all 0.3s;
+        }
+
+        .rotate-90 {
+            transform: rotate(90deg);
+            transition: all 0.3s;
+        }
+    }
+</style>
