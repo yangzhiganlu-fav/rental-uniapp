@@ -49,7 +49,7 @@
             }
         },
         {
-            "path": "pages/house/houseList",
+            "path": "pages/house/index",
             "style": {
                 "navigationBarTitleText": "房源"
             },
@@ -70,6 +70,18 @@
                 "sync": true,
                 "title": "我的",
                 "group": "我的"
+            }
+        },
+        {
+            "path": "pages/lease/index",
+            "style": {
+                "navigationBarTitleText": "租约"
+            },
+            "meta": {
+                "auth": false,
+                "sync": true,
+                "title": "租约",
+                "group": "租约"
             }
         }
     ],
@@ -146,6 +158,22 @@
                     }
                 }
             ]
+        },
+        {
+            "root": "pages/lease",
+            "pages": [
+                {
+                    "path": "leaseDetail",
+                    "style": {
+                        "navigationBarTitleText": "租约详情"
+                    },
+                    "meta": {
+                        "sync": true,
+                        "title": "租约详情",
+                        "group": "租约"
+                    }
+                }
+            ]
         }
     ],
     "globalStyle": {
@@ -156,6 +184,8 @@
         "navigationStyle": "custom"
     },
     "tabBar": {
+        "color": "#282828",
+        "selectedColor": "#409eff",
         "list": [
             {
                 "pagePath": "pages/index/index"

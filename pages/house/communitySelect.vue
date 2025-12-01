@@ -8,7 +8,7 @@
         class="page-select-house"
     >
         <template #right>
-            <up-text type="primary" text="取消" size="14" class="ss-p-l-8" @tap="cancel"></up-text>
+            <up-text type="primary" text="取消" size="12" class="ss-p-l-8" @tap="cancel"></up-text>
         </template>
         <uni-group
             :title="state.communityName ? '小区' : '已录入小区'"

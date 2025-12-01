@@ -62,12 +62,12 @@
                 <view v-if="tools === 'search'" class="ss-flex-1">
                     <slot name="center">
                         <uni-search-bar
-                            class="ss-flex-1 search-box"
                             :radius="20"
                             :placeholder="placeholderText"
                             :clearButton="searchClearButton"
                             :cancelButton="searchCancelButton"
                             v-model="searchModel"
+                            style="padding: 0 20rpx"
                             @input="onInput"
                             @confirm="onSearch"
                         />

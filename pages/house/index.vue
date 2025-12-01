@@ -1,5 +1,5 @@
 <template>
-    <s-layout tabbar="/pages/house/houseList">
+    <s-layout tabbar="/pages/house/index">
         <!-- 顶部导航栏中间部分 -->
         <template #center>
             <!-- 如果有选中的小区，显示小区名称 -->

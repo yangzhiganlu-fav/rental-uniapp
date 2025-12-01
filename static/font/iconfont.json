@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "10405113",
+      "name": "签合同",
+      "font_class": "qianhetong",
+      "unicode": "e6bd",
+      "unicode_decimal": 59069
+    },
+    {
       "icon_id": "5083733",
       "name": "用户协议",
       "font_class": "yonghuxieyi",

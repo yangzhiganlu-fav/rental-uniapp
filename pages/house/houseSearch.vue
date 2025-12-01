@@ -8,7 +8,7 @@
         class="page-house-search"
     >
         <template #right>
-            <up-text type="primary" text="取消" size="14" class="ss-p-l-8" @tap="cancel"></up-text>
+            <up-text type="primary" text="取消" size="12" class="ss-p-l-8" @tap="cancel"></up-text>
         </template>
 
         <view class="search-content" v-if="state.keyword">
