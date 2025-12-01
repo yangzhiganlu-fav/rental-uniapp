@@ -65,7 +65,7 @@
                     </uni-forms-item>
 
                     <uni-forms-item label="卧型/朝向" name="orientation">
-                        <view class="trigger" @click="showOrientationPicker = true">
+                        <view class="trigger" @tap="showOrientationPicker = true">
                             <text v-if="formData.orientation?.length" class="value-text">
                                 {{ `${formData.orientation[0]} ${formData.orientation[1]}` }}
                             </text>
@@ -108,7 +108,7 @@
                         <template #label>
                             <view class="form-item-label">
                                 <text class="main-text">带看联系人</text>
-                                <view class="add-contact-btn" @click.stop="showAddContactPopup">
+                                <view class="add-contact-btn" @tap.stop="showAddContactPopup">
                                     <s-icon name="plus" size="24" color="#ff9900" />
                                     <text>添加</text>
                                 </view>

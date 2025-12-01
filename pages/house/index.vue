@@ -41,11 +41,11 @@
             </view>
             <!-- 否则显示搜索和新增按钮 -->
             <view v-else class="options-container">
-                <s-icon name="search" size="40" @click="navigateTo('/pages/house/houseSearch')" />
+                <s-icon name="search" size="40" @tap="navigateTo('/pages/house/houseSearch')" />
                 <s-icon
                     name="xinzengfangjian"
                     size="40"
-                    @click="navigateTo('/pages/house/houseAdd')"
+                    @tap="navigateTo('/pages/house/houseAdd')"
                 />
             </view>
         </template>

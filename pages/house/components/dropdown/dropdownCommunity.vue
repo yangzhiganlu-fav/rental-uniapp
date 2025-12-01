@@ -13,7 +13,7 @@
                             :class="{ active: localValue === item.value }"
                             v-for="(item, idx) in section.items"
                             :key="idx"
-                            @click="onSelect(item)"
+                            @tap="onSelect(item)"
                         >
                             {{ item.label }}
                         </view>
@@ -22,8 +22,8 @@
             </up-collapse>
         </scroll-view>
         <view class="dropdown-footer">
-            <button class="btn-reset" @click="resetFilter">重置</button>
-            <button class="btn-confirm" type="primary" @click="confirmFilter">确定</button>
+            <button class="btn-reset" @tap="resetFilter">重置</button>
+            <button class="btn-confirm" type="primary" @tap="confirmFilter">确定</button>
         </view>
     </view>
 </template>

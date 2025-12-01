@@ -8,15 +8,15 @@
                     :class="{ active: localValue[group.key] === item.value }"
                     v-for="item in group.options"
                     :key="item.value"
-                    @click="updateValue(group.key, item.value)"
+                    @tap="updateValue(group.key, item.value)"
                 >
                     {{ item.label }}
                 </view>
             </view>
         </view>
         <view class="dropdown-footer">
-            <button class="btn-reset" @click="resetFilter">重置</button>
-            <button class="btn-confirm" type="primary" @click="confirmFilter">确定</button>
+            <button class="btn-reset" @tap="resetFilter">重置</button>
+            <button class="btn-confirm" type="primary" @tap="confirmFilter">确定</button>
         </view>
     </view>
 </template>

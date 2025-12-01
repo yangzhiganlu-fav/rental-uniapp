@@ -62,12 +62,12 @@
             },
             {
                 text: '房源',
-                url: '/pages/house/houseList',
+                url: '/pages/house/index',
                 icon: 'fangdong',
             },
             {
                 text: '租约',
-                url: '/pages/contract/index',
+                url: '/pages/lease/index',
                 icon: 'hetong',
             },
             {

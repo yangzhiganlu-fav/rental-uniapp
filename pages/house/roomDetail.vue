@@ -80,7 +80,7 @@
                         <uni-icons type="arrowright" size="20" color="#999"></uni-icons>
                     </template>
                 </up-cell>
-                <view v-if="formData.remark" class="remark-content" @click="openRemarkModal">
+                <view v-if="formData.remark" class="remark-content" @tap="openRemarkModal">
                     {{ formData.remark }}
                 </view>
                 <up-cell class="hiden-line" title="基本信息"></up-cell>
@@ -192,7 +192,7 @@
                         type="warning"
                         text="分享空房"
                         openType="share"
-                        @click="onShare"
+                        @tap="onShare"
                     ></up-button>
                 </view>
                 <view class="btn-item">
