@@ -263,12 +263,13 @@
         display: flex;
         flex-direction: column;
         gap: 20rpx;
-        padding: 20rpx 20rpx 50rpx 20rpx;
+        padding: 20rpx;
     }
 
     .section {
         flex-shrink: 0;
         background-color: #fff;
+        padding-bottom: 20rpx;
 
         .section-header {
             padding: 20rpx;

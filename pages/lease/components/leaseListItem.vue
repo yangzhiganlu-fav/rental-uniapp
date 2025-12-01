@@ -7,6 +7,8 @@
         titleColor="#333333"
         subTitleColor="#666666"
         margin="0"
+        :show-foot="false"
+        @click="onTap"
     >
         <template #body>
             <view class="lease-body">
@@ -31,7 +33,7 @@
 <script setup>
     import { defineProps, defineEmits } from 'vue';
 
-    defineProps({
+    const props = defineProps({
         lease: {
             type: Object,
             required: true,
@@ -41,7 +43,7 @@
     const emit = defineEmits(['tap']);
 
     const onTap = () => {
-        emit('onTap', lease);
+        emit('onTap', props.lease);
     };
 </script>
 

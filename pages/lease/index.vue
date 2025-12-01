@@ -40,7 +40,7 @@
             <view v-for="lease in leaseList" :key="lease.id" class="ss-p-16 ss-m-b-12">
                 <lease-list-item
                     :lease="lease"
-                    @onTap="navigateTo(`/pages/lease/leaseDetail?id=${lease.id}`)"
+                    @onTap="navigateTo(`/pages/lease/leaseDetail`, { leaseId: lease.id })"
                 />
             </view>
         </scroll-view>
@@ -64,8 +64,8 @@
         selectedCommunity: null, // 当前选中的小区（搜索结果）
     });
 
-    const navigateTo = (url) => {
-        sheep.$router.go(url);
+    const navigateTo = (url, options = {}) => {
+        sheep.$router.go(url, options);
     };
 
     const toggleHouseCountPopup = () => {

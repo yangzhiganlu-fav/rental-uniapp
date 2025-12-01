@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "23791298",
+      "name": "身份证",
+      "font_class": "shenfenzheng",
+      "unicode": "ea05",
+      "unicode_decimal": 59909
+    },
+    {
+      "icon_id": "1433812",
+      "name": "phone",
+      "font_class": "phone",
+      "unicode": "e659",
+      "unicode_decimal": 58969
+    },
+    {
       "icon_id": "10405113",
       "name": "签合同",
       "font_class": "qianhetong",
