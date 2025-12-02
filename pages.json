@@ -190,6 +190,22 @@
                     }
                 }
             ]
+        },
+        {
+            "root": "pages/lease",
+            "pages": [
+                {
+                    "path": "tenantIdCardView",
+                    "style": {
+                        "navigationBarTitleText": "证件照片"
+                    },
+                    "meta": {
+                        "sync": true,
+                        "title": "证件照片",
+                        "group": "租约"
+                    }
+                }
+            ]
         }
     ],
     "globalStyle": {

@@ -24,7 +24,7 @@
         </view>
 
         <view class="btn-group">
-            <view class="btn" @tap="onCallTenant">
+            <view class="btn" @tap="onViewIdCard">
                 <view class="btn-icon" style="background-color: #3c9cff">
                     <s-icon name="shenfenzheng" size="52rpx" color="#fff" />
                 </view>
@@ -42,12 +42,21 @@
 </template>
 
 <script setup>
+    import sheep from '@/sheep';
+
     const props = defineProps({
         info: {
             type: Object,
             default: () => ({}),
         },
     });
+
+    // 查看证件
+    const onViewIdCard = () => {
+        sheep.$router.go('/pages/lease/tenantIdCardView', {
+            tenantId: props.info.tenantId,
+        });
+    };
 
     // 拨打电话
     const onCallTenant = () => {
