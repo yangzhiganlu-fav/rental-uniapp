@@ -9,33 +9,11 @@
                     value="待付款"
                 ></up-cell>
                 <up-cell class="grey-label grey-value hiden-line inner-cell" title="签约房源">
-                    <template #title>
-                        <view class="flex-center">
-                            <view>签约房源</view>
-                            <s-icon
-                                name="edit"
-                                size="36rpx"
-                                color="#3c9cff"
-                                style="margin-left: 10rpx"
-                            ></s-icon>
-                        </view>
-                    </template>
                     <template #value>
                         <view class="ss-flex-1 text-right">棕榈湾48幢/栋802室E</view>
                     </template>
                 </up-cell>
                 <up-cell class="grey-label grey-value hiden-line inner-cell" title="起止日期">
-                    <template #title>
-                        <view class="flex-center">
-                            <view>起止日期</view>
-                            <s-icon
-                                name="edit"
-                                size="36rpx"
-                                color="#3c9cff"
-                                style="margin-left: 10rpx"
-                            ></s-icon>
-                        </view>
-                    </template>
                     <template #value>
                         <view class="ss-flex-1 text-right">2025-12-26/2026-12-25</view>
                     </template>
@@ -45,42 +23,19 @@
                     title="租期"
                     value="12个月"
                 ></up-cell>
-                <up-cell class="grey-label grey-value hiden-line inner-cell">
-                    <template #title>
-                        <view class="flex-center">
-                            <view>入住人数</view>
-                            <s-icon
-                                name="edit"
-                                size="36rpx"
-                                color="#3c9cff"
-                                style="margin-left: 10rpx"
-                            ></s-icon>
-                        </view>
-                    </template>
+                <up-cell class="grey-label grey-value hiden-line inner-cell" title="入住人数">
                     <template #value>
                         <view class="ss-flex-1 text-right">1</view>
                     </template>
                 </up-cell>
                 <up-cell class="grey-label grey-value inner-cell" title="收款方式">
-                    <template #title>
-                        <view class="flex-center">
-                            <view>收款方式</view>
-                            <s-icon
-                                name="edit"
-                                size="36rpx"
-                                color="#3c9cff"
-                                style="margin-left: 10rpx"
-                            ></s-icon>
-                        </view>
-                    </template>
                     <template #value>
                         <view class="ss-flex-1 text-right">付一押一</view>
                     </template>
                 </up-cell>
 
-                <!-- 分割线效果，通过 margin 或者 border 实现，这里利用 up-cell 的 border -->
                 <up-cell
-                    class="grey-label grey-value hiden-line inner-cell"
+                    class="grey-label grey-value hiden-line"
                     title="租金"
                     value="¥920"
                 ></up-cell>
@@ -107,7 +62,7 @@
                     class="grey-label blue-value inner-cell"
                     title="租约备注"
                     value="编辑备注"
-                    isLink
+                    @click="sheep.$router.go('/pages/lease/leaseRemarkEdit')"
                 >
                     <template #right-icon>
                         <uni-icons type="arrowright" size="20" color="#999"></uni-icons>
@@ -149,13 +104,14 @@
 
         <!-- 底部按钮 -->
         <view class="footer-btns">
-            <button class="btn btn-gray">退房</button>
-            <button class="btn btn-blue">编辑租约</button>
+            <up-button type="error" class="ss-flex-1">退房</up-button>
+            <up-button type="primary" class="ss-flex-1">编辑租约</up-button>
         </view>
     </view>
 </template>
 
 <script setup>
+    import sheep from '@/sheep';
     import { ref } from 'vue';
 
     const contractUrl = ref('https://cdn.uviewui.com/uview/album/1.jpg');
@@ -218,7 +174,7 @@
     }
 
     .custom-header {
-        padding: 24rpx 32rpx 10rpx;
+        padding: 24rpx 32rpx;
         font-size: 30rpx;
         font-weight: bold;
         color: $dark-3;
@@ -228,17 +184,6 @@
         padding: 0 32rpx 24rpx;
         font-size: 28rpx;
         color: $dark-6;
-    }
-
-    .flex-center {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        color: $dark-6;
-    }
-
-    .flex-shink-0 {
-        flex-shrink: 0;
     }
 
     .contract-preview {
@@ -275,29 +220,6 @@
         box-sizing: border-box;
         padding-bottom: calc(20rpx + constant(safe-area-inset-bottom));
         padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
-
-        .btn {
-            flex: 1;
-            height: 80rpx;
-            line-height: 80rpx;
-            border-radius: 8rpx;
-            font-size: 30rpx;
-            border: none;
-
-            &::after {
-                border: none;
-            }
-
-            &.btn-gray {
-                background-color: #999;
-                color: #fff;
-            }
-
-            &.btn-blue {
-                background-color: #4ecdc4; // 使用主题色
-                color: #fff;
-            }
-        }
     }
 
     // 灰色标签样式

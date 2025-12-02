@@ -11,10 +11,16 @@
         <view class="info-row">
             <view class="info-label">电话</view>
             <view class="info-value">{{ info.phone }}</view>
-            <view class="contact-tags">
-                <up-tag text="电子合同" type="primary" plain size="mini"></up-tag>
-                <up-tag text="7天后逾期" type="error" size="mini"></up-tag>
-            </view>
+        </view>
+        <view class="info-row">
+            <up-tag
+                text="电子合同"
+                type="primary"
+                plain
+                size="mini"
+                style="margin-right: 16rpx"
+            ></up-tag>
+            <up-tag text="7天后逾期" type="error" plain size="mini"></up-tag>
         </view>
 
         <view class="btn-group">
@@ -59,6 +65,7 @@
         background-color: #fff;
         border-radius: 16rpx;
         padding: 32rpx 24rpx;
+        flex-shrink: 0;
 
         .info-row {
             display: flex;
@@ -77,15 +84,6 @@
             .info-value {
                 flex: 1;
                 color: $dark-3;
-            }
-
-            .contact-tags {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                gap: 16rpx;
-                margin-left: 20rpx;
             }
         }
 

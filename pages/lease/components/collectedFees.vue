@@ -45,7 +45,6 @@
 <style lang="scss" scoped>
     .collected-fees {
         padding: 20rpx;
-        background-color: $uni-bg-color;
         color: $dark-9;
     }
 

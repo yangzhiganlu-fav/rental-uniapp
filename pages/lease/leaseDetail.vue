@@ -59,6 +59,7 @@
         .tabs {
             margin-top: 20rpx;
             background-color: #fff;
+            flex-shrink: 0;
 
             :deep(.u-tabs__wrapper__nav__item) {
                 flex: 1;
