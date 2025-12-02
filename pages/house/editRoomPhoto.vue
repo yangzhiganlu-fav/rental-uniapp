@@ -15,31 +15,38 @@
                 提醒：请保证上传照片和视频的真实性，平台会对照片真实性进行检查，一经查实虚假照片您的房源照片将会被下架。此处仅展示房东上传的照片和视频
             </view>
 
-            <template v-if="current === 0">
-                <s-media-group
-                    v-for="(group, index) in photoGroups"
-                    :key="index"
-                    :title="group.name"
-                    :list="group.items"
-                    :checkable="isEditMode"
-                    :selectedIds="selectedIds"
-                    @add="onAddPhoto(group)"
-                    @itemClick="onPhotoClick($event, group)"
-                ></s-media-group>
-            </template>
-            <template v-if="current === 1">
-                <s-media-group
-                    v-for="(group, index) in videoGroups"
-                    :key="`video-${index}`"
-                    :title="group.name"
-                    :list="group.items"
-                    :checkable="isEditMode"
-                    :selectedIds="selectedIds"
-                    :isVideo="true"
-                    @add="onAddVideo(group)"
-                    @itemClick="onVideoClick($event, group)"
-                ></s-media-group>
-            </template>
+            <view
+                class="media-group"
+                v-for="(group, index) in currentGroups"
+                :key="`${current}-${index}`"
+            >
+                <view class="group-title">{{ group.name }}</view>
+                <s-media-upload
+                    v-model="group.items"
+                    :maxCount="9"
+                    :accept="current === 0 ? 'image' : 'video'"
+                    :addIcon="current === 0 ? 'camera-filled' : 'videocam-filled'"
+                    :autoUploadAuthUrl="authUrl"
+                    :autoUploadHeader="uploadHeader"
+                    @upload-success="(newItems) => handleUploadSuccess(group, newItems)"
+                    @click-item="(e) => onMediaClick(e.item, group)"
+                >
+                    <template #item-overlay="{ item }">
+                        <view class="tags" v-if="current === 0">
+                            <view v-if="item.isMain" class="tag main">主图</view>
+                            <view v-else-if="item.isDisplayed" class="tag displayed"> 已展示 </view>
+                        </view>
+                        <view class="check-icon" v-if="isEditMode">
+                            <up-radio-group
+                                :modelValue="selectedIds.includes(item.id) ? item.id : ''"
+                                size="28rpx"
+                            >
+                                <up-radio :name="item.id" :label="null"></up-radio>
+                            </up-radio-group>
+                        </view>
+                    </template>
+                </s-media-upload>
+            </view>
         </view>
 
         <!-- Bottom Bar -->
@@ -73,23 +80,18 @@
 
                 <!-- View Mode Actions -->
                 <template v-else>
-                    <!-- Photo Mode -->
-                    <view class="tab-actions" v-if="current === 0">
+                    <view class="tab-actions">
                         <view class="action-btn" @tap="enterEditMode('delete')">
                             <uni-icons type="trash" size="24" color="#666"></uni-icons>
                             <text>删除</text>
                         </view>
-                        <view class="action-btn" @tap="enterEditMode('setMain')">
+                        <view
+                            class="action-btn"
+                            @tap="enterEditMode('setMain')"
+                            v-if="current === 0"
+                        >
                             <uni-icons type="star" size="24" color="#666"></uni-icons>
                             <text>设为主图</text>
-                        </view>
-                        <up-button type="primary">完成</up-button>
-                    </view>
-                    <!-- Video Mode -->
-                    <view class="tab-actions" v-else>
-                        <view class="action-btn" @tap="enterEditMode('delete')">
-                            <uni-icons type="trash" size="24" color="#666"></uni-icons>
-                            <text>删除</text>
                         </view>
                         <up-button type="primary">完成</up-button>
                     </view>
@@ -100,14 +102,23 @@
 </template>
 
 <script setup>
-    import { ref, reactive } from 'vue';
-    import sMediaGroup from '@/sheep/components/s-media-group/s-media-group.vue';
+    import { ref, reactive, computed } from 'vue';
+    import { baseUrl, apiPath } from '@/sheep/config';
+    import { getAccessToken, getTenantId } from '@/sheep/request';
+    import sMediaUpload from '@/sheep/components/s-media-upload/s-media-upload.vue';
 
     const list = ref(['照片', '视频']);
     const current = ref(0);
     const isEditMode = ref(false);
     const editType = ref(null); // 'delete' | 'setMain' | null
     const selectedIds = ref([]);
+
+    const authUrl = baseUrl + apiPath + '/infra/file/presigned-url';
+    const uploadHeader = {
+        Authorization: 'Bearer ' + getAccessToken(),
+        'tenant-id': getTenantId(),
+        Accept: '*/*',
+    };
 
     // Mock Data
     const photoGroups = reactive([
@@ -197,6 +208,21 @@
         },
     ]);
 
+    const currentGroups = computed(() => (current.value === 0 ? photoGroups : videoGroups));
+
+    const handleUploadSuccess = (group, newItems) => {
+        newItems.forEach((item) => {
+            group.items.push({
+                id: item.url,
+                url: item.url,
+                isMain: false,
+                isDisplayed: true,
+                isPrivate: true,
+                thumb: item.thumb || '', // 视频封面
+            });
+        });
+    };
+
     const onClickTab = (e) => {
         if (current.value !== e.currentIndex) {
             current.value = e.currentIndex;
@@ -218,15 +244,9 @@
 
     const toggleSelectAll = () => {
         const allIds = [];
-        if (current.value === 0) {
-            photoGroups.forEach((group) => {
-                group.items.forEach((item) => allIds.push(item.id));
-            });
-        } else {
-            videoGroups.forEach((group) => {
-                group.items.forEach((item) => allIds.push(item.id));
-            });
-        }
+        currentGroups.value.forEach((group) => {
+            group.items.forEach((item) => allIds.push(item.id));
+        });
 
         if (selectedIds.value.length === allIds.length) {
             selectedIds.value = [];
@@ -235,35 +255,7 @@
         }
     };
 
-    const onAddPhoto = (group) => {
-        uni.chooseImage({
-            count: 9,
-            success: (res) => {
-                res.tempFilePaths.forEach((filePath) => {
-                    group.items.push({
-                        id: filePath,
-                        url: filePath,
-                        isMain: false,
-                        isDisplayed: true,
-                        isPrivate: true,
-                    });
-                });
-            },
-        });
-    };
-
-    const onAddVideo = (group) => {
-        uni.chooseVideo({
-            success: (res) => {
-                group.items.push({
-                    id: res.tempFilePath,
-                    url: res.tempFilePath,
-                });
-            },
-        });
-    };
-
-    const onPhotoClick = (item, group) => {
+    const onMediaClick = (item, group) => {
         if (isEditMode.value) {
             if (editType.value === 'setMain') {
                 // Single selection for setMain
@@ -278,26 +270,15 @@
                 }
             }
         } else {
-            uni.previewImage({
-                urls: group.items.map((i) => i.url),
-                current: item.url,
-            });
-        }
-    };
-
-    const onVideoClick = (item, group) => {
-        if (isEditMode.value) {
-            // Multiple selection for delete (Video only supports delete in edit mode)
-            const index = selectedIds.value.indexOf(item.id);
-            if (index > -1) {
-                selectedIds.value.splice(index, 1);
+            if (current.value === 0) {
+                uni.previewImage({
+                    urls: group.items.map((i) => i.url),
+                    current: item.url,
+                });
             } else {
-                selectedIds.value.push(item.id);
+                // Preview video
+                console.log('Preview video', item);
             }
-        } else {
-            // Preview video
-            console.log('Preview video', item);
-            // Implement video preview logic
         }
     };
 
@@ -309,20 +290,11 @@
             content: '确定要删除选中的项目吗？',
             success: (res) => {
                 if (res.confirm) {
-                    // Delete logic
-                    if (current.value === 0) {
-                        photoGroups.forEach((group) => {
-                            group.items = group.items.filter(
-                                (item) => !selectedIds.value.includes(item.id),
-                            );
-                        });
-                    } else {
-                        videoGroups.forEach((group) => {
-                            group.items = group.items.filter(
-                                (item) => !selectedIds.value.includes(item.id),
-                            );
-                        });
-                    }
+                    currentGroups.value.forEach((group) => {
+                        group.items = group.items.filter(
+                            (item) => !selectedIds.value.includes(item.id),
+                        );
+                    });
                     exitEditMode();
                 }
             },
@@ -388,6 +360,18 @@
         margin-bottom: 20rpx;
     }
 
+    .media-group {
+        margin-bottom: 30rpx;
+        padding: 0 30rpx;
+
+        .group-title {
+            font-size: 30rpx;
+            font-weight: bold;
+            margin-bottom: 20rpx;
+            color: #333;
+        }
+    }
+
     .bottom-bar {
         height: 100rpx;
         background-color: #fff;
@@ -429,5 +413,37 @@
                 color: #999;
             }
         }
+    }
+
+    .tags {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-wrap: wrap;
+        z-index: 5;
+
+        .tag {
+            font-size: 20rpx;
+            padding: 2rpx 6rpx;
+            color: #fff;
+            margin-right: 4rpx;
+            border-bottom-right-radius: 8rpx;
+
+            &.main {
+                background-color: #4a90e2;
+            }
+            &.displayed {
+                background-color: #a0cfff;
+            }
+        }
+    }
+
+    .check-icon {
+        position: absolute;
+        top: -6rpx;
+        right: -8rpx;
+        z-index: 10;
+        pointer-events: none;
     }
 </style>

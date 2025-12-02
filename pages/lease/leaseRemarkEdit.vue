@@ -17,16 +17,16 @@
             <!-- 图片凭证 -->
             <view class="section">
                 <view class="section-title">图片凭证（{{ fileList.length }}/6）</view>
-                <up-upload
-                    :fileList="fileList"
-                    @afterRead="afterRead"
-                    @delete="deletePic"
-                    name="1"
-                    multiple
+                <s-media-upload
+                    v-model="fileList"
                     :maxCount="6"
-                    width="108"
-                    height="108"
-                ></up-upload>
+                    :autoUploadAuthUrl="authUrl"
+                    :autoUploadHeader="uploadHeader"
+                    deletable
+                    @upload-success="handleUploadSuccess"
+                    @delete-item="handleDelete"
+                    @click-item="handlePreview"
+                ></s-media-upload>
             </view>
         </view>
 
@@ -47,52 +47,34 @@
 <script setup>
     import { ref } from 'vue';
     import sheep from '@/sheep';
+    import { baseUrl, apiPath } from '@/sheep/config';
+    import { getAccessToken, getTenantId } from '@/sheep/request';
+    import sMediaUpload from '@/sheep/components/s-media-upload/s-media-upload.vue';
 
     const remark = ref('');
     const fileList = ref([]);
-
-    // 删除图片
-    const deletePic = (event) => {
-        fileList.value.splice(event.index, 1);
+    const authUrl = baseUrl + apiPath + '/infra/file/presigned-url';
+    const uploadHeader = {
+        Authorization: 'Bearer ' + getAccessToken(),
+        'tenant-id': getTenantId(),
+        Accept: '*/*',
     };
 
-    // 新增图片
-    const afterRead = async (event) => {
-        // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
-        let lists = [].concat(event.file);
-        let fileListLen = fileList.value.length;
-        lists.map((item) => {
-            fileList.value.push({
-                ...item,
-                status: 'uploading',
-                message: '上传中',
-            });
+    // 上传成功回调
+    const handleUploadSuccess = (newItems) => {
+        fileList.value.push(...newItems);
+    };
+
+    const handlePreview = ({ item, index }) => {
+        const urls = fileList.value.map((item) => item.url);
+        uni.previewImage({
+            urls,
+            current: urls[index],
         });
-        for (let i = 0; i < lists.length; i++) {
-            const result = await sheep.$api.file.uploadFile(lists[i].url);
-            let item = fileList.value[fileListLen];
-            if (result) {
-                fileList.value.splice(
-                    fileListLen,
-                    1,
-                    Object.assign(item, {
-                        status: 'success',
-                        message: '',
-                        url: result.data,
-                    }),
-                );
-            } else {
-                fileList.value.splice(
-                    fileListLen,
-                    1,
-                    Object.assign(item, {
-                        status: 'failed',
-                        message: '上传失败',
-                    }),
-                );
-            }
-            fileListLen++;
-        }
+    };
+
+    const handleDelete = (index) => {
+        fileList.value.splice(index, 1);
     };
 
     // 保存
