@@ -3,28 +3,15 @@
         <su-sticky bgColor="#fff" offsetTop="-1">
             <up-dropdown ref="uDropdown" borderBottom titleSize="12" activeColor="#2979ff">
                 <up-dropdown-item
-                    title="默认排序"
-                    v-model="searchForm.sortOrder"
-                    :options="[
-                        { label: '默认排序', value: 'default' },
-                        { label: '按时间升序', value: 'timeAsc' },
-                        { label: '按时间降序', value: 'timeDesc' },
-                    ]"
-                    @close="handleConfirm"
-                ></up-dropdown-item>
-
-                <up-dropdown-item
                     title="租约状态"
                     v-model="searchForm.leaseStatus"
                     :options="[
                         { label: '不限', value: '' },
+                        { label: '租期中', value: 'active' },
                         { label: '已退房', value: 'checkedOut' },
                         { label: '租约快到期', value: 'nearExpiry' },
                         { label: '待签署', value: 'pendingSignature' },
-                        { label: '即将逾期', value: 'nearOverdue' },
-                        { label: '逾期欠款', value: 'overdue' },
                         { label: '已签署', value: 'signed' },
-                        { label: '定金', value: 'deposit' },
                     ]"
                     @close="handleConfirm"
                 ></up-dropdown-item>
@@ -47,7 +34,6 @@
     const uDropdown = ref(null);
 
     const initialSearchForm = {
-        sortOrder: 'default',
         leaseStatus: '',
         dateRanges: {
             leaseStartDate: [],
