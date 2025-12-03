@@ -2,12 +2,8 @@
     <s-layout tabbar="/pages/lease/index">
         <!-- 顶部导航栏中间部分 -->
         <template #center>
-            <!-- 如果有选中的小区，显示小区名称 -->
-            <view v-if="searchForm.selectedCommunity">
-                {{ searchForm.selectedCommunity.name }}
-            </view>
             <!-- 否则显示房源统计信息，点击可切换统计维度 -->
-            <view v-else class="mine-house-count" @tap="toggleHouseCountPopup">
+            <view class="mine-house-count" @tap="toggleHouseCountPopup">
                 <view>王某某(分散式)(100000间)</view>
                 <uni-icons
                     type="right"
@@ -19,16 +15,7 @@
 
         <!-- 顶部导航栏右侧部分 -->
         <template #right>
-            <!-- 如果有选中的小区，显示取消按钮 -->
-            <up-text
-                v-if="searchForm.selectedCommunity"
-                type="primary"
-                text="取消"
-                size="12"
-                @tap="onCancelSearch"
-            >
-            </up-text>
-            <s-icon v-else name="search" size="40" @tap="navigateTo('/pages/house/houseSearch')" />
+            <s-icon name="search" size="40" @tap="toggleSearchPopup" />
         </template>
 
         <!-- 租约筛选组件 -->
@@ -45,6 +32,9 @@
             </view>
         </scroll-view>
 
+        <!-- 搜索弹窗 -->
+        <search-popup v-model:show="isSearchPopupVisible" @search="handleKeywordSearch" />
+
         <!-- 切换房东手中的房源统计维度弹窗 -->
         <my-house-count-popup v-model:show="showHouseCountPopup" @change="onHouseCountTypeChange" />
     </s-layout>
@@ -53,12 +43,13 @@
 <script setup>
     import sheep from '@/sheep';
     import { ref } from 'vue';
-    import { onLoad, onUnload } from '@dcloudio/uni-app';
     import MyHouseCountPopup from '@/pages/house/components/popup/myHouseCountPopup.vue';
     import LeaseFilter from './components/leaseFilter.vue';
     import LeaseListItem from './components/leaseListItem.vue';
+    import SearchPopup from '@/pages/house/components/popup/searchPopup.vue';
 
     const showHouseCountPopup = ref(false); // 是否显示房源统计弹窗
+    const isSearchPopupVisible = ref(false); // 是否显示搜索弹窗
 
     const searchForm = ref({
         selectedCommunity: null, // 当前选中的小区（搜索结果）
@@ -70,10 +61,12 @@
 
     const toggleHouseCountPopup = () => {
         showHouseCountPopup.value = !showHouseCountPopup.value;
+        isSearchPopupVisible.value = false;
     };
 
-    const onCancelSearch = () => {
-        searchForm.value.selectedCommunity = null;
+    const toggleSearchPopup = () => {
+        isSearchPopupVisible.value = !isSearchPopupVisible.value;
+        showHouseCountPopup.value = false;
     };
 
     const onHouseCountTypeChange = (type) => {
@@ -82,6 +75,11 @@
 
     const onSearch = (filters) => {
         console.log('Lease filters applied:', filters);
+    };
+
+    const handleKeywordSearch = (keyword) => {
+        console.log('搜索关键字:', keyword);
+        // TODO: 实现搜索逻辑
     };
 
     const leaseList = ref([
@@ -145,18 +143,6 @@
             },
         ]);
     };
-
-    onLoad(() => {
-        // 监听搜索目标选择事件
-        uni.$on('SELECT_SEARCH_TARGET', (data) => {
-            showHouseCountPopup.value = false;
-            searchForm.value.selectedCommunity = data;
-        });
-    });
-
-    onUnload(() => {
-        uni.$off('SELECT_SEARCH_TARGET');
-    });
 </script>
 
 <style lang="scss" scoped>

@@ -2,12 +2,8 @@
     <s-layout tabbar="/pages/house/index">
         <!-- 顶部导航栏中间部分 -->
         <template #center>
-            <!-- 如果有选中的小区，显示小区名称 -->
-            <view v-if="searchForm.selectedCommunity">
-                {{ searchForm.selectedCommunity.name }}
-            </view>
             <!-- 否则显示房源统计信息，点击可切换统计维度 -->
-            <view v-else class="mine-house-count" @tap="toggleHouseCountPopup">
+            <view class="mine-house-count" @tap="toggleHouseCountPopup">
                 <view>王某某(分散式)(100000间)</view>
                 <uni-icons
                     type="right"
@@ -29,19 +25,9 @@
                     @tap="exitEditMode"
                 ></up-text>
             </view>
-            <!-- 如果有选中的小区，显示取消按钮 -->
-            <view v-else-if="searchForm.selectedCommunity" class="options-container">
-                <up-text
-                    type="primary"
-                    text="取消"
-                    size="14"
-                    class="ss-p-l-8"
-                    @tap="onCancelSearch"
-                ></up-text>
-            </view>
             <!-- 否则显示搜索和新增按钮 -->
             <view v-else class="options-container">
-                <s-icon name="search" size="40" @tap="navigateTo('/pages/house/houseSearch')" />
+                <s-icon name="search" size="40" @tap="toggleSearchPopup" />
                 <s-icon
                     name="xinzengfangjian"
                     size="40"
@@ -52,6 +38,9 @@
 
         <!-- 切换房东手中的房源统计维度弹窗 -->
         <my-house-count-popup v-model:show="showHouseCountPopup" @change="onHouseCountTypeChange" />
+
+        <!-- 搜索弹窗 -->
+        <search-popup v-model:show="isSearchPopupVisible" @search="handleKeywordSearch" />
 
         <!-- 筛选小区/房源弹框 -->
         <house-filter v-model:showSearch="showFilterPopup" @search="handleSearch" />
@@ -99,12 +88,13 @@
     // 1. 导入依赖
     import sheep from '@/sheep';
     import { ref, reactive, computed, watch } from 'vue';
-    import { onShow, onHide, onLoad, onUnload } from '@dcloudio/uni-app';
+    import { onShow, onHide } from '@dcloudio/uni-app';
     import { cloneDeep, merge } from 'lodash-es';
 
     // 2. 导入组件
     import HouseFilter from './components/houseFilter.vue';
     import MyHouseCountPopup from './components/popup/myHouseCountPopup.vue';
+    import SearchPopup from './components/popup/searchPopup.vue';
     import EditRoomModal from './components/modal/editRoomModal.vue';
 
     // 3. 导入静态资源
@@ -115,6 +105,7 @@
     // 4. 状态定义
     // 4.1 UI控制状态
     const showHouseCountPopup = ref(false); // 是否显示房源统计弹窗
+    const isSearchPopupVisible = ref(false); // 是否显示搜索弹窗
     const showFilterPopup = ref(false); // 是否显示筛选弹窗
     const isEditing = ref(false); // 是否处于编辑模式
     const showEditRoomModal = ref(false); // 是否显示编辑房间弹窗
@@ -153,10 +144,12 @@
     // 5.2 弹窗控制
     const toggleHouseCountPopup = () => {
         showHouseCountPopup.value = !showHouseCountPopup.value;
+        isSearchPopupVisible.value = false;
     };
 
-    const toggleFilterPopup = () => {
-        showFilterPopup.value = !showFilterPopup.value;
+    const toggleSearchPopup = () => {
+        isSearchPopupVisible.value = !isSearchPopupVisible.value;
+        showHouseCountPopup.value = false;
     };
 
     // 5.3 业务逻辑 - 房源统计
@@ -165,14 +158,15 @@
     };
 
     // 5.4 业务逻辑 - 搜索与筛选
+    const handleKeywordSearch = (keyword) => {
+        console.log('搜索关键字:', keyword);
+        // TODO: 实现搜索逻辑
+    };
+
     const handleSearch = (newSearchForm) => {
         searchForm.value = merge(cloneDeep(searchForm.value), cloneDeep(newSearchForm));
         console.log('searchForm updated:', searchForm.value);
         // TODO: 触发列表刷新
-    };
-
-    const onCancelSearch = () => {
-        searchForm.value.selectedCommunity = null;
     };
 
     // 5.5 业务逻辑 - 房间操作
@@ -297,18 +291,6 @@
     };
 
     // 6. 生命周期
-    onLoad(() => {
-        // 监听搜索目标选择事件
-        uni.$on('SELECT_SEARCH_TARGET', (data) => {
-            showHouseCountPopup.value = false;
-            showFilterPopup.value = false;
-            searchForm.value.selectedCommunity = data;
-        });
-    });
-
-    onUnload(() => {
-        uni.$off('SELECT_SEARCH_TARGET');
-    });
 
     onShow(() => {
         loadCommunityList();

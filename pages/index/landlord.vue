@@ -12,29 +12,6 @@
         >
         </up-swiper>
 
-        <!-- 金刚区 -->
-        <s-menu-grid
-            :data="navList"
-            :styles="{
-                bgType: 'color',
-                bgColor: '#fff',
-                marginBottom: 16,
-                marginLeft: 16,
-                marginRight: 16,
-                padding: 16,
-                paddingTop: 16,
-                paddingRight: 16,
-                paddingBottom: 16,
-                paddingLeft: 16,
-                borderRadius: 16,
-                borderTopLeftRadius: 16,
-                borderTopRightRadius: 16,
-                borderBottomRightRadius: 16,
-                borderBottomLeftRadius: 16,
-            }"
-            class="flex-shrink-0"
-        />
-
         <!-- 待办事项 -->
         <s-menu-grid
             :data="todoList"
@@ -121,33 +98,6 @@
         '/static/room/room2.jpeg',
         '/static/room/room3.jpeg',
     ]);
-
-    // 金刚区列表
-    const navList = reactive({
-        column: 4,
-        list: [
-            {
-                title: '录入房源',
-                iconUrl: 'lurufangyuan',
-                url: '/pages/house/houseAdd',
-                iconSize: 64,
-                iconColor: '#f9a825',
-                badge: {
-                    show: false,
-                },
-            },
-            {
-                title: '添加租约',
-                iconUrl: 'tianjiazuyue',
-                url: '/pages/house/houseAdd',
-                iconSize: 62,
-                iconColor: '#f9a825',
-                badge: {
-                    show: false,
-                },
-            },
-        ],
-    });
 
     // 待办事项
     const todoList = reactive({
@@ -289,7 +239,7 @@
 
         .statistic-item {
             border-radius: 24rpx;
-            padding: 30rpx;
+            padding: 26rpx;
             display: flex;
             flex-direction: column;
             justify-content: space-between;

@@ -113,18 +113,6 @@
                     }
                 },
                 {
-                    "path": "houseSearch",
-                    "style": {
-                        "navigationBarTitleText": "搜索房源",
-                        "navigationStyle": "custom"
-                    },
-                    "meta": {
-                        "sync": true,
-                        "title": "搜索房源",
-                        "group": "房源"
-                    }
-                },
-                {
                     "path": "roomAdd",
                     "style": {
                         "navigationBarTitleText": "添加房间"
