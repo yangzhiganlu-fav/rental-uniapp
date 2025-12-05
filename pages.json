@@ -167,6 +167,22 @@
             "root": "pages/lease",
             "pages": [
                 {
+                    "path": "leaseAdd",
+                    "style": {
+                        "navigationBarTitleText": "录入租约"
+                    },
+                    "meta": {
+                        "sync": true,
+                        "title": "录入租约",
+                        "group": "租约"
+                    }
+                }
+            ]
+        },
+        {
+            "root": "pages/lease",
+            "pages": [
+                {
                     "path": "leaseRemarkEdit",
                     "style": {
                         "navigationBarTitleText": "编辑备注"

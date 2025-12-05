@@ -26,8 +26,6 @@
                     :maxCount="9"
                     :accept="current === 0 ? 'image' : 'video'"
                     :addIcon="current === 0 ? 'camera-filled' : 'videocam-filled'"
-                    :autoUploadAuthUrl="authUrl"
-                    :autoUploadHeader="uploadHeader"
                     @upload-success="(newItems) => handleUploadSuccess(group, newItems)"
                     @click-item="(e) => onMediaClick(e.item, group)"
                 >
@@ -103,22 +101,12 @@
 
 <script setup>
     import { ref, reactive, computed } from 'vue';
-    import { baseUrl, apiPath } from '@/sheep/config';
-    import { getAccessToken, getTenantId } from '@/sheep/request';
-    import sMediaUpload from '@/sheep/components/s-media-upload/s-media-upload.vue';
 
     const list = ref(['照片', '视频']);
     const current = ref(0);
     const isEditMode = ref(false);
     const editType = ref(null); // 'delete' | 'setMain' | null
     const selectedIds = ref([]);
-
-    const authUrl = baseUrl + apiPath + '/infra/file/presigned-url';
-    const uploadHeader = {
-        Authorization: 'Bearer ' + getAccessToken(),
-        'tenant-id': getTenantId(),
-        Accept: '*/*',
-    };
 
     // Mock Data
     const photoGroups = reactive([

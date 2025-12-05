@@ -20,8 +20,6 @@
                 <s-media-upload
                     v-model="fileList"
                     :maxCount="6"
-                    :autoUploadAuthUrl="authUrl"
-                    :autoUploadHeader="uploadHeader"
                     deletable
                     @upload-success="handleUploadSuccess"
                     @delete-item="handleDelete"
@@ -47,18 +45,9 @@
 <script setup>
     import { ref } from 'vue';
     import sheep from '@/sheep';
-    import { baseUrl, apiPath } from '@/sheep/config';
-    import { getAccessToken, getTenantId } from '@/sheep/request';
-    import sMediaUpload from '@/sheep/components/s-media-upload/s-media-upload.vue';
 
     const remark = ref('');
     const fileList = ref([]);
-    const authUrl = baseUrl + apiPath + '/infra/file/presigned-url';
-    const uploadHeader = {
-        Authorization: 'Bearer ' + getAccessToken(),
-        'tenant-id': getTenantId(),
-        Accept: '*/*',
-    };
 
     // 上传成功回调
     const handleUploadSuccess = (newItems) => {

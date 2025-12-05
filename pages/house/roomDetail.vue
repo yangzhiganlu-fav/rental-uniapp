@@ -197,7 +197,7 @@
                 </view>
                 <view class="btn-item">
                     <!-- 录入租约按钮 -->
-                    <up-button type="primary" text="录入租约"></up-button>
+                    <up-button type="primary" text="录入租约" @tap="onEnterLease"></up-button>
                 </view>
             </view>
         </su-fixed>
@@ -451,6 +451,10 @@
 
     const editRoomPhoto = () => {
         sheep.$router.go('/pages/house/editRoomPhoto');
+    };
+
+    const onEnterLease = () => {
+        sheep.$router.go('/pages/lease/leaseAdd');
     };
 
     // 楼层选择器引用

@@ -154,6 +154,62 @@
     }
 }
 
+.form-sm {
+    :deep(.u-form-item__body__left__content__label) {
+        font-size: $tx-sm !important;
+    }
+
+    :deep(.uni-input-placeholder) {
+        font-size: $tx-sm !important;
+    }
+
+    :deep(.u-input__content__subfix-icon) {
+        font-size: $tx-sm !important;
+    }
+
+    :deep(.uni-textarea-textarea) {
+        font-size: $tx-sm !important;
+    }
+
+    :deep(.uni-input-input) {
+        font-size: $tx-sm !important;
+    }
+}
+
+.submit-form {
+    .u-form-item {
+        padding: 0 32rpx;
+        background-color: $white;
+        border-bottom: 1rpx solid $gray-d;
+    }
+
+    .border-top {
+        border-top: 1rpx solid $gray-d;
+    }
+
+    .border-none {
+        border: none;
+    }
+
+    .placeholder-align-right {
+        text-align: right;
+    }
+
+    .uni-input-wrapper .uni-input-input {
+        direction: ltr;
+        text-align: right;
+    }
+
+    .uni-numbox__value .uni-input-input {
+        text-align: center;
+        direction: ltr;
+    }
+
+    .u-form-item__body__right__content__slot {
+        justify-content: flex-end;
+    }
+}
+
 /* 表单标签样式 */
 .form-item-label {
     display: flex;
@@ -198,44 +254,6 @@
         font-size: 24rpx;
         color: $orange-light;
         margin-left: 2rpx;
-    }
-}
-
-/* 下拉列表样式 */
-.dropdown {
-    .dropdown-trigger {
-        display: flex;
-        align-items: center;
-        font-size: $tx-base;
-        color: $black;
-
-        text {
-            margin-right: 4rpx;
-            &.active {
-                color: $blue-light;
-            }
-        }
-    }
-    .dropdown-list {
-        background-color: $white;
-        padding: 20rpx 0;
-
-        .dropdown-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 24rpx 30rpx;
-            font-size: $tx-base;
-            color: $black;
-
-            &.active {
-                color: $blue-light;
-            }
-
-            &:active {
-                background-color: $gray-f;
-            }
-        }
     }
 }
 
@@ -314,56 +332,47 @@
     height: 80rpx !important;
 }
 
-.form-sm {
-    :deep(.u-form-item__body__left__content__label) {
-        font-size: $tx-sm !important;
-    }
+/* 下拉列表样式 */
+.dropdown {
+    .dropdown-trigger {
+        display: flex;
+        align-items: center;
+        font-size: $tx-base;
+        color: $black;
 
-    :deep(.uni-input-placeholder) {
-        font-size: $tx-sm !important;
+        text {
+            margin-right: 4rpx;
+            &.active {
+                color: $blue-light;
+            }
+        }
     }
+    .dropdown-list {
+        background-color: $white;
+        padding: 20rpx 0;
 
-    :deep(.u-input__content__subfix-icon) {
-        font-size: $tx-sm !important;
-    }
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24rpx 30rpx;
+            font-size: $tx-base;
+            color: $black;
 
-    :deep(.uni-textarea-textarea) {
-        font-size: $tx-sm !important;
-    }
+            &.active {
+                color: $blue-light;
+            }
 
-    :deep(.uni-input-input) {
-        font-size: $tx-sm !important;
+            &:active {
+                background-color: $gray-f;
+            }
+        }
     }
 }
 
 /* 筛选下拉框样式 */
 .dropdown-slot-content {
     background-color: $white;
-}
-.filter-box {
-    padding: 20rpx;
-    .filter-title {
-        font-weight: bold;
-        margin-bottom: 20rpx;
-        font-size: $tx-base;
-        color: $black;
-    }
-    .filter-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20rpx;
-    }
-    .tag-item {
-        padding: 12rpx 24rpx;
-        background-color: $gray-f;
-        border-radius: 8rpx;
-        font-size: 24rpx;
-        color: $dark-6;
-        &.active {
-            background-color: $blue;
-            color: $white;
-        }
-    }
 }
 
 .dropdown-footer {
@@ -393,6 +402,32 @@
             &::after {
                 border: none;
             }
+        }
+    }
+}
+
+.filter-box {
+    padding: 20rpx;
+    .filter-title {
+        font-weight: bold;
+        margin-bottom: 20rpx;
+        font-size: $tx-base;
+        color: $black;
+    }
+    .filter-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20rpx;
+    }
+    .tag-item {
+        padding: 12rpx 24rpx;
+        background-color: $gray-f;
+        border-radius: 8rpx;
+        font-size: 24rpx;
+        color: $dark-6;
+        &.active {
+            background-color: $blue;
+            color: $white;
         }
     }
 }

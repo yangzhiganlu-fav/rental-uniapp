@@ -76,6 +76,8 @@
 
 <script setup>
     import { ref, computed } from 'vue';
+    import { baseUrl, apiPath } from '@/sheep/config';
+    import { getAccessToken, getTenantId } from '@/sheep/request';
 
     const props = defineProps({
         modelValue: {
@@ -104,11 +106,15 @@
         },
         autoUploadAuthUrl: {
             type: String,
-            required: true,
+            default: `${baseUrl}${apiPath}/infra/file/presigned-url`,
         },
         autoUploadHeader: {
             type: Object,
-            default: () => ({}),
+            default: () => ({
+                Authorization: `Bearer ${getAccessToken()}`,
+                'tenant-id': getTenantId(),
+                Accept: '*/*',
+            }),
         },
         deletable: {
             type: Boolean,
