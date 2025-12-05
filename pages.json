@@ -210,6 +210,22 @@
                     }
                 }
             ]
+        },
+        {
+            "root": "pages/lease",
+            "pages": [
+                {
+                    "path": "leaseFeeDetail",
+                    "style": {
+                        "navigationBarTitleText": "费用详情"
+                    },
+                    "meta": {
+                        "sync": true,
+                        "title": "费用详情",
+                        "group": "租约"
+                    }
+                }
+            ]
         }
     ],
     "globalStyle": {

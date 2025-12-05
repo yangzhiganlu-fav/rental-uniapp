@@ -1,29 +1,37 @@
 <template>
     <view class="collected-fees">
-        <view class="fee-item" v-for="(item, index) in list" :key="index">
-            <up-card :show-head="false" :show-foot="false" :border="false" margin="0">
-                <template #body>
-                    <view class="fee-content">
-                        <view class="card-head">
-                            <text class="period">【账期】 {{ item.period }}</text>
-                            <view class="payment-tag">
-                                <text>{{ item.paymentMethod }}</text>
-                            </view>
-                            <up-icon name="arrow-right" size="12" color="#3c9cff"></up-icon>
+        <up-card
+            v-for="(item, index) in list"
+            :key="index"
+            :show-head="false"
+            :show-foot="false"
+            :border="false"
+            margin="0"
+            style="margin-bottom: 20rpx"
+            @click="onFeeCardClick(item)"
+        >
+            <template #body>
+                <view class="fee-content">
+                    <view class="card-head">
+                        <text class="period">【账期】 {{ item.period }}</text>
+                        <view class="payment-tag">
+                            <text>{{ item.paymentMethod }}</text>
                         </view>
-                        <view class="card-body">
-                            <text class="date">【实收日期】 {{ item.collectionDate }}</text>
-                            <text class="amount">实收 {{ item.amount }}</text>
-                        </view>
+                        <up-icon name="arrow-right" size="12" color="#3c9cff"></up-icon>
                     </view>
-                </template>
-            </up-card>
-        </view>
+                    <view class="card-body">
+                        <text class="date">【实收日期】 {{ item.collectionDate }}</text>
+                        <text class="amount">实收 {{ item.amount }}</text>
+                    </view>
+                </view>
+            </template>
+        </up-card>
     </view>
 </template>
 
 <script setup>
     import { ref } from 'vue';
+    import sheep from '@/sheep';
 
     // 模拟数据
     const list = ref([
@@ -39,21 +47,43 @@
             amount: '1270.00',
             paymentMethod: '租好点支付',
         },
+        {
+            period: '2025-10-23/2025-11-22',
+            collectionDate: '2025-10-22',
+            amount: '1270.00',
+            paymentMethod: '租好点支付',
+        },
+        {
+            period: '2025-10-23/2025-11-22',
+            collectionDate: '2025-10-22',
+            amount: '1270.00',
+            paymentMethod: '租好点支付',
+        },
+        {
+            period: '2025-10-23/2025-11-22',
+            collectionDate: '2025-10-22',
+            amount: '1270.00',
+            paymentMethod: '租好点支付',
+        },
+        {
+            period: '2025-10-23/2025-11-22',
+            collectionDate: '2025-10-22',
+            amount: '1270.00',
+            paymentMethod: '租好点支付',
+        },
     ]);
+
+    const onFeeCardClick = (item) => {
+        sheep.$router.go('/pages/lease/leaseFeeDetail', {
+            type: 'paid',
+        });
+    };
 </script>
 
 <style lang="scss" scoped>
     .collected-fees {
         padding: 20rpx;
         color: $dark-9;
-    }
-
-    .fee-item {
-        margin-bottom: 20rpx;
-
-        :deep(.u-card) {
-            border-radius: 16rpx;
-        }
     }
 
     .fee-content {

@@ -1,15 +1,15 @@
 <template>
     <s-layout title="租约详情">
-        <scroll-view scroll-y class="lease-detail">
+        <view class="lease-detail">
             <!-- 客户基础信息 -->
-            <CustomerInfo :info="leaseData" />
+            <customer-info :info="leaseData" />
 
             <up-tabs :list="list1" :current="currentTab" class="tabs" @click="onTabClick"></up-tabs>
 
-            <view class="tab-content">
+            <scroll-view scroll-y class="tab-content">
                 <component :is="currentTabComponent" />
-            </view>
-        </scroll-view>
+            </scroll-view>
+        </view>
     </s-layout>
 </template>
 
@@ -55,6 +55,8 @@
     .lease-detail {
         flex: 1;
         min-height: 0;
+        display: flex;
+        flex-direction: column;
 
         .tabs {
             margin-top: 20rpx;
@@ -64,6 +66,12 @@
             :deep(.u-tabs__wrapper__nav__item) {
                 flex: 1;
             }
+        }
+
+        .tab-content {
+            flex: 1;
+            min-height: 0;
+            overflow: auto;
         }
     }
 </style>
