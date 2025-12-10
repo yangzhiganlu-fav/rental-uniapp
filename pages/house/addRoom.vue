@@ -106,8 +106,8 @@
     import sheep from '@/sheep';
     import { ref, computed } from 'vue';
     import { onLoad } from '@dcloudio/uni-app';
-    import RoomOrientation from './components/formItem/roomOrientation.vue';
-    import KeyPlaceSelector from './components/formItem/keyPlaceSelector.vue';
+    import RoomOrientation from './components/houseFormItem/roomOrientation.vue';
+    import KeyPlaceSelector from './components/houseFormItem/keyPlaceSelector.vue';
     import HouseApi from '@/sheep/api/house';
 
     const houseInfo = ref({

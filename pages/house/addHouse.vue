@@ -221,10 +221,10 @@
     import sheep from '@/sheep';
     import { ref, computed, watch } from 'vue';
     import { onLoad, onUnload } from '@dcloudio/uni-app';
-    import HouseLayout from './components/formItem/houseLayout.vue';
-    import FloorSelector from './components/formItem/floorSelector.vue';
-    import RoomOrientation from './components/formItem/roomOrientation.vue';
-    import KeyPlaceSelector from './components/formItem/keyPlaceSelector.vue';
+    import HouseLayout from './components/houseFormItem/houseLayout.vue';
+    import FloorSelector from './components/houseFormItem/floorSelector.vue';
+    import RoomOrientation from './components/houseFormItem/roomOrientation.vue';
+    import KeyPlaceSelector from './components/houseFormItem/keyPlaceSelector.vue';
     import HouseApi from '@/sheep/api/house';
 
     const community = ref(null);

@@ -322,7 +322,7 @@
     import sheep from '@/sheep';
     import { reactive, ref } from 'vue';
     import { onShareAppMessage, onLoad } from '@dcloudio/uni-app';
-    import { useRoomDetail } from './hooks/useRoomDetail';
+    import { useRoomEdit } from './hooks/useRoomEdit';
     import RoomSwiper from './components/roomSwiper.vue';
     import EditRoomModal from './components/editRoomModal.vue';
 
@@ -381,7 +381,7 @@
         orientationRange,
         openOrientationPicker,
         onOrientationConfirm,
-    } = useRoomDetail();
+    } = useRoomEdit();
 
     const list1 = reactive([
         '/static/room/room1.jpg',
