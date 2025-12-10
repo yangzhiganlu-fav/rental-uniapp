@@ -61,7 +61,7 @@
     import sheep from '@/sheep';
     import { mobile, password } from '@/sheep/validate/form';
     import { showAuthModal, closeAuthModal } from '@/sheep/hooks/useModal';
-    import AuthUtil from '@/sheep/api/member/auth';
+    import AuthUtil from '@/sheep/api/system/auth';
 
     const accountLoginRef = ref(null);
 

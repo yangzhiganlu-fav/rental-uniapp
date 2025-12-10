@@ -16,6 +16,7 @@ if (typeof baseUrl === 'undefined') {
 }
 
 export const apiPath = import.meta.env.SHOPRO_API_PATH;
+export const rentApiPath = import.meta.env.SHOPRO_API_RENT_PATH;
 export const staticUrl = import.meta.env.SHOPRO_STATIC_URL;
 export const tenantId = import.meta.env.SHOPRO_TENANT_ID;
 export const websocketPath = import.meta.env.SHOPRO_WEBSOCKET_PATH;
@@ -24,6 +25,7 @@ export const h5Url = import.meta.env.SHOPRO_H5_URL;
 export default {
     baseUrl,
     apiPath,
+    rentApiPath,
     staticUrl,
     tenantId,
     websocketPath,

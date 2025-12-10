@@ -3,7 +3,10 @@
         "autoscan": true,
         "custom": {
             "^s-(.*)": "@/sheep/components/s-$1/s-$1.vue",
-            "^su-(.*)": "@/sheep/ui/su-$1/su-$1.vue"
+            "^su-(.*)": "@/sheep/ui/su-$1/su-$1.vue",
+            "^u--(.*)": "@/uni_modules/uview-plus/components/u-$1/u-$1.vue",
+            "^up-(.*)": "@/uni_modules/uview-plus/components/u-$1/u-$1.vue",
+            "^u-([^-].*)": "@/uni_modules/uview-plus/components/u-$1/u-$1.vue"
         }
     },
     "pages": [
@@ -15,10 +18,59 @@
                 "enablePullDownRefresh": true
             },
             "meta": {
-                "auth": false,
+                "auth": true,
                 "sync": true,
                 "title": "首页",
-                "group": "商城"
+                "group": "首页"
+            }
+        },
+        {
+            "path": "pages/login/index",
+            "meta": {
+                "auth": false,
+                "sync": true,
+                "title": "登录",
+                "group": "登录"
+            }
+        },
+        {
+            "path": "pages/house/index",
+            "style": {
+                "navigationBarTitleText": "房源",
+                "enablePullDownRefresh": true,
+                "onReachBottomDistance": 50
+            },
+            "meta": {
+                "auth": true,
+                "sync": true,
+                "title": "房源",
+                "group": "房源"
+            }
+        },
+        {
+            "path": "pages/lease/index",
+            "style": {
+                "navigationBarTitleText": "租约",
+                "enablePullDownRefresh": true,
+                "onReachBottomDistance": 50
+            },
+            "meta": {
+                "auth": true,
+                "sync": true,
+                "title": "租约",
+                "group": "租约"
+            }
+        },
+        {
+            "path": "pages/mine/index",
+            "style": {
+                "navigationBarTitleText": "我的"
+            },
+            "meta": {
+                "auth": true,
+                "sync": true,
+                "title": "我的",
+                "group": "我的"
             }
         }
     ],
@@ -50,6 +102,69 @@
                     }
                 }
             ]
+        },
+        {
+            "root": "pages/house",
+            "pages": [
+                {
+                    "path": "addHouse",
+                    "style": {
+                        "navigationBarTitleText": "录入房源"
+                    },
+                    "meta": {
+                        "sync": true,
+                        "title": "录入房源",
+                        "group": "房源"
+                    }
+                },
+                {
+                    "path": "communitySelect",
+                    "style": {
+                        "navigationBarTitleText": "选择房源",
+                        "enablePullDownRefresh": true,
+                        "navigationStyle": "custom"
+                    },
+                    "meta": {
+                        "sync": true,
+                        "title": "选择房源",
+                        "group": "房源"
+                    }
+                },
+
+                {
+                    "path": "addRoom",
+                    "style": {
+                        "navigationBarTitleText": "添加房间"
+                    },
+                    "meta": {
+                        "sync": true,
+                        "title": "添加房间",
+                        "group": "房源"
+                    }
+                },
+                {
+                    "path": "roomDetail",
+                    "style": {
+                        "navigationBarTitleText": "房间详情"
+                    },
+                    "meta": {
+                        "sync": true,
+                        "title": "房间详情",
+                        "group": "房源"
+                    }
+                },
+                {
+                    "path": "editPhoto",
+                    "style": {
+                        "navigationBarTitleText": "编辑房间照片"
+                    },
+                    "meta": {
+                        "sync": true,
+                        "title": "编辑房间照片",
+                        "group": "房源"
+                    }
+                }
+            ]
         }
     ],
     "globalStyle": {
@@ -63,16 +178,16 @@
         "list": [
             {
                 "pagePath": "pages/index/index"
+            },
+            {
+                "pagePath": "pages/house/index"
+            },
+            {
+                "pagePath": "pages/lease/index"
+            },
+            {
+                "pagePath": "pages/mine/index"
             }
-            // {
-            //     "pagePath": "pages/index/category"
-            // },
-            // {
-            //     "pagePath": "pages/index/cart"
-            // },
-            // {
-            //     "pagePath": "pages/index/user"
-            // }
         ]
     }
 }

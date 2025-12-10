@@ -15,7 +15,10 @@
             <view class="u-tabbar__content__item-wrapper">
                 <slot></slot>
             </view>
-            <view v-if="safeAreaInsetBottom" :style="[{ height: safeBottomHeight + 'px' }]"></view>
+            <view
+                v-if="safeAreaInsetBottom"
+                :style="[{ height: safeBottomHeight * 2 + 'rpx' }]"
+            ></view>
         </view>
         <view
             class="u-tabbar__placeholder"
@@ -210,7 +213,7 @@
             box-shadow: 0px -2px 4px 0px rgba(51, 51, 51, 0.06);
 
             &__item-wrapper {
-                height: 50px;
+                height: 100rpx;
                 display: flex;
                 justify-content: space-around;
                 align-items: center;

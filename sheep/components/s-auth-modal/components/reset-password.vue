@@ -77,7 +77,7 @@
     import sheep from '@/sheep';
     import { code, mobile, password } from '@/sheep/validate/form';
     import { showAuthModal, closeAuthModal, getSmsCode, getSmsTimer } from '@/sheep/hooks/useModal';
-    import UserApi from '@/sheep/api/member/user';
+    import UserApi from '@/sheep/api/system/user';
 
     const resetPasswordRef = ref(null);
     const isLogin = computed(() => sheep.$store('user').isLogin);

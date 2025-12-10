@@ -67,7 +67,7 @@
     import sheep from '@/sheep';
     import { code, mobile } from '@/sheep/validate/form';
     import { showAuthModal, closeAuthModal, getSmsCode, getSmsTimer } from '@/sheep/hooks/useModal';
-    import AuthUtil from '@/sheep/api/member/auth';
+    import AuthUtil from '@/sheep/api/system/auth';
 
     const smsLoginRef = ref(null);
 

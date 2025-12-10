@@ -1,0 +1,76 @@
+.dropdown-footer {
+    display: flex;
+
+    .btn-reset,
+    .btn-confirm {
+        flex: 1;
+        padding: 0;
+        border-radius: 8rpx;
+        font-size: $tx-sm;
+        border-radius: 0 !important;
+
+        &::after {
+            border: none;
+        }
+    }
+
+    .btn-reset {
+        background-color: $gray-d;
+        color: $dark-3;
+    }
+
+    .btn-confirm {
+        flex: 2;
+        background-color: $blue-light;
+        color: $white;
+    }
+}
+
+.common-form {
+    padding: 0 24rpx;
+    background-color: $white;
+
+    .placeholder-align-right {
+        text-align: right;
+    }
+
+    .uni-input-wrapper .uni-input-input {
+        direction: ltr;
+        text-align: right;
+    }
+
+    .u-form-item__body {
+        padding: 28rpx 0 !important;
+    }
+
+    .double-form-item {
+        position: relative;
+
+        .u-form-item__body__left {
+            align-items: flex-start;
+        }
+
+        .u-form-item__body__right {
+            padding-top: 80rpx;
+        }
+
+        .top-form-item {
+            position: absolute;
+            top: 10rpx;
+            right: 0;
+            text-align: right;
+        }
+
+        .bottom-form-item {
+            padding-top: 100rpx;
+        }
+    }
+}
+
+.u-toolbar {
+    background-color: $bg-page;
+}
+
+.u-action-sheet__header {
+    background-color: $bg-page;
+}

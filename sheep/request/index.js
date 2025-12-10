@@ -8,7 +8,7 @@ import { apiPath, baseUrl, tenantId } from '@/sheep/config';
 import $store from '@/sheep/store';
 import $platform from '@/sheep/platform';
 import { showAuthModal } from '@/sheep/hooks/useModal';
-import AuthUtil from '@/sheep/api/member/auth';
+import AuthUtil from '@/sheep/api/system/auth';
 import { getTerminal } from '@/sheep/helper/const';
 
 const options = {
@@ -71,6 +71,9 @@ const http = new Request({
  */
 http.interceptors.request.use(
     (config) => {
+        if (config.custom.apiPath) {
+            config.baseURL = baseUrl + config.custom.apiPath;
+        }
         // 自定义处理【auth 授权】：必须登录的接口，则跳出 AuthModal 登录弹窗
         if (config.custom.auth && !$store('user').isLogin) {
             showAuthModal();
@@ -112,7 +115,10 @@ http.interceptors.request.use(
 http.interceptors.response.use(
     (response) => {
         // 约定：如果是 /auth/ 下的 URL 地址，并且返回了 accessToken 说明是登录相关的接口，则自动设置登陆令牌
-        if (response.config.url.indexOf('/member/auth/') >= 0 && response.data?.data?.accessToken) {
+        if (response.config.url.indexOf('/system/auth/') >= 0 && response.data?.data?.accessToken) {
+            if (response.data.data.userId) {
+                $store('user').setUserId(response.data.data.userId);
+            }
             $store('user').setToken(
                 response.data.data.accessToken,
                 response.data.data.refreshToken,
@@ -227,7 +233,7 @@ let requestList = []; // 请求队列
 let isRefreshToken = false; // 是否正在刷新中
 const refreshToken = async (config) => {
     // 如果当前已经是 refresh-token 的 URL 地址，并且还是 401 错误，说明是刷新令牌失败了，直接返回 Promise.reject(error)
-    if (config.url.indexOf('/member/auth/refresh-token') >= 0) {
+    if (config.url.indexOf('/system/auth/refresh-token') >= 0) {
         return Promise.reject('error');
     }
 

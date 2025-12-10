@@ -1,6 +1,6 @@
 <!-- 装修基础组件：宫格导航 -->
 <template>
-    <view :style="[bgStyle, { marginLeft: `${data.space}px` }]">
+    <view :style="[bgStyle, { marginLeft: `${data.space}rpx` }]">
         <uni-grid :showBorder="Boolean(data.border)" :column="data.column">
             <uni-grid-item
                 v-for="(item, index) in data.list"
@@ -18,7 +18,12 @@
                         >
                             {{ item.badge.text }}
                         </view>
-                        <image class="menu-image" :src="sheep.$url.cdn(item.iconUrl)"></image>
+                        <!-- <image class="menu-image" :src="sheep.$url.cdn(item.iconUrl)"></image> -->
+                        <s-icon
+                            :name="item.iconUrl"
+                            :size="item.iconSize"
+                            :color="item.iconColor"
+                        ></s-icon>
                     </view>
 
                     <view class="title-box ss-flex ss-flex-col ss-row-center ss-col-center">
@@ -66,8 +71,8 @@
 
 <style lang="scss" scoped>
     .menu-image {
-        width: 24px;
-        height: 24px;
+        width: 48rpx;
+        height: 48rpx;
     }
 
     .grid-item-box {
@@ -97,6 +102,10 @@
         }
 
         .title-box {
+            .grid-text {
+                margin-top: 8rpx;
+                font-size: 24rpx;
+            }
             .grid-tip {
                 font-size: 24rpx;
                 white-space: nowrap;

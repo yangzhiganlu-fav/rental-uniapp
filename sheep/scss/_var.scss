@@ -16,6 +16,28 @@ $brown: #a5673f; // 棕褐
 $grey: #8799a3; // 玄灰
 $gray: #aaaaaa; // 草灰
 $black: #333333; // 墨黑
+$teal: #45cbb9; // 水鸭色
+$tan: #d2b48c; // 土黄
+
+// 浅色系
+$red-light: #ff5b5b;
+$orange-light: #ff7d3a;
+$blue-light: #3c9cff;
+$green-light: #50e3c2;
+$orange-light: #ff9900;
+$tan-light: #e6d8ad;
+
+// 仪表盘颜色
+$dash-green: #56c088;
+$dash-blue: #6a75ca;
+$dash-red: #e86a58;
+$dash-yellow: #f9a825;
+$dash-purple: #9b59b6;
+$dash-cyan: #1abc9c;
+
+// 字体大小
+$tx-sm: 24rpx;
+$tx-base: 28rpx;
 
 $colors: ();
 $colors: map-merge(

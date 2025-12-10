@@ -88,12 +88,24 @@
     width: 100%;
 }
 
+.ss-min-h-0 {
+    min-height: 0;
+}
+
+.ss-min-w-0 {
+    min-width: 0;
+}
+
+.ss-flex-shrink-0 {
+    flex-shrink: 0;
+}
+
 /* ==================
 
     margin padding: 内外边距
 	
  ==================== */
-@for $i from 0 through 100 {
+@for $i from 0 through 200 {
     // 只要双数和能被5除尽的数
     @if $i % 2==0 or $i % 5==0 {
         // 得出：u-margin-30或者u-m-30

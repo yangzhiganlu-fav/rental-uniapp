@@ -13,16 +13,11 @@
                     :customStyle="badgeStyle"
                     :isDot="dot"
                 >
-                    <image
-                        v-if="icon"
+                    <s-icon
                         :name="icon"
                         :color="isActive ? parentData.activeColor : parentData.inactiveColor"
-                        :size="20"
-                    ></image>
-                    <block v-else>
-                        <slot v-if="isActive" name="active-icon" />
-                        <slot v-else name="inactive-icon" />
-                    </block>
+                        :size="40"
+                    ></s-icon>
                 </uni-badge>
             </view>
 
@@ -49,13 +44,15 @@
      * @property {String | Number}  badge    右上角的角标提示信息
      * @property {Boolean}      dot      是否显示圆点，将会覆盖badge参数（默认 false ）
      * @property {String}      text    描述文本
-     * @property {Object | String}  badgeStyle  控制徽标的位置，对象或者字符串形式，可以设置top和right属性（默认 'top: 6px;right:2px;' ）
+     * @property {Object | String}  badgeStyle  控制徽标的位置，对象或者字符串形式，可以设置top和right属性（默认 'top: 12rpx;right:4rpx;' ）
      * @property {Object}      customStyle  定义需要用到的外部样式
      *
      */
     import { $parent, addStyle } from '@/sheep/helper';
+    import sIcon from '@/sheep/components/s-icon/s-icon.vue';
 
     export default {
+        components: { sIcon },
         name: 'su-tabbar-item',
         props: {
             customStyle: {
@@ -187,21 +184,16 @@
 
 <style lang="scss" scoped>
     .tabbar-center-item {
-        height: 40px;
-        width: 40px;
+        height: 80rpx;
+        width: 80rpx;
         display: flex;
         align-items: center;
         justify-content: center;
         border-radius: 50%;
         background-color: rebeccapurple;
-        transform: scale(1.3) translateY(-6px);
+        transform: scale(1.3) translateY(-12rpx);
         position: absolute;
         z-index: 2;
-
-        .center-image {
-            width: 25px;
-            height: 25px;
-        }
     }
 
     .u-tabbar-item {
@@ -221,8 +213,8 @@
         }
 
         &__text {
-            margin-top: 2px;
-            font-size: 12px;
+            margin-top: 4rpx;
+            font-size: 24rpx;
             color: var(--textSize);
         }
     }

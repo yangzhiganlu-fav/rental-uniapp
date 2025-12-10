@@ -1,7 +1,7 @@
 import user from './user';
 import goods from './goods';
 import groupon from './groupon';
-import SocialApi from '@/sheep/api/member/social';
+import SocialApi from '@/sheep/api/system/social';
 
 export function getPosterData(options) {
     switch (options.shareInfo.poster.type) {

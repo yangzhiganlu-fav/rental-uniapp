@@ -56,7 +56,7 @@
     import sheep from '@/sheep';
     import { closeAuthModal } from '@/sheep/hooks/useModal';
     import FileApi from '@/sheep/api/infra/file';
-    import UserApi from '@/sheep/api/member/user';
+    import UserApi from '@/sheep/api/system/user';
 
     const props = defineProps({
         agreeStatus: {

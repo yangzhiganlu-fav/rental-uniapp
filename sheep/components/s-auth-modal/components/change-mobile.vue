@@ -72,7 +72,7 @@
     import sheep from '@/sheep';
     import { code, mobile } from '@/sheep/validate/form';
     import { closeAuthModal, getSmsCode, getSmsTimer } from '@/sheep/hooks/useModal';
-    import UserApi from '@/sheep/api/member/user';
+    import UserApi from '@/sheep/api/system/user';
 
     const changeMobileRef = ref(null);
     const userInfo = computed(() => sheep.$store('user').userInfo);

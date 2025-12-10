@@ -1,6 +1,6 @@
 // 登录
 import third from '@/sheep/api/migration/third';
-import SocialApi from '@/sheep/api/member/social';
+import SocialApi from '@/sheep/api/system/social';
 import $share from '@/sheep/platform/share';
 
 // TODO 芋艿：等后面搞 App 再弄

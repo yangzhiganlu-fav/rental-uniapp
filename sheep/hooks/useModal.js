@@ -3,7 +3,7 @@ import $helper from '@/sheep/helper';
 import dayjs from 'dayjs';
 import { ref } from 'vue';
 import test from '@/sheep/helper/test.js';
-import AuthUtil from '@/sheep/api/member/auth';
+import AuthUtil from '@/sheep/api/system/auth';
 
 // 打开授权弹框
 export function showAuthModal(type = 'smsLogin') {

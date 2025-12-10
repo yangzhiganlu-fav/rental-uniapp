@@ -670,6 +670,14 @@ export function copyText(text) {
     // #endif
 }
 
+// 手机号脱敏
+function maskPhone(phone) {
+    if (typeof phone !== 'string') {
+        phone = String(phone);
+    }
+    return phone.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
+}
+
 export default {
     range,
     getPx,
@@ -700,4 +708,5 @@ export default {
     test,
     getRootUrl,
     copyText,
+    maskPhone,
 };

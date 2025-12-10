@@ -1,7 +1,7 @@
 import $wxsdk from '@/sheep/libs/sdk-h5-weixin';
 import { getRootUrl } from '@/sheep/helper';
-import AuthUtil from '@/sheep/api/member/auth';
-import SocialApi from '@/sheep/api/member/social';
+import AuthUtil from '@/sheep/api/system/auth';
+import SocialApi from '@/sheep/api/system/social';
 
 const socialType = 31; // 社交类型 - 微信公众号
 

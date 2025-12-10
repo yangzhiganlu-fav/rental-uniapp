@@ -13,8 +13,18 @@
                 :tools="tools"
                 :opacityBgUi="opacityBgUi"
                 @search="(e) => emits('search', e)"
-                :defaultSearch="defaultSearch"
-            />
+                v-model:searchText="searchModel"
+            >
+                <template #left>
+                    <slot name="left"></slot>
+                </template>
+                <template #center>
+                    <slot name="center"></slot>
+                </template>
+                <template #right>
+                    <slot name="right"></slot>
+                </template>
+            </su-navbar>
 
             <!-- 顶部导航栏-情况2：装修组件导航栏-标准 -->
             <s-custom-navbar
@@ -126,7 +136,7 @@
             type: [Number, String],
             default: 100,
         },
-        defaultSearch: {
+        searchText: {
             type: String,
             default: '',
         },
@@ -136,13 +146,22 @@
             default: false,
         },
     });
-    const emits = defineEmits(['search']);
+    const emits = defineEmits(['search', 'update:searchText']);
 
     const sysStore = sheep.$store('sys');
     const userStore = sheep.$store('user');
     const appStore = sheep.$store('app');
     const modalStore = sheep.$store('modal');
     const sys = computed(() => sysStore);
+
+    const searchModel = computed({
+        get() {
+            return props.searchText;
+        },
+        set(value) {
+            emits('update:searchText', value);
+        },
+    });
 
     // 导航栏模式(因为有自定义导航栏 需要计算)
     const navbarMode = computed(() => {
@@ -238,7 +257,7 @@
             position: absolute;
             z-index: 1;
             width: 100%;
-            min-height: 100%;
+            height: 100%;
             display: flex;
             flex-direction: column;
 
@@ -247,6 +266,7 @@
                 position: relative;
                 z-index: 1;
                 flex: 1;
+                min-height: 0;
             }
 
             .page-img {

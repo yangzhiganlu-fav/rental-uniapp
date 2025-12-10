@@ -61,7 +61,7 @@
     import { ref, reactive, unref } from 'vue';
     import { code, password } from '@/sheep/validate/form';
     import { closeAuthModal, getSmsCode, getSmsTimer } from '@/sheep/hooks/useModal';
-    import UserApi from '@/sheep/api/member/user';
+    import UserApi from '@/sheep/api/system/user';
 
     const changePasswordRef = ref(null);
 

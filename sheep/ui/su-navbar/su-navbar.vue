@@ -51,7 +51,7 @@
                                 sheep.$platform.name !== 'WechatOfficialAccount'
                             "
                         >
-                            <text :style="{ color: themeColor, fontSize: '18px' }">{{
+                            <text :style="{ color: themeColor, fontSize: '36rpx' }">{{
                                 title
                             }}</text>
                         </view>
@@ -76,12 +76,16 @@
                             class="uni-navbar__header-container-inner"
                         >
                             <text
-                                :style="{ color: themeColor, fontSize: '36rpx' }"
+                                :style="{ color: themeColor, fontSize: '28rpx' }"
                                 class="ss-line-1"
-                                >{{ title }}</text
                             >
+                                {{ title }}
+                            </text>
                         </view>
                     </slot>
+                </view>
+                <view class="uni-navbar__header-btns-right">
+                    <slot name="right"></slot>
                 </view>
             </view>
         </view>
@@ -120,9 +124,15 @@
      * @event {Function} clickTitle 中间标题点击时触发
      */
 
-    const getVal = (val) => (typeof val === 'number' ? val + 'px' : val);
+    const getVal = (val) => (typeof val === 'number' ? val * 2 + 'rpx' : val);
 
-    const emits = defineEmits(['clickLeft', 'clickRight', 'clickTitle', 'search']);
+    const emits = defineEmits([
+        'clickLeft',
+        'clickRight',
+        'clickTitle',
+        'search',
+        'update:searchText',
+    ]);
     const props = defineProps({
         dark: {
             type: Boolean,
@@ -204,7 +214,7 @@
             type: String,
             default: 'title',
         },
-        defaultSearch: {
+        searchText: {
             type: String,
             default: '',
         },
@@ -212,15 +222,22 @@
 
     const capsuleStyle = computed(() => {
         return {
-            width: sheep.$platform.capsule.width + 'px',
-            height: sheep.$platform.capsule.height + 'px',
+            width: sheep.$platform.capsule.width * 2 + 'rpx',
+            height: sheep.$platform.capsule.height * 2 + 'rpx',
             margin:
-                '0 ' + (sheep.$platform.device.windowWidth - sheep.$platform.capsule.right) + 'px',
+                '0 ' +
+                (sheep.$platform.device.windowWidth - sheep.$platform.capsule.right) * 2 +
+                'rpx',
         };
     });
 
-    const searchModel = computed(() => {
-        return props.defaultSearch;
+    const searchModel = computed({
+        get() {
+            return props.searchText;
+        },
+        set(value) {
+            emits('update:searchText', value);
+        },
     });
 
     const themeBgColor = computed(() => {
@@ -294,8 +311,7 @@
     }
     .icon-box {
         background: #ffffff;
-        box-shadow: 0px 0px 4rpx rgba(51, 51, 51, 0.08),
-            0px 4rpx 6rpx 2rpx rgba(102, 102, 102, 0.12);
+        box-shadow: 0 0 4rpx rgba(51, 51, 51, 0.08), 0 4rpx 6rpx 2rpx rgba(102, 102, 102, 0.12);
         border-radius: 30rpx;
         width: 134rpx;
         height: 56rpx;
@@ -322,16 +338,16 @@
             height: 56rpx;
             &-left:hover {
                 background: rgba(0, 0, 0, 0.16);
-                border-radius: 30rpx 0px 0px 30rpx;
+                border-radius: 30rpx 0 0 30rpx;
             }
             &-right:hover {
                 background: rgba(0, 0, 0, 0.16);
-                border-radius: 0px 30rpx 30rpx 0px;
+                border-radius: 0 30rpx 30rpx 0;
             }
         }
     }
 
-    $nav-height: 44px;
+    $nav-height: 88rpx;
 
     .fixed-bg {
         position: absolute;
@@ -347,12 +363,12 @@
         font-size: 34rpx;
         /* #endif */
         /* #ifndef APP-PLUS */
-        font-size: 14px;
+        font-size: 28rpx;
         /* #endif */
     }
 
     .uni-nav-bar-right-text {
-        font-size: 12px;
+        font-size: 24rpx;
     }
 
     .uni-navbar__content {
@@ -373,18 +389,19 @@
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
-        line-height: 18px;
+        line-height: 36rpx;
     }
 
     .uni-navbar__header {
         /* #ifndef APP-NVUE */
         display: flex;
         /* #endif */
-        padding: 0 10px;
+        padding: 0 20rpx;
         flex-direction: row;
+        align-items: center;
         justify-content: space-between;
         height: $nav-height;
-        font-size: 12px;
+        font-size: 24rpx;
         position: relative;
         z-index: 2;
     }
@@ -407,6 +424,7 @@
     }
 
     .uni-navbar__header-btns-left {
+        height: 100%;
         /* #ifndef APP-NVUE */
         display: flex;
         /* #endif */
@@ -446,7 +464,7 @@
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        font-size: 12px;
+        font-size: 24rpx;
         overflow: hidden;
         // box-sizing: border-box;
     }
@@ -469,7 +487,7 @@
     }
 
     .uni-navbar--shadow {
-        box-shadow: 0 1px 6px #ccc;
+        box-shadow: 0 2rpx 12rpx #ccc;
     }
 
     .uni-navbar--border {

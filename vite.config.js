@@ -4,7 +4,6 @@ import path from 'path';
 // import viteCompression from 'vite-plugin-compression';
 import uniReadPagesV3Plugin from './sheep/router/utils/uni-read-pages-v3';
 import mpliveMainfestPlugin from './sheep/libs/mplive-manifest-plugin';
-import UnoCSS from 'unocss/vite';
 
 // https://vitejs.dev/config/
 export default (command, mode) => {
@@ -13,7 +12,6 @@ export default (command, mode) => {
         envPrefix: 'SHOPRO_',
         plugins: [
             uni(),
-            UnoCSS(),
             // viteCompression({
             // 	verbose: false
             // }),

@@ -1,4 +1,5 @@
 import $store from '@/sheep/store';
+import sheep from '@/sheep';
 import { showAuthModal, showShareModal } from '@/sheep/hooks/useModal';
 import { isNumber, isString, isEmpty, startsWith, isObject, isNil, clone } from 'lodash-es';
 import throttle from '@/sheep/helper/throttle';
@@ -59,7 +60,7 @@ const _go = (
 
     // 页面登录拦截
     if (nextRoute.meta?.auth && !$store('user').isLogin) {
-        showAuthModal();
+        sheep.$router.go('/pages/login/index');
         return;
     }
 
@@ -147,9 +148,9 @@ function getCurrentRoute(field = '') {
     currentPage.$page['options'] = currentPage.options;
     // #endif
     if (field !== '') {
-        return currentPage.$page[field];
+        return currentPage?.$page[field];
     } else {
-        return currentPage.$page;
+        return currentPage?.$page;
     }
 }
 

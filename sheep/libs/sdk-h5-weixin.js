@@ -6,7 +6,7 @@
 
 import jweixin from 'weixin-js-sdk';
 import $helper from '@/sheep/helper';
-import AuthUtil from '@/sheep/api/member/auth';
+import AuthUtil from '@/sheep/api/system/auth';
 
 let configSuccess = false;
 

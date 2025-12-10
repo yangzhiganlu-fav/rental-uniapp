@@ -1,6 +1,6 @@
-import AuthUtil from '@/sheep/api/member/auth';
-import SocialApi from '@/sheep/api/member/social';
-import UserApi from '@/sheep/api/member/user';
+import AuthUtil from '@/sheep/api/system/auth';
+import SocialApi from '@/sheep/api/system/social';
+import UserApi from '@/sheep/api/system/user';
 import sheep from '@/sheep';
 
 const socialType = 34; // 社交类型 - 微信小程序
