@@ -2,7 +2,7 @@
     <!-- 页面布局组件，设置标题和背景色 -->
     <s-layout :title="roomData.roomName || ''" :bgStyle="{ backgroundColor: '#fff' }">
         <!-- 房间图片轮播图组件 -->
-        <room-swiper :list="list1" @edit="editRoomPhoto"></room-swiper>
+        <room-swiper :list="roomData.photosList || []" @edit="editRoomPhoto"></room-swiper>
         <!-- 表单容器 -->
         <up-cell-group class="form-container">
             <!-- 房间状态部分 -->
@@ -93,7 +93,7 @@
         <!-- 底部固定操作栏 -->
         <su-fixed bottom :bgStyles="{ backgroundColor: '#fff' }">
             <view class="button-box">
-                <view class="btn-item">
+                <view v-if="roomData.rentalStatus === 0" class="btn-item">
                     <!-- 分享按钮 -->
                     <up-button
                         type="warning"
@@ -176,14 +176,8 @@
         }
     };
 
-    const list1 = reactive([
-        '/static/room/room1.jpg',
-        '/static/room/room2.jpeg',
-        '/static/room/room3.jpeg',
-    ]);
-
     const editRoomPhoto = () => {
-        sheep.$router.go('/pages/house/editRoomPhoto');
+        sheep.$router.go('/pages/house/editPhoto');
     };
 
     const onEnterLease = () => {
@@ -200,7 +194,7 @@
             href: 'https://example.com',
             title: '房源分享',
             summary: '来看看这个房源',
-            imageUrl: list1[0],
+            imageUrl: roomData.value.photosList?.[0] || '',
             success: (res) => {
                 console.log('success:' + JSON.stringify(res));
             },
@@ -216,7 +210,7 @@
         return {
             title: '房源分享',
             path: '/pages/house/roomDetail',
-            imageUrl: list1[0],
+            imageUrl: roomData.value.photosList?.[0] || '',
         };
     });
 </script>
