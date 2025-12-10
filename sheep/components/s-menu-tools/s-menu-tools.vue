@@ -11,11 +11,7 @@
                             class="ss-reset-button list-image ss-flex ss-row-center ss-col-center"
                             @tap="onClick(item)"
                         >
-                            <image
-                                v-if="show"
-                                :src="sheep.$url.static(item.icon)"
-                                class="list-icon"
-                            />
+                            <s-icon v-if="show" :name="item.icon" size="40" class="list-icon" />
                         </button>
                         <view class="list-title ss-m-t-20">{{ item.title }}</view>
                     </view>
@@ -26,9 +22,9 @@
 </template>
 
 <script setup>
-    import { reactive, computed } from 'vue';
+    import { computed } from 'vue';
     import sheep from '@/sheep';
-    import { showMenuTools, closeMenuTools } from '@/sheep/hooks/useModal';
+    import { closeMenuTools } from '@/sheep/hooks/useModal';
 
     const show = computed(() => sheep.$store('modal').menu);
 
@@ -36,42 +32,26 @@
         closeMenuTools();
         if (item.url) sheep.$router.go(item.url);
     }
-
     const list = [
         {
             url: '/pages/index/index',
-            icon: '/static/img/shop/tools/home.png',
+            icon: 'home',
             title: '首页',
         },
         {
-            url: '/pages/index/search',
-            icon: '/static/img/shop/tools/search.png',
-            title: '搜索',
+            url: '/pages/house/index',
+            icon: 'fangdong',
+            title: '房源',
         },
         {
-            url: '/pages/index/user',
-            icon: '/static/img/shop/tools/user.png',
-            title: '个人中心',
+            url: '/pages/lease/index',
+            icon: 'hetong',
+            title: '租约',
         },
         {
-            url: '/pages/index/cart',
-            icon: '/static/img/shop/tools/cart.png',
-            title: '购物车',
-        },
-        {
-            url: '/pages/user/goods-log',
-            icon: '/static/img/shop/tools/browse.png',
-            title: '浏览记录',
-        },
-        {
-            url: '/pages/user/goods-collect',
-            icon: '/static/img/shop/tools/collect.png',
-            title: '我的收藏',
-        },
-        {
-            url: '/pages/chat/index',
-            icon: '/static/img/shop/tools/service.png',
-            title: '客服',
+            url: '/pages/mine/index',
+            icon: 'yonghu',
+            title: '我的',
         },
     ];
 </script>
