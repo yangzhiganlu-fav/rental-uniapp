@@ -22,7 +22,7 @@
                     <up-grid-item
                         v-for="room in house.roomList"
                         :key="room.id"
-                        @tap="onRoomClick(room)"
+                        @tap="onRoomClick(house, room)"
                     >
                         <view class="room-card">
                             <view class="room-card__image">
@@ -75,8 +75,8 @@
         return statusMap[status] || '未知';
     };
 
-    const onRoomClick = (room) => {
-        emit('room-click', room);
+    const onRoomClick = (house, room) => {
+        emit('room-click', house, room);
     };
 
     const onRoomAdd = (house) => {

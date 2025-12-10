@@ -79,6 +79,17 @@ const HouseApi = {
             },
         });
     },
+    // 更新房源
+    updateRoom: (data) => {
+        return request({
+            url: '/lessor/room',
+            method: 'PUT',
+            data,
+            custom: {
+                apiPath: rentApiPath,
+            },
+        });
+    },
 };
 
 export default HouseApi;

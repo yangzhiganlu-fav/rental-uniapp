@@ -129,10 +129,10 @@
         onSearch(true);
     };
 
-    const onRoomClick = (room) => {
-        console.log(room);
+    const onRoomClick = (house, room) => {
         sheep.$router.go('/pages/house/roomDetail', {
-            roomId: room.id,
+            houseId: house.houseId,
+            id: room.id,
         });
     };
 

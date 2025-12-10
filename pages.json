@@ -145,7 +145,8 @@
                 {
                     "path": "roomDetail",
                     "style": {
-                        "navigationBarTitleText": "房间详情"
+                        "navigationBarTitleText": "房间详情",
+                        "enablePullDownRefresh": true
                     },
                     "meta": {
                         "sync": true,
