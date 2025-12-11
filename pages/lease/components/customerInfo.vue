@@ -2,29 +2,74 @@
     <view class="customer-info">
         <view class="info-row">
             <view class="info-label">姓名</view>
-            <view class="info-value">{{ info.tenantName }}</view>
+            <view class="info-value">{{ leaseData?.renterName }}</view>
         </view>
         <view class="info-row">
             <view class="info-label">性别</view>
-            <view class="info-value">{{ info.gender }}</view>
+            <view class="info-value">{{ formatSex(leaseData?.renterSex) }}</view>
         </view>
         <view class="info-row">
             <view class="info-label">电话</view>
-            <view class="info-value">{{ info.phone }}</view>
+            <view class="info-value">{{ maskPhone(leaseData?.renterPhone) }}</view>
         </view>
         <view class="info-row">
-            <up-tag
-                text="电子合同"
-                type="primary"
-                plain
-                size="mini"
-                style="margin-right: 16rpx"
-            ></up-tag>
-            <up-tag text="7天后逾期" type="error" plain size="mini"></up-tag>
+            <view class="lease-tags">
+                <!-- 待签署：0:待签署 1:已签署（租约进行中） 2：合同终止 -->
+                <up-tag
+                    v-if="leaseData?.status === 0"
+                    text="待签署"
+                    type="success"
+                    size="mini"
+                ></up-tag>
+
+                <!-- 快到期：租约剩余天数 <= 7天 -->
+                <up-tag
+                    v-if="
+                        leaseData?.remainDay !== null &&
+                        leaseData?.remainDay !== undefined &&
+                        leaseData?.remainDay <= 7
+                    "
+                    text="快到期"
+                    type="warning"
+                    size="mini"
+                ></up-tag>
+
+                <!-- 即将逾期：逾期天数为负数 -->
+                <up-tag
+                    v-if="
+                        leaseData?.overDueDay !== null &&
+                        leaseData?.overDueDay !== undefined &&
+                        leaseData?.overDueDay < 0
+                    "
+                    :text="`${Math.abs(info.overDueDay)}天后逾期`"
+                    type="primary"
+                    size="mini"
+                ></up-tag>
+
+                <!-- 已逾期：逾期天数为正数 -->
+                <up-tag
+                    v-if="
+                        leaseData?.overDueDay !== null &&
+                        leaseData?.overDueDay !== undefined &&
+                        leaseData?.overDueDay > 0
+                    "
+                    :text="`逾期${info.overDueDay}天`"
+                    type="error"
+                    size="mini"
+                ></up-tag>
+
+                <!-- 退房时间 actualEndTime -->
+                <up-tag
+                    v-if="leaseData?.actualEndTime"
+                    :text="`${leaseData.actualEndTime} 已退房`"
+                    type="info"
+                    size="mini"
+                ></up-tag>
+            </view>
         </view>
 
         <view class="btn-group">
-            <view class="btn" @tap="onViewIdCard">
+            <view v-if="leaseData?.idCardFileList?.length" class="btn" @tap="onViewIdCard">
                 <view class="btn-icon" style="background-color: #3c9cff">
                     <s-icon name="shenfenzheng" size="52rpx" color="#fff" />
                 </view>
@@ -45,24 +90,35 @@
     import sheep from '@/sheep';
 
     const props = defineProps({
-        info: {
+        leaseData: {
             type: Object,
             default: () => ({}),
         },
     });
 
+    const formatSex = (sex) => {
+        if (sex === 0) return '男';
+        if (sex === 1) return '女';
+        return '未知';
+    };
+
+    const maskPhone = (phone) => {
+        if (!phone || phone.length < 7) return phone;
+        return phone.slice(0, 3) + '****' + phone.slice(7);
+    };
+
     // 查看证件
     const onViewIdCard = () => {
         sheep.$router.go('/pages/lease/tenantIdCardView', {
-            tenantId: props.info.tenantId,
+            urls: JSON.stringify(props.leaseData?.idCardFileList || []),
         });
     };
 
     // 拨打电话
     const onCallTenant = () => {
-        if (props.info.phone) {
+        if (props.leaseData?.renterPhone) {
             uni.makePhoneCall({
-                phoneNumber: props.info.phone,
+                phoneNumber: props.leaseData.renterPhone,
             });
         }
     };
@@ -93,6 +149,13 @@
             .info-value {
                 flex: 1;
                 color: $dark-3;
+            }
+
+            .lease-tags {
+                display: flex;
+                gap: 12rpx;
+                align-items: center;
+                flex-wrap: wrap;
             }
         }
 
@@ -127,5 +190,10 @@
                 margin: 0 36rpx !important;
             }
         }
+    }
+
+    :deep(.u-tag__content) {
+        display: flex;
+        align-items: center;
     }
 </style>

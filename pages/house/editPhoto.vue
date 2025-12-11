@@ -121,50 +121,44 @@
 
     // 加载房间数据
     const loadRoomData = async () => {
-        try {
-            loading.value = true;
-            const res = await HouseApi.getRoomDetail({ id: roomId.value });
+        loading.value = true;
+        const res = await HouseApi.getRoomDetail({ id: roomId.value });
 
-            if (res.code === 0 && res.data) {
-                const fileList = res.data.photoList || [];
+        if (res.code === 0 && res.data) {
+            const fileList = res.data.photoList || [];
 
-                // 清空现有数据
-                photoGroups.forEach((group) => (group.items = []));
-                videoGroups.forEach((group) => (group.items = []));
+            // 清空现有数据
+            photoGroups.forEach((group) => (group.items = []));
+            videoGroups.forEach((group) => (group.items = []));
 
-                // 分类填充数据
-                fileList.forEach((file) => {
-                    const item = {
-                        url: file.url,
-                        type: file.type,
-                        isCover: file.isCover || 0,
-                        code: file.code,
-                    };
+            // 分类填充数据
+            fileList.forEach((file) => {
+                const item = {
+                    url: file.url,
+                    type: file.type,
+                    isCover: file.isCover || 0,
+                    code: file.code,
+                };
 
-                    // 根据 code 判断是图片还是视频（code=6 为视频，1-5为图片分类）
-                    if (file.code === 6) {
-                        const videoGroup = videoGroups.find((g) => g.code === 6);
-                        if (videoGroup) {
-                            videoGroup.items.push(item);
-                        }
-                    } else {
-                        // 图片，根据 code 分类（1=卧室, 2=客厅, 3=卫生间, 4=厨房, 5=周边环境）
-                        const photoGroup = photoGroups.find((g) => g.code === file.code);
-                        if (photoGroup) {
-                            photoGroup.items.push(item);
-                        }
+                // 根据 code 判断是图片还是视频（code=6 为视频，1-5为图片分类）
+                if (file.code === 6) {
+                    const videoGroup = videoGroups.find((g) => g.code === 6);
+                    if (videoGroup) {
+                        videoGroup.items.push(item);
                     }
-                });
-            }
-        } catch (error) {
-            console.error('加载房间数据失败:', error);
-            uni.showToast({
-                title: '加载数据失败',
-                icon: 'none',
+                } else {
+                    // 图片，根据 code 分类（1=卧室, 2=客厅, 3=卫生间, 4=厨房, 5=周边环境）
+                    const photoGroup = photoGroups.find((g) => g.code === file.code);
+                    if (photoGroup) {
+                        photoGroup.items.push(item);
+                    }
+                }
             });
-        } finally {
-            loading.value = false;
+        } else {
+            photoGroups.forEach((group) => (group.items = []));
+            videoGroups.forEach((group) => (group.items = []));
         }
+        loading.value = false;
     };
     const list = ref(['照片', '视频']);
     const current = ref(0);

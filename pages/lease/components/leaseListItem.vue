@@ -122,4 +122,9 @@
     :deep(.u-card__head__title__text) {
         font-weight: 600 !important;
     }
+
+    :deep(.u-tag__content) {
+        display: flex;
+        align-items: center;
+    }
 </style>

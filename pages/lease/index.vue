@@ -12,10 +12,7 @@
 
         <!-- 租约列表 -->
         <view v-for="lease in leaseList" :key="lease.id" class="ss-p-b-0 ss-p-x-16 ss-p-t-16">
-            <lease-list-item
-                :lease="lease"
-                @click="navigateTo(`/pages/lease/leaseDetail`, { leaseId: lease.id })"
-            />
+            <lease-list-item :lease="lease" @click="navigateTo(lease)" />
         </view>
 
         <up-loadmore :status="loadStatus" line fontSize="12" marginTop="16" marginBottom="16" />
@@ -49,8 +46,8 @@
     const total = ref(0);
     const loadStatus = ref('loadmore'); // loadmore | loading | nomore
 
-    const navigateTo = (url, options = {}) => {
-        sheep.$router.go(url, options);
+    const navigateTo = (lease) => {
+        sheep.$router.go('/pages/lease/leaseDetail', { leaseId: lease.id });
     };
 
     const onSearch = async (isRefresh = true) => {

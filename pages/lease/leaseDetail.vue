@@ -1,44 +1,52 @@
 <template>
     <s-layout title="租约详情">
         <view class="lease-detail">
-            <!-- 客户基础信息 -->
-            <customer-info :info="leaseData" />
+            <customer-info :leaseData="leaseData" />
 
-            <up-tabs :list="list1" :current="currentTab" class="tabs" @click="onTabClick"></up-tabs>
+            <up-tabs
+                :list="tabList"
+                :current="currentTab"
+                class="tabs"
+                @click="onTabClick"
+            ></up-tabs>
+
+            <up-gap height="20rpx" bgColor="#f6f6f6"></up-gap>
 
             <scroll-view scroll-y class="tab-content">
-                <component :is="currentTabComponent" />
+                <component :is="currentTabComponent" :leaseData="leaseData" />
             </scroll-view>
         </view>
     </s-layout>
 </template>
 
 <script setup>
-    import sheep from '@/sheep';
     import { ref, reactive, computed } from 'vue';
+    import { onLoad, onPullDownRefresh } from '@dcloudio/uni-app';
     import CustomerInfo from './components/customerInfo.vue';
     import LeaseInfo from './components/leaseInfo.vue';
     import UnpaidFees from './components/unpaidFees.vue';
     import CollectedFees from './components/collectedFees.vue';
+    import LeaseApi from '@/sheep/api/lease';
 
-    const leaseId = sheep.$router.getCurrentRoute().options.leaseId;
+    const leaseId = ref('');
 
-    // 租约数据
-    const leaseData = ref({
-        tenantName: '李晓峰',
-        gender: '未知',
-        phone: '13791957248',
+    onLoad((options) => {
+        leaseId.value = options.leaseId || '';
+        fetchLeaseDetail();
     });
 
-    const list1 = reactive([
-        { name: '租约信息' },
-        { name: '未收费用', badge: { isDot: true } },
-        { name: '已收费用' },
-    ]);
+    onPullDownRefresh(async () => {
+        await fetchLeaseDetail();
+        uni.stopPullDownRefresh();
+    });
+
+    // 租约数据
+    const leaseData = ref(null);
+
+    const tabList = reactive([{ name: '租约信息' }, { name: '未收费用' }, { name: '已收费用' }]);
 
     const currentTab = ref(0);
 
-    // 选项卡点击事件
     const onTabClick = (tab) => {
         currentTab.value = tab.index;
     };
@@ -49,12 +57,20 @@
         if (currentTab.value === 2) return CollectedFees;
         return null;
     });
+
+    const fetchLeaseDetail = async () => {
+        const { code, data } = await LeaseApi.getLeaseDetail({ id: leaseId.value });
+        if (code === 0 && data) {
+            leaseData.value = data;
+        } else {
+            leaseData.value = null;
+        }
+    };
 </script>
 
 <style lang="scss" scoped>
     .lease-detail {
-        flex: 1;
-        min-height: 0;
+        height: 100%;
         display: flex;
         flex-direction: column;
 

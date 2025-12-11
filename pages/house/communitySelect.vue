@@ -36,17 +36,11 @@
 
     const houseList = ref([]);
 
-    const onSearch = (value) => {
-        communityName.value = value;
-        fetchCommunityList();
-    };
-
     const fetchCommunityList = async () => {
         const params = {
             communityName: communityName.value || '',
             isExist: true,
         };
-        houseList.value = [];
         const { code, data } = await HouseApi.getCommunityList(params);
         if (code === 0) {
             houseList.value = data.reduce((accumulator, current) => {
@@ -55,6 +49,8 @@
                 }
                 return accumulator;
             }, []);
+        } else {
+            houseList.value = [];
         }
     };
 

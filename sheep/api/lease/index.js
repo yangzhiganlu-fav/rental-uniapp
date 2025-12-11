@@ -25,6 +25,17 @@ const LeaseApi = {
             },
         });
     },
+    // 获取租约详情
+    getLeaseDetail: (params) => {
+        return request({
+            url: '/lessor/contract/detail',
+            method: 'GET',
+            params,
+            custom: {
+                apiPath: rentApiPath,
+            },
+        });
+    },
 };
 
 export default LeaseApi;

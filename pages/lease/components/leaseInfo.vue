@@ -1,106 +1,96 @@
 <template>
     <view class="lease-info">
-        <!-- 租约基本信息 -->
-        <view class="card no-padding">
-            <up-cell-group :border="false">
-                <up-cell
-                    class="grey-label grey-value hiden-line inner-cell"
-                    title="租约状态"
-                    value="待付款"
-                ></up-cell>
-                <up-cell class="grey-label grey-value hiden-line inner-cell" title="签约房源">
-                    <template #value>
-                        <view class="ss-flex-1 text-right">棕榈湾48幢/栋802室E</view>
-                    </template>
-                </up-cell>
-                <up-cell class="grey-label grey-value hiden-line inner-cell" title="起止日期">
-                    <template #value>
-                        <view class="ss-flex-1 text-right">2025-12-26/2026-12-25</view>
-                    </template>
-                </up-cell>
-                <up-cell
-                    class="grey-label grey-value hiden-line inner-cell"
-                    title="租期"
-                    value="12个月"
-                ></up-cell>
-                <up-cell class="grey-label grey-value hiden-line inner-cell" title="入住人数">
-                    <template #value>
-                        <view class="ss-flex-1 text-right">1</view>
-                    </template>
-                </up-cell>
-                <up-cell class="grey-label grey-value inner-cell" title="收款方式">
-                    <template #value>
-                        <view class="ss-flex-1 text-right">付一押一</view>
-                    </template>
-                </up-cell>
+        <up-form labelWidth="140" :border="false" class="common-form">
+            <up-form-item label="租约状态">
+                <template #right>
+                    <view class="form-value">{{ leaseStatusText }}</view>
+                </template>
+            </up-form-item>
+            <up-form-item label="签约房源">
+                <template #right>
+                    <view class="form-value">{{ leaseData?.title || '-' }}</view>
+                </template>
+            </up-form-item>
+            <up-form-item label="起止日期">
+                <template #right>
+                    <view class="form-value">{{ leasePeriod }}</view>
+                </template>
+            </up-form-item>
+            <up-form-item label="租期">
+                <template #right>
+                    <view class="form-value">{{ leaseDuration }}</view>
+                </template>
+            </up-form-item>
+            <up-form-item label="入住人数">
+                <template #right>
+                    <view class="form-value">{{ leaseData?.renterNum || '-' }}</view>
+                </template>
+            </up-form-item>
+            <up-form-item label="收款方式">
+                <template #right>
+                    <view class="form-value">{{ payMethodText }}</view>
+                </template>
+            </up-form-item>
+            <up-form-item label="租金">
+                <template #right>
+                    <view class="form-value">¥{{ leaseData?.price || 0 }}</view>
+                </template>
+            </up-form-item>
+            <up-form-item label="房屋押金">
+                <template #right>
+                    <view class="form-value">¥{{ leaseData?.deposit || 0 }}</view>
+                </template>
+            </up-form-item>
+            <up-gap height="20rpx" bgColor="#f6f6f6" class="gap"></up-gap>
+            <view class="custom-header">其他补充约定</view>
+            <view class="custom-content">{{ leaseData?.remark || '无' }}</view>
+            <up-gap height="20rpx" bgColor="#f6f6f6" class="gap"></up-gap>
+            <up-form-item
+                label="租约备注"
+                :borderBottom="false"
+                @click="sheep.$router.go('/pages/lease/leaseRemarkEdit')"
+            >
+                <view class="form-value" style="color: #3c9cff">编辑</view>
+                <template #right>
+                    <uni-icons
+                        type="arrowright"
+                        size="20"
+                        color="#999"
+                        style="margin-left: 10rpx"
+                    ></uni-icons>
+                </template>
+            </up-form-item>
+            <up-form-item :borderBottom="false">
+                <template #label>
+                    <view style="display: flex; align-items: center">
+                        <text style="margin-right: 20rpx">电子合同</text>
+                        <uni-icons
+                            type="download"
+                            size="28"
+                            color="#3c9cff"
+                            @click="onDownloadContract"
+                        ></uni-icons>
+                    </view>
+                </template>
+            </up-form-item>
+            <view class="contract-preview" v-if="contractFileList.length > 0">
+                <up-image
+                    v-for="(file, index) in contractFileList"
+                    :key="index"
+                    :src="file.url"
+                    width="200rpx"
+                    height="280rpx"
+                    mode="aspectFill"
+                    @click="onPreviewContract(index)"
+                    style="margin-right: 20rpx"
+                ></up-image>
+            </view>
+            <view class="contract-preview" v-else>
+                <view class="no-contract">暂无合同文件</view>
+            </view>
+        </up-form>
 
-                <up-cell
-                    class="grey-label grey-value hiden-line"
-                    title="租金"
-                    value="¥920"
-                ></up-cell>
-                <up-cell
-                    class="grey-label grey-value hiden-line inner-cell"
-                    title="房屋押金"
-                    value="¥920"
-                ></up-cell>
-            </up-cell-group>
-        </view>
-
-        <!-- 其他补充约定 -->
-        <view class="card no-padding">
-            <up-cell-group :border="false">
-                <view class="custom-header">其他补充约定</view>
-                <view class="custom-content">无</view>
-            </up-cell-group>
-        </view>
-
-        <!-- 备注与清单 -->
-        <view class="card no-padding">
-            <up-cell-group :border="false">
-                <up-cell
-                    class="grey-label blue-value inner-cell"
-                    title="租约备注"
-                    value="编辑备注"
-                    @click="sheep.$router.go('/pages/lease/leaseRemarkEdit')"
-                >
-                    <template #right-icon>
-                        <uni-icons type="arrowright" size="20" color="#999"></uni-icons>
-                    </template>
-                </up-cell>
-            </up-cell-group>
-        </view>
-
-        <!-- 电子合同 -->
-        <view class="card no-padding">
-            <up-cell-group :border="false">
-                <up-cell class="grey-label grey-value hiden-line inner-cell">
-                    <template #title>
-                        <view style="display: flex; align-items: center">
-                            <text style="margin-right: 20rpx">电子合同</text>
-                            <uni-icons
-                                type="download"
-                                size="28"
-                                color="#3c9cff"
-                                @click="onDownloadContract"
-                            ></uni-icons>
-                        </view>
-                    </template>
-                </up-cell>
-                <view class="contract-preview">
-                    <up-image
-                        :src="contractUrl"
-                        width="200rpx"
-                        height="280rpx"
-                        mode="aspectFill"
-                        @click="onPreviewContract"
-                    ></up-image>
-                </view>
-            </up-cell-group>
-        </view>
-
-        <!-- 底部占位 -->
-        <view class="footer-placeholder"></view>
+        <up-gap height="130rpx" bgColor="#f6f6f6"></up-gap>
 
         <!-- 底部按钮 -->
         <view class="footer-btns">
@@ -112,30 +102,102 @@
 
 <script setup>
     import sheep from '@/sheep';
-    import { ref } from 'vue';
+    import { ref, computed } from 'vue';
+
+    const props = defineProps({
+        leaseData: {
+            type: Object,
+            default: () => null,
+        },
+    });
+
+    // 租约状态文本
+    const leaseStatusText = computed(() => {
+        if (!props.leaseData) return '-';
+        const statusMap = {
+            0: '待签署',
+            1: '租约进行中',
+            2: '合同终止',
+        };
+        return statusMap[props.leaseData.status] || '-';
+    });
+
+    // 支付方式文本
+    const payMethodText = computed(() => {
+        if (!props.leaseData?.payMethod) return '-';
+        const payMethodMap = {
+            1: '押一付一',
+            2: '押一付二',
+            3: '押一付三',
+            4: '押二付一',
+            5: '押二付二',
+            6: '押二付三',
+        };
+        return payMethodMap[props.leaseData.payMethod] || '-';
+    });
+
+    // 租期
+    const leasePeriod = computed(() => {
+        if (!props.leaseData?.startTime || !props.leaseData?.endTime) return '-';
+        return `${props.leaseData.startTime}/${props.leaseData.endTime}`;
+    });
+
+    // 租期时长
+    const leaseDuration = computed(() => {
+        if (!props.leaseData?.startTime || !props.leaseData?.endTime) return '-';
+        const start = new Date(props.leaseData.startTime);
+        const end = new Date(props.leaseData.endTime);
+        const months =
+            (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
+        return `${months}个月`;
+    });
+
+    // 合同文件列表
+    const contractFileList = computed(() => {
+        return props.leaseData?.contractFileList || [];
+    });
 
     const contractUrl = ref('https://cdn.uviewui.com/uview/album/1.jpg');
 
     // 预览图片
-    const onPreviewContract = () => {
+    const onPreviewContract = (index = 0) => {
+        if (contractFileList.value.length === 0) {
+            uni.showToast({
+                title: '暂无合同文件',
+                icon: 'none',
+            });
+            return;
+        }
+        const urls = contractFileList.value.map((file) => file.url);
         uni.previewImage({
-            urls: [contractUrl.value],
-            current: 0,
+            urls: urls,
+            current: index,
         });
     };
 
     // 下载图片
     const onDownloadContract = () => {
+        if (contractFileList.value.length === 0) {
+            uni.showToast({
+                title: '暂无合同文件',
+                icon: 'none',
+            });
+            return;
+        }
+
+        // 如果有多个文件，下载第一个
+        const downloadUrl = contractFileList.value[0].url;
+
         // #ifdef H5
         const a = document.createElement('a');
-        a.href = contractUrl.value;
+        a.href = downloadUrl;
         a.download = 'contract.jpg';
         a.click();
         // #endif
 
         // #ifndef H5
         uni.downloadFile({
-            url: contractUrl.value,
+            url: downloadUrl,
             success: (res) => {
                 if (res.statusCode === 200) {
                     uni.saveImageToPhotosAlbum({
@@ -162,32 +224,24 @@
 </script>
 
 <style lang="scss" scoped>
-    .card {
-        background-color: #fff;
-        border-radius: 16rpx;
-        margin-bottom: 20rpx;
-        overflow: hidden; // 确保圆角生效
-
-        &.no-padding {
-            padding: 0;
-        }
-    }
-
     .custom-header {
-        padding: 24rpx 32rpx;
-        font-size: 30rpx;
+        padding: 24rpx 0;
+        font-size: 28rpx;
         font-weight: bold;
         color: $dark-3;
     }
 
     .custom-content {
-        padding: 0 32rpx 24rpx;
-        font-size: 28rpx;
-        color: $dark-6;
+        padding: 0 0 24rpx;
+        font-size: 24rpx;
+        color: $dark-3;
     }
 
     .contract-preview {
         padding: 0 32rpx 32rpx;
+        display: flex;
+        flex-wrap: wrap;
+
         .contract-img {
             width: 200rpx;
             height: 280rpx;
@@ -198,6 +252,14 @@
             justify-content: center;
             color: #999;
             font-size: 24rpx;
+        }
+
+        .no-contract {
+            width: 100%;
+            padding: 40rpx 0;
+            text-align: center;
+            color: #999;
+            font-size: 28rpx;
         }
     }
 
@@ -222,42 +284,20 @@
         padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
     }
 
-    // 灰色标签样式
-    .grey-label {
-        :deep(.u-cell__title-text) {
-            color: $dark-6;
-        }
+    .form-value {
+        color: $dark-3;
+        text-align: right;
     }
 
-    // 灰色值样式
-    .grey-value {
-        :deep(.u-cell__value) {
-            color: $dark-3;
-        }
+    :deep(.u-form-item__body) {
+        padding: 20rpx 0 !important;
     }
 
-    // 蓝色值样式
-    .blue-value {
-        :deep(.u-cell__value) {
-            color: $blue-light;
-        }
+    :deep(.u-form-item__body__right__content__slot) {
+        justify-content: flex-end;
     }
 
-    // 隐藏分割线
-    .hiden-line {
-        :deep(.u-line) {
-            display: none;
-        }
-    }
-
-    // 内部单元格样式调整
-    .inner-cell {
-        :deep(.u-cell__body) {
-            padding: 20rpx 32rpx !important;
-        }
-    }
-
-    :deep(.u-cell__body__content) {
-        flex: none;
+    .gap {
+        margin: 0 -24rpx;
     }
 </style>
