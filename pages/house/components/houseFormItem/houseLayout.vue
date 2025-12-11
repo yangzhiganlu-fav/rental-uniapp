@@ -29,17 +29,17 @@
     const props = defineProps({
         // 室
         roomNumber: {
-            type: Number,
+            type: [Number, String],
             required: true,
         },
         // 厅
         hallNumber: {
-            type: Number,
+            type: [Number, String],
             required: true,
         },
         // 卫
         toiletNumber: {
-            type: Number,
+            type: [Number, String],
             required: true,
         },
         // 0: 整租 1: 合租
@@ -53,11 +53,11 @@
 
     const indexs = computed(() => {
         const roomIndex = props.rentType === 0 ? props.roomNumber - 1 : props.roomNumber - 2;
-        return [roomIndex < 0 ? 0 : roomIndex, props.hallNumber, props.toiletNumber];
+        return [roomIndex < 0 ? 0 : roomIndex, props.hallNumber || 0, props.toiletNumber || 0];
     });
 
     const text = computed(() => {
-        if (props.roomNumber === 0 && props.hallNumber === 0 && props.toiletNumber === 0) {
+        if (props.roomNumber === '' && props.hallNumber === '' && props.toiletNumber === '') {
             return '';
         }
         return `${props.roomNumber}室 ${props.hallNumber}厅 ${props.toiletNumber}卫`;

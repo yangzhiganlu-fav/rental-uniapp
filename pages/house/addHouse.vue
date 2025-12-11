@@ -234,12 +234,12 @@
         blockNumber: '', // 楼号
         unitNumber: '', // 单元号
         houseNo: '', // 房间号
-        roomNumber: 0, // 室
-        hallNumber: 0, // 厅
-        toiletNumber: 0, // 卫
+        roomNumber: '', // 室
+        hallNumber: '', // 厅
+        toiletNumber: '', // 卫
         isElevator: 1, // 是否有电梯 0：楼梯房 1：电梯房
-        floor: 0, // 所在楼层
-        totalFloor: 0, // 总楼层
+        floor: '', // 所在楼层
+        totalFloor: '', // 总楼层
         houseArea: '', // 房屋面积（整租）
         price: '', // 出租金额,整数（整租）
         rentalStatus: 0, // 出租情况 0:待租 1：已出租（整租）
@@ -426,13 +426,44 @@
                     }
                 }
             }
-            if (rentType.value === 1) {
-                // 合租
-                onSaveMultiple();
-            } else {
-                // 整租
-                onSaveSingle();
+            // 合租
+            onSaveMultiple();
+        } else {
+            if (isNullable(formData.value.houseArea)) {
+                uni.showToast({
+                    title: '请输入整套面积',
+                    icon: 'none',
+                });
+                return;
             }
+            if (isNullable(formData.value.price)) {
+                uni.showToast({
+                    title: '请输入租金',
+                    icon: 'none',
+                });
+                return;
+            }
+
+            if (showKeyPlaceSelector.value) {
+                if (isNullable(formData.value.keyPlaceType)) {
+                    uni.showToast({
+                        title: '请选择钥匙位置',
+                        icon: 'none',
+                    });
+                    return;
+                }
+                if (formData.value.keyPlaceType === 1 || formData.value.keyPlaceType === 6) {
+                    if (isNullable(formData.value.keyPlace)) {
+                        uni.showToast({
+                            title: '请输入钥匙位置或密码锁密码',
+                            icon: 'none',
+                        });
+                        return;
+                    }
+                }
+            }
+            // 整租
+            onSaveSingle();
         }
     };
 

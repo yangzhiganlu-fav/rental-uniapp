@@ -39,12 +39,12 @@
     const props = defineProps({
         // 所在层
         floor: {
-            type: Number,
+            type: [Number, String],
             required: true,
         },
         // 总层数
         totalFloor: {
-            type: Number,
+            type: [Number, String],
             required: true,
         },
         // 是否有电梯
@@ -76,7 +76,7 @@
     ]);
 
     const text = computed(() => {
-        if (props.floor === 0 && props.totalFloor === 0) {
+        if (props.floor === '' && props.totalFloor === '') {
             return '';
         }
         return `第${props.floor}层 / 共${props.totalFloor}层`;

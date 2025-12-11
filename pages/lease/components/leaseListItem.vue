@@ -2,7 +2,7 @@
     <up-card
         :title="lease.title"
         :subTitle="lease.renterName"
-        titleSize="24rpx"
+        titleSize="22rpx"
         subTitleSize="24rpx"
         titleColor="#999"
         subTitleColor="#666"
@@ -66,6 +66,7 @@
                     <up-tag
                         v-if="lease.actualEndTime"
                         :text="`${lease.actualEndTime} 已退房`"
+                        type="info"
                         size="mini"
                     ></up-tag>
                 </view>
@@ -116,5 +117,9 @@
             align-items: center;
             justify-content: flex-end;
         }
+    }
+
+    :deep(.u-card__head__title__text) {
+        font-weight: 600 !important;
     }
 </style>

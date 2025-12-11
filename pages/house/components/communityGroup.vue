@@ -67,10 +67,10 @@
     // 房间状态映射
     const getRoomStatusText = (status) => {
         const statusMap = {
-            0: '待租',
-            1: '已出租有租约',
-            2: '转租',
-            3: '已出无租约',
+            0: '空置',
+            1: '已租有租约',
+            2: '转租中',
+            3: '已租无租约',
         };
         return statusMap[status] || '未知';
     };

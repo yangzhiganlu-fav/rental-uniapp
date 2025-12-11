@@ -4,6 +4,7 @@
         tools="search"
         searchClearButton="auto"
         v-model:searchText="searchForm.searchText"
+        placeholderText="小区/门牌号/房间号/姓名/手机号"
         @search="onCommunitySearch"
     >
         <template #right>
@@ -133,6 +134,8 @@
         sheep.$router.go('/pages/house/roomDetail', {
             houseId: house.houseId,
             id: room.id,
+            // 房间状态 0:待租 1：已出租有租约 2:转租 3：已出无租约
+            roomStatus: room.roomStatus,
         });
     };
 

@@ -83,7 +83,12 @@
                 @save="handleSave"
             ></floor-edit>
 
-            <up-cell class="blue-value hiden-line" title="历史租约" value="1">
+            <up-cell
+                class="blue-value hiden-line"
+                title="历史租约"
+                :value="roomData.leaseCount || '0'"
+                @tap="onLeaseHistoryTap"
+            >
                 <template #right-icon>
                     <uni-icons type="arrowright" size="20" color="#999"></uni-icons>
                 </template>
@@ -94,7 +99,6 @@
         <su-fixed bottom :bgStyles="{ backgroundColor: '#fff' }">
             <view class="button-box">
                 <view v-if="roomData.rentalStatus === 0" class="btn-item">
-                    <!-- 分享按钮 -->
                     <up-button
                         type="warning"
                         text="分享空房"
@@ -103,8 +107,10 @@
                     ></up-button>
                 </view>
                 <view class="btn-item">
-                    <!-- 录入租约按钮 -->
-                    <up-button type="primary" text="录入租约" @tap="onEnterLease"></up-button>
+                    <up-button type="primary" text="录入租约" @tap="onEnterAddLease"></up-button>
+                </view>
+                <view v-if="roomData.roomStatus === 1" class="btn-item">
+                    <up-button type="primary" text="查看租约" @tap="onEnterViewLease"></up-button>
                 </view>
             </view>
         </su-fixed>
@@ -113,8 +119,8 @@
 
 <script setup>
     import sheep from '@/sheep';
-    import { reactive, ref } from 'vue';
-    import { onShareAppMessage, onLoad, onPullDownRefresh } from '@dcloudio/uni-app';
+    import { ref } from 'vue';
+    import { onShareAppMessage, onLoad, onShow, onPullDownRefresh } from '@dcloudio/uni-app';
     import HouseApi from '@/sheep/api/house';
     import RoomSwiper from './components/roomSwiper.vue';
     import RentalStatusEdit from './components/roomFormItem/rentalStatusEdit.vue';
@@ -132,12 +138,17 @@
     const roomData = ref({
         houseId: '',
         id: '',
+        roomStatus: '',
     });
 
     // 页面加载时获取参数，设置标题
     onLoad((options) => {
         roomData.value.houseId = options.houseId || '';
         roomData.value.id = options.id || '';
+        roomData.value.roomStatus = options.roomStatus || '';
+    });
+
+    onShow(() => {
         loadRoomData();
     });
 
@@ -182,8 +193,29 @@
         });
     };
 
-    const onEnterLease = () => {
-        sheep.$router.go('/pages/lease/leaseAdd');
+    const onEnterAddLease = () => {
+        sheep.$router.go('/pages/lease/leaseAdd', {
+            id: roomData.value.id,
+            communityName: roomData.value.communityName,
+            blockNumber: roomData.value.blockNumber,
+            unitNumber: roomData.value.unitNumber,
+            houseNo: roomData.value.houseNo,
+        });
+    };
+
+    const onEnterViewLease = () => {
+        sheep.$router.go('/pages/lease/leaseDetail', {
+            roomId: roomData.value.id,
+        });
+    };
+
+    const onLeaseHistoryTap = () => {
+        if (!roomData.value.leaseCount) {
+            return;
+        }
+        sheep.$router.go('/pages/lease/leaseHistory', {
+            id: roomData.value.id,
+        });
     };
 
     // 分享功能

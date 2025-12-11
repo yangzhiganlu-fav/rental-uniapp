@@ -408,6 +408,7 @@
         font-size: 24rpx;
         position: relative;
         z-index: 2;
+        border-bottom: 1rpx solid #ddd;
     }
 
     .uni-navbar__header-btns {

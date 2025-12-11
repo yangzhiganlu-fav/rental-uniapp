@@ -174,7 +174,8 @@
                 {
                     "path": "leaseDetail",
                     "style": {
-                        "navigationBarTitleText": "租约详情"
+                        "navigationBarTitleText": "租约详情",
+                        "enablePullDownRefresh": true
                     },
                     "meta": {
                         "sync": true,
@@ -223,6 +224,17 @@
                     "meta": {
                         "sync": true,
                         "title": "费用详情",
+                        "group": "租约"
+                    }
+                },
+                {
+                    "path": "leaseHistory",
+                    "style": {
+                        "navigationBarTitleText": "历史租约"
+                    },
+                    "meta": {
+                        "sync": true,
+                        "title": "历史租约",
                         "group": "租约"
                     }
                 }

@@ -14,6 +14,17 @@ const LeaseApi = {
             },
         });
     },
+    // 添加租约
+    addLease: (data) => {
+        return request({
+            url: '/lessor/contract/add',
+            method: 'POST',
+            data,
+            custom: {
+                apiPath: rentApiPath,
+            },
+        });
+    },
 };
 
 export default LeaseApi;
