@@ -7,11 +7,27 @@
             :indicatorStyle="{ right: '20rpx', bottom: '20rpx' }"
         >
             <template #default="{ item }">
-                <image :src="item" mode="aspectFill" style="width: 100%; height: 100%"></image>
+                <video
+                    v-if="item.type === 'video/mp4'"
+                    :src="item.url"
+                    style="width: 100%; height: 100%"
+                    objectFit="cover"
+                    controls
+                ></video>
+                <image
+                    v-else
+                    :src="item.url"
+                    mode="aspectFill"
+                    style="width: 100%; height: 100%"
+                ></image>
             </template>
             <template #indicator>
                 <view class="indicator">
-                    <up-icon name="photo" color="#fff" size="14"></up-icon>
+                    <up-icon
+                        :name="list[currentNum]?.type === 'video/mp4' ? 'play-circle' : 'photo'"
+                        color="#fff"
+                        size="14"
+                    ></up-icon>
                     <text class="indicator-text">{{ currentNum + 1 }}/{{ list.length }}</text>
                 </view>
             </template>

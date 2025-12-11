@@ -1,9 +1,8 @@
 <template>
     <up-cell
-        class="blue-value grey-label hiden-line inner-cell"
+        class="grey-value grey-label hiden-line inner-cell"
         title="门牌号"
         :value="displayValue"
-        @click="openModal"
     >
         <template #right-icon>
             <uni-icons type="arrowright" size="20" color="#999"></uni-icons>
@@ -143,6 +142,12 @@
 <style lang="scss" scoped>
     .grey-label {
         :deep(.u-cell__title-text) {
+            color: $dark-9;
+        }
+    }
+
+    .grey-value {
+        :deep(.u-cell__value) {
             color: $dark-9;
         }
     }

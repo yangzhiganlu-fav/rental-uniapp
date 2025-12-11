@@ -62,7 +62,7 @@
                         <uni-search-bar
                             class="ss-flex-1 search-box"
                             :radius="20"
-                            placeholder="请输入关键词"
+                            :placeholder="placeholderText"
                             cancelButton="none"
                             v-model="searchModel"
                             @confirm="onSearch"
@@ -217,6 +217,10 @@
         searchText: {
             type: String,
             default: '',
+        },
+        placeholderText: {
+            type: String,
+            default: '请输入关键词',
         },
     });
 

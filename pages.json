@@ -157,12 +157,73 @@
                 {
                     "path": "editPhoto",
                     "style": {
-                        "navigationBarTitleText": "编辑房间照片"
+                        "navigationBarTitleText": "编辑房间照片",
+                        "enablePullDownRefresh": true
                     },
                     "meta": {
                         "sync": true,
                         "title": "编辑房间照片",
                         "group": "房源"
+                    }
+                }
+            ]
+        },
+        {
+            "root": "pages/lease",
+            "pages": [
+                {
+                    "path": "leaseDetail",
+                    "style": {
+                        "navigationBarTitleText": "租约详情"
+                    },
+                    "meta": {
+                        "sync": true,
+                        "title": "租约详情",
+                        "group": "租约"
+                    }
+                },
+                {
+                    "path": "leaseAdd",
+                    "style": {
+                        "navigationBarTitleText": "录入租约"
+                    },
+                    "meta": {
+                        "sync": true,
+                        "title": "录入租约",
+                        "group": "租约"
+                    }
+                },
+                {
+                    "path": "leaseRemarkEdit",
+                    "style": {
+                        "navigationBarTitleText": "编辑备注"
+                    },
+                    "meta": {
+                        "sync": true,
+                        "title": "编辑备注",
+                        "group": "租约"
+                    }
+                },
+                {
+                    "path": "tenantIdCardView",
+                    "style": {
+                        "navigationBarTitleText": "证件照片"
+                    },
+                    "meta": {
+                        "sync": true,
+                        "title": "证件照片",
+                        "group": "租约"
+                    }
+                },
+                {
+                    "path": "leaseFeeDetail",
+                    "style": {
+                        "navigationBarTitleText": "费用详情"
+                    },
+                    "meta": {
+                        "sync": true,
+                        "title": "费用详情",
+                        "group": "租约"
                     }
                 }
             ]

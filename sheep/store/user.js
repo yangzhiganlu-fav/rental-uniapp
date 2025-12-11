@@ -97,8 +97,6 @@ const user = defineStore({
             this.setUserId('');
             // 清空用户相关的缓存
             this.userInfo = clone(defaultUserInfo);
-            this.userWallet = clone(defaultUserWallet);
-            this.numData = cloneDeep(defaultNumData);
         },
 
         // 登录后，加载各种信息

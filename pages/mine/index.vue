@@ -10,9 +10,9 @@
                     </view>
                 </view>
                 <view>
-                    <up-button plain shape="circle" class="logout-btn" @tap="onLogout"
-                        >退出登录</up-button
-                    >
+                    <up-button plain shape="circle" class="logout-btn" @tap="onLogout">
+                        退出登录
+                    </up-button>
                 </view>
             </view>
             <view class="service-box">
@@ -86,7 +86,7 @@
                 const { code } = await AuthUtil.logout();
                 if (code === 0) {
                     sheep.$store('user').logout();
-                    sheep.$router.go('/pages/index/login');
+                    sheep.$router.go('/pages/login/index');
                 }
             },
         });

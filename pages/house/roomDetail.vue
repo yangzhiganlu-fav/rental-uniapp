@@ -177,7 +177,9 @@
     };
 
     const editRoomPhoto = () => {
-        sheep.$router.go('/pages/house/editPhoto');
+        sheep.$router.go('/pages/house/editPhoto', {
+            id: roomData.value.id,
+        });
     };
 
     const onEnterLease = () => {

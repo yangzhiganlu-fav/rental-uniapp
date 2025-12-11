@@ -12,6 +12,7 @@
                 :color="color"
                 :tools="tools"
                 :opacityBgUi="opacityBgUi"
+                :placeholderText="placeholderText"
                 @search="(e) => emits('search', e)"
                 v-model:searchText="searchModel"
             >
@@ -144,6 +145,10 @@
         showLeftButton: {
             type: Boolean,
             default: false,
+        },
+        placeholderText: {
+            type: String,
+            default: '请输入关键词',
         },
     });
     const emits = defineEmits(['search', 'update:searchText']);

@@ -90,6 +90,17 @@ const HouseApi = {
             },
         });
     },
+    // 更新房间照片和视频
+    updateRoomPhotos: (data) => {
+        return request({
+            url: '/lessor/room/photo',
+            method: 'POST',
+            data,
+            custom: {
+                apiPath: rentApiPath,
+            },
+        });
+    },
 };
 
 export default HouseApi;
