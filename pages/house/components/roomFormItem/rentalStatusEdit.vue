@@ -2,10 +2,10 @@
     <up-cell
         title="出租状态"
         :value="displayValue"
-        class="grey-label blue-value hiden-line inner-cell"
+        :class="['grey-label', disabled ? '' : 'blue-value', 'hiden-line', 'inner-cell']"
         @click="openPicker"
     >
-        <template #right-icon>
+        <template v-if="!disabled" #right-icon>
             <uni-icons type="arrowright" size="20" color="#999"></uni-icons>
         </template>
     </up-cell>
@@ -29,6 +29,10 @@
             type: [Number, String],
             default: 0,
         },
+        disabled: {
+            type: Boolean,
+            default: false,
+        },
     });
 
     const emit = defineEmits(['save']);
@@ -48,6 +52,7 @@
     });
 
     const openPicker = () => {
+        if (props.disabled) return;
         tempValue.value = props.value ? [props.value] : [];
         showPicker.value = true;
     };

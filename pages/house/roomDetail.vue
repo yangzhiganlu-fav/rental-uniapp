@@ -11,6 +11,7 @@
             <!-- 出租状态 -->
             <rental-status-edit
                 :value="roomData.rentalStatus"
+                :disabled="!!roomData.contractId"
                 @save="handleSave"
             ></rental-status-edit>
 
@@ -109,7 +110,10 @@
                         @tap="onShare"
                     ></up-button>
                 </view>
-                <view v-if="roomData.rentalStatus === 3" class="btn-item">
+                <view
+                    v-if="roomData.rentalStatus === 0 || roomData.rentalStatus === 3"
+                    class="btn-item"
+                >
                     <up-button type="primary" text="录入租约" @tap="onEnterAddLease"></up-button>
                 </view>
                 <view
