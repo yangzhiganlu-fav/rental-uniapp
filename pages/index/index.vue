@@ -210,7 +210,15 @@
     const fetchCountData = async () => {
         const { code, data } = await CountApi.getCountData();
         if (code === 0 && data) {
-            // TODO: 根据接口返回数据更新 statisticList
+            statisticList[0].subtitle = data.rentCount || 0;
+            statisticList[1].subtitle = data.notRentCount || 0;
+            statisticList[2].subtitle = data.signCount || 0;
+            statisticList[3].subtitle = data.bill || 0;
+            statisticList[3].count = data.billCount || 0;
+            statisticList[4].subtitle = data.bill || 0;
+            statisticList[4].count = data.billCount || 0;
+            statisticList[5].subtitle = data.overdueBill || 0;
+            statisticList[5].count = data.overdueBillCount || 0;
         }
     };
 

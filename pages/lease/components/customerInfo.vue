@@ -178,6 +178,7 @@
 
                 .btn-text {
                     color: $dark-6;
+                    font-size: 26rpx;
                 }
             }
 

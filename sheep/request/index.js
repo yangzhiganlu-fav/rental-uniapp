@@ -7,7 +7,6 @@ import Request from 'luch-request';
 import { apiPath, baseUrl, tenantId } from '@/sheep/config';
 import $store from '@/sheep/store';
 import $platform from '@/sheep/platform';
-import { showAuthModal } from '@/sheep/hooks/useModal';
 import AuthUtil from '@/sheep/api/system/auth';
 import { getTerminal } from '@/sheep/helper/const';
 
@@ -76,7 +75,6 @@ http.interceptors.request.use(
         }
         // 自定义处理【auth 授权】：必须登录的接口，则跳出 AuthModal 登录弹窗
         if (config.custom.auth && !$store('user').isLogin) {
-            showAuthModal();
             return Promise.reject();
         }
 
@@ -289,7 +287,6 @@ const refreshToken = async (config) => {
 const handleAuthorized = () => {
     const userStore = $store('user');
     userStore.logout(true);
-    showAuthModal();
     // 登录超时
     return Promise.reject({
         code: 401,

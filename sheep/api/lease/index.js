@@ -47,6 +47,28 @@ const LeaseApi = {
             },
         });
     },
+    // 更新租约
+    updateLease: (data) => {
+        return request({
+            url: '/lessor/contract/update',
+            method: 'POST',
+            data,
+            custom: {
+                apiPath: rentApiPath,
+            },
+        });
+    },
+    // 签署租约
+    signLease: (params) => {
+        return request({
+            url: '/lessor/contract/approve',
+            method: 'PUT',
+            params,
+            custom: {
+                apiPath: rentApiPath,
+            },
+        });
+    },
 };
 
 export default LeaseApi;

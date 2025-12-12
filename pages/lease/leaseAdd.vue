@@ -64,10 +64,6 @@
             <date-selector
                 :startDateValue="formData.startTime"
                 :endDateValue="formData.endTime"
-                label="起租日"
-                placeholder="请选择起租日"
-                :showShortcut="true"
-                :borderBottom="false"
                 @change="handleFormChange"
             />
 
@@ -135,7 +131,7 @@
                 prop="otherAgree"
                 label-position="top"
                 :borderBottom="true"
-                class="other-supplementary-agreement"
+                class="custom-form-item-label"
             >
                 <up-textarea
                     v-model.trim="formData.otherAgree"
@@ -368,12 +364,6 @@
 
         :deep(.uni-input-input) {
             text-align: center;
-        }
-    }
-
-    .other-supplementary-agreement {
-        :deep(.u-form-item__body__left) {
-            margin-bottom: 20rpx !important;
         }
     }
 </style>

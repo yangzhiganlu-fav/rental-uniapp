@@ -1,5 +1,10 @@
 <template>
-    <up-form-item label="其他费用" prop="otherFees" class="other-fee">
+    <up-form-item
+        label="其他费用"
+        prop="otherFees"
+        :borderBottom="!feesList.length"
+        class="other-fee"
+    >
         <up-button
             type="warning"
             size="small"
@@ -29,7 +34,11 @@
                     inputAlign="right"
                     placeholderClass="placeholder-align-right"
                     @blur="handleAmountChange"
-                ></up-input>
+                >
+                    <template #suffix>
+                        <view class="ss-m-l-4">元</view>
+                    </template>
+                </up-input>
                 <up-icon
                     name="close-circle"
                     color="#ccc"
@@ -45,7 +54,7 @@
         label="其他费用描述"
         :borderBottom="true"
         labelPosition="top"
-        class="other-fee-desc"
+        class="custom-form-item-label"
     >
         <up-textarea
             v-model.trim="otherBillDescValue"
@@ -66,27 +75,27 @@
 </template>
 
 <script setup>
-    import { reactive, ref, onMounted, computed } from 'vue';
+    import { reactive, ref, computed, watch } from 'vue';
 
     const props = defineProps({
         electricityBill: {
-            type: String,
+            type: [Number, String],
             default: '',
         },
         waterBill: {
-            type: String,
+            type: [Number, String],
             default: '',
         },
         netBill: {
-            type: String,
+            type: [Number, String],
             default: '',
         },
         gasBill: {
-            type: String,
+            type: [Number, String],
             default: '',
         },
         otherBill: {
-            type: String,
+            type: [Number, String],
             default: '',
         },
         otherBillDesc: {
@@ -145,9 +154,21 @@
         }
     };
 
-    onMounted(() => {
-        initFeesList();
-    });
+    watch(
+        () => [
+            props.electricityBill,
+            props.waterBill,
+            props.netBill,
+            props.gasBill,
+            props.otherBill,
+            props.otherBillDesc,
+        ],
+        () => {
+            feesList.length = 0; // 清空现有列表
+            initFeesList();
+        },
+        { immediate: true },
+    );
 
     const handleConfirm = (e) => {
         const { value } = e;
@@ -212,12 +233,6 @@
 
         :deep(.u-icon__icon) {
             font-size: 14px !important;
-        }
-    }
-
-    .other-fee-desc {
-        :deep(.u-form-item__body__left) {
-            margin-bottom: 20rpx !important;
         }
     }
 </style>

@@ -86,7 +86,6 @@
                 const { code } = await AuthUtil.logout();
                 if (code === 0) {
                     sheep.$store('user').logout();
-                    sheep.$router.go('/pages/login/index');
                 }
             },
         });

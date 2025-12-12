@@ -42,7 +42,7 @@
                 </template>
             </up-form-item>
             <up-gap height="20rpx" bgColor="#f6f6f6" class="gap"></up-gap>
-            <up-form-item label="其他补充约定" labelPosition="top" class="remark">
+            <up-form-item label="其他补充约定" labelPosition="top" class="custom-form-item-label">
                 <up-textarea
                     v-model="otherBillDesc"
                     placeholder="暂无补充约定"
@@ -51,7 +51,7 @@
                 ></up-textarea>
             </up-form-item>
             <up-gap height="20rpx" bgColor="#f6f6f6" class="gap"></up-gap>
-            <up-form-item label="租约备注" labelPosition="top" class="remark">
+            <up-form-item label="租约备注" labelPosition="top" class="custom-form-item-label">
                 <up-textarea
                     v-model="textRemark"
                     placeholder="暂无备注"
@@ -101,10 +101,26 @@
             </view>
         </up-form>
 
-        <up-gap height="130rpx" bgColor="#f6f6f6"></up-gap>
+        <up-gap height="130rpx" bgColor="#f6f6f6" v-if="leaseData?.status !== 2"></up-gap>
 
         <!-- 底部按钮 -->
-        <view class="footer-btns">
+        <view class="footer-btns" v-if="leaseData?.status === 0">
+            <!-- 状态0：待签署 - 签署同意和签署拒绝按钮 -->
+            <up-button type="error" :loading="signLoading" class="ss-flex-1" @click="handleSign(2)">
+                签署拒绝
+            </up-button>
+            <up-button
+                type="success"
+                :loading="signLoading"
+                class="ss-flex-1"
+                @click="handleSign(1)"
+            >
+                签署同意
+            </up-button>
+        </view>
+
+        <view class="footer-btns" v-else-if="leaseData?.status === 1">
+            <!-- 状态1：已签署 - 退房、编辑租约按钮 -->
             <up-button
                 type="error"
                 :loading="checkOutLoading"
@@ -146,6 +162,25 @@
             sheep.$router.back();
         }
         checkOutLoading.value = false;
+    };
+
+    const signLoading = ref(false);
+
+    // 签署租约
+    const handleSign = async (status) => {
+        signLoading.value = true;
+        const { code } = await LeaseApi.signLease({
+            id: props.leaseData.id,
+            status, // 状态 1：通过，2：拒绝
+        });
+        if (code === 0) {
+            uni.showToast({
+                title: status === 1 ? '签署同意成功' : '签署拒绝成功',
+                icon: 'success',
+            });
+            sheep.$router.back();
+        }
+        signLoading.value = false;
     };
 
     // 其他补充约定
@@ -305,12 +340,6 @@
 
     .gap {
         margin: 0 -24rpx;
-    }
-
-    .remark {
-        :deep(.u-form-item__body__left) {
-            margin-bottom: 20rpx !important;
-        }
     }
 
     :deep(.u-form-item__body__left__content__label) {

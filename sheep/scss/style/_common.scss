@@ -65,6 +65,12 @@
             padding-top: 100rpx;
         }
     }
+
+    .custom-form-item-label {
+        :deep(.u-form-item__body__left) {
+            margin-bottom: 40rpx !important;
+        }
+    }
 }
 
 .u-toolbar {

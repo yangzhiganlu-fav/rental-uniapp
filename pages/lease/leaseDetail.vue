@@ -21,7 +21,7 @@
 
 <script setup>
     import { ref, reactive, computed } from 'vue';
-    import { onLoad, onPullDownRefresh } from '@dcloudio/uni-app';
+    import { onLoad, onShow, onPullDownRefresh } from '@dcloudio/uni-app';
     import CustomerInfo from './components/customerInfo.vue';
     import LeaseInfo from './components/leaseInfo.vue';
     import UnpaidFees from './components/unpaidFees.vue';
@@ -32,6 +32,9 @@
 
     onLoad((options) => {
         leaseId.value = options.leaseId || '';
+    });
+
+    onShow(() => {
         fetchLeaseDetail();
     });
 

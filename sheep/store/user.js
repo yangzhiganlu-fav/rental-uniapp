@@ -1,9 +1,8 @@
 import { defineStore } from 'pinia';
 import $share from '@/sheep/platform/share';
-import { clone, cloneDeep } from 'lodash-es';
-import app from './app';
-import { showAuthModal } from '@/sheep/hooks/useModal';
+import { clone } from 'lodash-es';
 import UserApi from '@/sheep/api/system/user';
+import sheep from '..';
 
 // 默认用户信息
 const defaultUserInfo = {
@@ -109,6 +108,7 @@ const user = defineStore({
         // 登出系统
         async logout() {
             this.resetUserData();
+            sheep.$router.go('/pages/login/index');
             return !this.isLogin;
         },
     },

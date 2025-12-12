@@ -1,19 +1,13 @@
 <template>
     <view>
-        <up-form-item
-            label="补充约定"
-            prop="agree"
-            class="border-none"
-            :borderBottom="true"
-            @click="showPicker = true"
-        >
+        <up-form-item label="补充约定" prop="agree" class="border-none" @click="showPicker = true">
             <view class="edit-text">编辑</view>
             <template #right>
                 <up-icon name="arrow-right" class="ss-p-l-20"></up-icon>
             </template>
         </up-form-item>
 
-        <up-form-item label-width="0">
+        <up-form-item label-width="0" :borderBottom="true">
             <view class="custom-textarea">
                 <view v-for="(option, index) in displayList" :key="index" class="textarea-item">
                     {{ option.label }}
@@ -35,7 +29,7 @@
 </template>
 
 <script setup>
-    import { ref, computed, onMounted } from 'vue';
+    import { ref, computed, onMounted, watch } from 'vue';
     import DictApi from '@/sheep/api/system/dict';
 
     const props = defineProps({
@@ -50,6 +44,13 @@
     const showPicker = ref(false);
 
     const options = ref([]);
+
+    watch(
+        () => props.value,
+        (newVal) => {
+            selectedValues.value = newVal;
+        },
+    );
 
     onMounted(() => {
         fetchOptions();
