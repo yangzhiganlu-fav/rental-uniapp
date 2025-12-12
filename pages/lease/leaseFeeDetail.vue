@@ -189,7 +189,6 @@
     };
 
     onLoad((options) => {
-        console.log('options:', options);
         // 优先从 options 获取，也可以尝试从 sheep.$router 获取
         if (options.type) {
             type.value = options.type;

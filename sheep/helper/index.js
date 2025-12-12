@@ -678,6 +678,48 @@ function maskPhone(phone) {
     return phone.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
 }
 
+// 图片单个下载到相册，支持安卓和微信小程序
+const downloadImageToPhotosAlbum = (url) => {
+    return new Promise((resolve, reject) => {
+        uni.downloadFile({
+            url,
+            success: (downloadResult) => {
+                if (downloadResult.statusCode === 200) {
+                    uni.saveImageToPhotosAlbum({
+                        filePath: downloadResult.tempFilePath,
+                        success: (saveResult) => {
+                            resolve(saveResult);
+                        },
+                        fail: (err) => {
+                            reject(err);
+                        },
+                    });
+                } else {
+                    reject(new Error('下载图片失败'));
+                }
+            },
+            fail: (err) => {
+                reject(err);
+            },
+        });
+    });
+};
+
+// 图片批量下载到相册，支持安卓和微信小程序
+const downloadImagesToPhotosAlbum = async (urls = []) => {
+    const results = [];
+    for (let i = 0; i < urls.length; i++) {
+        try {
+            // eslint-disable-next-line no-await-in-loop
+            const res = await downloadImageToPhotosAlbum(urls[i]);
+            results.push({ url: urls[i], success: true, info: res });
+        } catch (err) {
+            results.push({ url: urls[i], success: false, info: err });
+        }
+    }
+    return results;
+};
+
 export default {
     range,
     getPx,
@@ -709,4 +751,6 @@ export default {
     getRootUrl,
     copyText,
     maskPhone,
+    downloadImageToPhotosAlbum,
+    downloadImagesToPhotosAlbum,
 };

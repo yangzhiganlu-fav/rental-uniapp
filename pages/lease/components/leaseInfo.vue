@@ -18,7 +18,7 @@
             </up-form-item>
             <up-form-item label="租期">
                 <template #right>
-                    <view class="form-value">{{ leaseDuration }}</view>
+                    <view class="form-value">{{ leaseData?.rentMonth || '-' }}</view>
                 </template>
             </up-form-item>
             <up-form-item label="入住人数">
@@ -42,38 +42,49 @@
                 </template>
             </up-form-item>
             <up-gap height="20rpx" bgColor="#f6f6f6" class="gap"></up-gap>
-            <view class="custom-header">其他补充约定</view>
-            <view class="custom-content">{{ leaseData?.remark || '无' }}</view>
+            <up-form-item label="其他补充约定" labelPosition="top" class="remark">
+                <up-textarea
+                    v-model="otherBillDesc"
+                    placeholder="暂无补充约定"
+                    height="160rpx"
+                    :disabled="true"
+                ></up-textarea>
+            </up-form-item>
             <up-gap height="20rpx" bgColor="#f6f6f6" class="gap"></up-gap>
-            <up-form-item
-                label="租约备注"
-                :borderBottom="false"
-                @click="sheep.$router.go('/pages/lease/leaseRemarkEdit')"
-            >
-                <view class="form-value" style="color: #3c9cff">编辑</view>
-                <template #right>
-                    <uni-icons
-                        type="arrowright"
-                        size="20"
-                        color="#999"
-                        style="margin-left: 10rpx"
-                    ></uni-icons>
-                </template>
+            <up-form-item label="租约备注" labelPosition="top" class="remark">
+                <up-textarea
+                    v-model="textRemark"
+                    placeholder="暂无备注"
+                    height="160rpx"
+                    :disabled="true"
+                ></up-textarea>
             </up-form-item>
-            <up-form-item :borderBottom="false">
-                <template #label>
-                    <view style="display: flex; align-items: center">
-                        <text style="margin-right: 20rpx">电子合同</text>
-                        <uni-icons
-                            type="download"
-                            size="28"
-                            color="#3c9cff"
-                            @click="onDownloadContract"
-                        ></uni-icons>
-                    </view>
-                </template>
-            </up-form-item>
-            <view class="contract-preview" v-if="contractFileList.length > 0">
+            <view class="img-title">图片凭证</view>
+            <view class="img-preview" v-if="remarkImageList.length > 0">
+                <up-image
+                    v-for="(file, index) in remarkImageList"
+                    :key="index"
+                    :src="file.url"
+                    width="200rpx"
+                    height="280rpx"
+                    mode="aspectFill"
+                    class="ss-m-r-20"
+                    @click="onPreviewRemarkImage(index)"
+                ></up-image>
+            </view>
+            <view class="img-preview" v-else>
+                <view class="no-img">暂无图片凭证</view>
+            </view>
+            <view class="img-title">
+                <text class="ss-m-r-20">电子合同</text>
+                <uni-icons
+                    type="download"
+                    size="24"
+                    color="#3c9cff"
+                    @click="onDownloadContract"
+                ></uni-icons>
+            </view>
+            <view class="img-preview" v-if="contractFileList.length > 0">
                 <up-image
                     v-for="(file, index) in contractFileList"
                     :key="index"
@@ -81,12 +92,12 @@
                     width="200rpx"
                     height="280rpx"
                     mode="aspectFill"
+                    class="ss-m-r-20"
                     @click="onPreviewContract(index)"
-                    style="margin-right: 20rpx"
                 ></up-image>
             </view>
-            <view class="contract-preview" v-else>
-                <view class="no-contract">暂无合同文件</view>
+            <view class="img-preview" v-else>
+                <view class="no-img">暂无合同文件</view>
             </view>
         </up-form>
 
@@ -94,15 +105,25 @@
 
         <!-- 底部按钮 -->
         <view class="footer-btns">
-            <up-button type="error" class="ss-flex-1">退房</up-button>
-            <up-button type="primary" class="ss-flex-1">编辑租约</up-button>
+            <up-button
+                type="error"
+                :loading="checkOutLoading"
+                class="ss-flex-1"
+                @click="handleCheckOut"
+            >
+                退房
+            </up-button>
+            <up-button type="primary" class="ss-flex-1" @click="handleEditLease">
+                编辑租约
+            </up-button>
         </view>
     </view>
 </template>
 
 <script setup>
     import sheep from '@/sheep';
-    import { ref, computed } from 'vue';
+    import { ref, computed, watch } from 'vue';
+    import LeaseApi from '@/sheep/api/lease';
 
     const props = defineProps({
         leaseData: {
@@ -111,12 +132,50 @@
         },
     });
 
+    const checkOutLoading = ref(false);
+
+    // 退房操作
+    const handleCheckOut = async () => {
+        checkOutLoading.value = true;
+        const { code } = await LeaseApi.checkOutLease({ id: props.leaseData.id });
+        if (code === 0) {
+            uni.showToast({
+                title: '退房成功',
+                icon: 'success',
+            });
+            sheep.$router.back();
+        }
+        checkOutLoading.value = false;
+    };
+
+    // 其他补充约定
+    const otherBillDesc = ref(props.leaseData?.otherBillDesc || '');
+
+    // 文字备注
+    const textRemark = ref(props.leaseData?.remark || '');
+
+    // 图片备注列表
+    const imageRemarkList = ref(props.leaseData?.remarkFileList || []);
+
+    // 监听 leaseData 变化，获取初始化值后停止监控
+    watch(
+        () => props.leaseData,
+        (newData) => {
+            if (newData) {
+                otherBillDesc.value = newData.otherBillDesc || '';
+                textRemark.value = newData.remark || '';
+                imageRemarkList.value = newData.remarkFileList || [];
+            }
+        },
+        { immediate: true },
+    );
+
     // 租约状态文本
     const leaseStatusText = computed(() => {
         if (!props.leaseData) return '-';
         const statusMap = {
             0: '待签署',
-            1: '租约进行中',
+            1: '已签署',
             2: '合同终止',
         };
         return statusMap[props.leaseData.status] || '-';
@@ -142,32 +201,26 @@
         return `${props.leaseData.startTime}/${props.leaseData.endTime}`;
     });
 
-    // 租期时长
-    const leaseDuration = computed(() => {
-        if (!props.leaseData?.startTime || !props.leaseData?.endTime) return '-';
-        const start = new Date(props.leaseData.startTime);
-        const end = new Date(props.leaseData.endTime);
-        const months =
-            (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
-        return `${months}个月`;
+    // 备注图片列表
+    const remarkImageList = computed(() => {
+        return props.leaseData?.remarkFileList || [];
     });
+
+    const onPreviewRemarkImage = (index = 0) => {
+        const urls = remarkImageList.value.map((file) => file.url);
+        uni.previewImage({
+            urls: urls,
+            current: index,
+        });
+    };
 
     // 合同文件列表
     const contractFileList = computed(() => {
         return props.leaseData?.contractFileList || [];
     });
 
-    const contractUrl = ref('https://cdn.uviewui.com/uview/album/1.jpg');
-
     // 预览图片
     const onPreviewContract = (index = 0) => {
-        if (contractFileList.value.length === 0) {
-            uni.showToast({
-                title: '暂无合同文件',
-                icon: 'none',
-            });
-            return;
-        }
         const urls = contractFileList.value.map((file) => file.url);
         uni.previewImage({
             urls: urls,
@@ -175,70 +228,23 @@
         });
     };
 
-    // 下载图片
+    // 下载全部合同文件
     const onDownloadContract = () => {
-        if (contractFileList.value.length === 0) {
-            uni.showToast({
-                title: '暂无合同文件',
-                icon: 'none',
-            });
-            return;
-        }
-
-        // 如果有多个文件，下载第一个
-        const downloadUrl = contractFileList.value[0].url;
-
-        // #ifdef H5
-        const a = document.createElement('a');
-        a.href = downloadUrl;
-        a.download = 'contract.jpg';
-        a.click();
-        // #endif
-
-        // #ifndef H5
-        uni.downloadFile({
-            url: downloadUrl,
-            success: (res) => {
-                if (res.statusCode === 200) {
-                    uni.saveImageToPhotosAlbum({
-                        filePath: res.tempFilePath,
-                        success: function () {
-                            uni.showToast({
-                                title: '保存成功',
-                                icon: 'success',
-                            });
-                        },
-                        fail: function (err) {
-                            console.log(err);
-                            uni.showToast({
-                                title: '保存失败',
-                                icon: 'none',
-                            });
-                        },
-                    });
-                }
-            },
+        sheep.$helper.downloadImagesToPhotosAlbum({
+            urls: contractFileList.value.map((file) => file.url),
         });
-        // #endif
+    };
+
+    const handleEditLease = () => {
+        sheep.$router.go('/pages/lease/leaseEdit', {
+            leaseId: props.leaseData.id,
+        });
     };
 </script>
 
 <style lang="scss" scoped>
-    .custom-header {
-        padding: 24rpx 0;
-        font-size: 28rpx;
-        font-weight: bold;
-        color: $dark-3;
-    }
-
-    .custom-content {
-        padding: 0 0 24rpx;
-        font-size: 24rpx;
-        color: $dark-3;
-    }
-
-    .contract-preview {
-        padding: 0 32rpx 32rpx;
+    .img-preview {
+        padding-bottom: 24rpx;
         display: flex;
         flex-wrap: wrap;
 
@@ -251,15 +257,14 @@
             align-items: center;
             justify-content: center;
             color: #999;
-            font-size: 24rpx;
+            font-size: 26rpx;
         }
 
-        .no-contract {
+        .no-img {
             width: 100%;
             padding: 40rpx 0;
-            text-align: center;
             color: #999;
-            font-size: 28rpx;
+            font-size: 26rpx;
         }
     }
 
@@ -285,8 +290,9 @@
     }
 
     .form-value {
-        color: $dark-3;
+        color: $dark-6;
         text-align: right;
+        font-size: 26rpx;
     }
 
     :deep(.u-form-item__body) {
@@ -299,5 +305,23 @@
 
     .gap {
         margin: 0 -24rpx;
+    }
+
+    .remark {
+        :deep(.u-form-item__body__left) {
+            margin-bottom: 20rpx !important;
+        }
+    }
+
+    :deep(.u-form-item__body__left__content__label) {
+        color: $dark-6;
+    }
+
+    .img-title {
+        display: flex;
+        align-items: center;
+        font-size: 26rpx;
+        color: $dark-6;
+        margin-bottom: 20rpx;
     }
 </style>

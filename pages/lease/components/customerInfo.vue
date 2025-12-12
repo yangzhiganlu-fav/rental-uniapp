@@ -10,7 +10,7 @@
         </view>
         <view class="info-row">
             <view class="info-label">电话</view>
-            <view class="info-value">{{ maskPhone(leaseData?.renterPhone) }}</view>
+            <view class="info-value">{{ sheep.$helper.maskPhone(leaseData?.renterPhone) }}</view>
         </view>
         <view class="info-row">
             <view class="lease-tags">
@@ -102,11 +102,6 @@
         return '未知';
     };
 
-    const maskPhone = (phone) => {
-        if (!phone || phone.length < 7) return phone;
-        return phone.slice(0, 3) + '****' + phone.slice(7);
-    };
-
     // 查看证件
     const onViewIdCard = () => {
         sheep.$router.go('/pages/lease/tenantIdCardView', {
@@ -129,13 +124,13 @@
         position: relative;
         background-color: #fff;
         border-radius: 16rpx;
-        padding: 32rpx 24rpx;
+        padding: 24rpx;
         flex-shrink: 0;
 
         .info-row {
             display: flex;
             align-items: flex-start;
-            font-size: 28rpx;
+            font-size: 26rpx;
 
             & + .info-row {
                 margin-top: 32rpx;

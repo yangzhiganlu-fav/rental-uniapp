@@ -195,13 +195,14 @@
                     }
                 },
                 {
-                    "path": "leaseRemarkEdit",
+                    "path": "leaseEdit",
                     "style": {
-                        "navigationBarTitleText": "编辑备注"
+                        "navigationBarTitleText": "编辑租约",
+                        "enablePullDownRefresh": true
                     },
                     "meta": {
                         "sync": true,
-                        "title": "编辑备注",
+                        "title": "编辑租约",
                         "group": "租约"
                     }
                 },

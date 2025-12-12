@@ -36,6 +36,17 @@ const LeaseApi = {
             },
         });
     },
+    // 退房
+    checkOutLease: (params) => {
+        return request({
+            url: '/lessor/contract/checkOut',
+            method: 'PUT',
+            params,
+            custom: {
+                apiPath: rentApiPath,
+            },
+        });
+    },
 };
 
 export default LeaseApi;
