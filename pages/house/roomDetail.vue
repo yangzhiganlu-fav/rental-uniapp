@@ -98,7 +98,10 @@
         <!-- 底部固定操作栏 -->
         <su-fixed bottom :bgStyles="{ backgroundColor: '#fff' }">
             <view class="button-box">
-                <view v-if="roomData.rentalStatus === 0" class="btn-item">
+                <view
+                    v-if="roomData.rentalStatus === 0 || roomData.rentalStatus === 2"
+                    class="btn-item"
+                >
                     <up-button
                         type="warning"
                         text="分享空房"
@@ -106,10 +109,13 @@
                         @tap="onShare"
                     ></up-button>
                 </view>
-                <view class="btn-item">
+                <view v-if="roomData.rentalStatus === 3" class="btn-item">
                     <up-button type="primary" text="录入租约" @tap="onEnterAddLease"></up-button>
                 </view>
-                <view v-if="roomData.roomStatus === 1" class="btn-item">
+                <view
+                    v-if="roomData.rentalStatus === 1 || roomData.rentalStatus === 2"
+                    class="btn-item"
+                >
                     <up-button type="primary" text="查看租约" @tap="onEnterViewLease"></up-button>
                 </view>
             </view>
