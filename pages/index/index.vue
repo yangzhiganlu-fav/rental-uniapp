@@ -47,6 +47,7 @@
                         v-for="(item, index) in statisticList"
                         :key="index"
                         :class="'bg-' + (index % 6)"
+                        @tap="navigateTo(item)"
                     >
                         <view class="stat-icon">
                             <s-icon
@@ -219,6 +220,40 @@
             statisticList[4].count = data.billCount || 0;
             statisticList[5].subtitle = data.overdueBill || 0;
             statisticList[5].count = data.overdueBillCount || 0;
+        }
+    };
+
+    const navigateTo = (item) => {
+        switch (item.title) {
+            case '已租':
+                uni.switchTab({
+                    url: '/pages/house/index',
+                });
+                uni.setStorageSync('rentalStatus', '1');
+                break;
+            case '未租':
+                uni.switchTab({
+                    url: '/pages/house/index',
+                });
+                uni.setStorageSync('rentalStatus', '0');
+                break;
+            case '本月签约数':
+                uni.switchTab({
+                    url: '/pages/lease/index',
+                });
+                uni.setStorageSync('leaseStatus', '1');
+                break;
+            case '本月应收':
+                sheep.$router.go('/pages/bill/index', {});
+                break;
+            case '本月待收':
+                sheep.$router.go('/pages/bill/index', {});
+                break;
+            case '逾期未收':
+                sheep.$router.go('/pages/bill/index', {});
+                break;
+            default:
+                break;
         }
     };
 

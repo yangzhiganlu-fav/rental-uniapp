@@ -80,12 +80,11 @@
             title: '提示',
             content: '确认退出账号？',
             success: async function (res) {
-                if (!res.confirm) {
-                    return;
-                }
-                const { code } = await AuthUtil.logout();
-                if (code === 0) {
-                    sheep.$store('user').logout();
+                if (res.confirm) {
+                    const { code } = await AuthUtil.logout();
+                    if (code === 0) {
+                        sheep.$store('user').logout();
+                    }
                 }
             },
         });

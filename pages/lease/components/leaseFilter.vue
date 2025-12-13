@@ -2,15 +2,9 @@
     <su-sticky bgColor="#fff">
         <up-dropdown ref="uDropdown" borderBottom titleSize="12" activeColor="#2979ff">
             <up-dropdown-item
-                title="租约状态"
+                :title="statusLabel"
                 v-model="localSearchForm.status"
-                :options="[
-                    { label: '不限', value: -1 },
-                    { label: '待签署', value: 0 },
-                    { label: '已签署', value: 1 },
-                    { label: '已退房', value: 2 },
-                    { label: '租约快到期', value: 3 },
-                ]"
+                :options="statusOptions"
                 @change="handleConfirm"
             ></up-dropdown-item>
 
@@ -225,13 +219,7 @@
         get() {
             const form = {};
             dateFields.forEach((field) => {
-                if (field === 'status') {
-                    // 空字符串转换为 -1 显示"不限"
-                    form[field] =
-                        props.modelValue[field] === '' ? -1 : props.modelValue[field] || -1;
-                } else {
-                    form[field] = props.modelValue[field] || '';
-                }
+                form[field] = props.modelValue[field] || '';
             });
             return form;
         },
@@ -241,6 +229,21 @@
                 ...val,
             });
         },
+    });
+
+    // 状态选项与动态标题（模板显示选中项的 label）
+    const statusOptions = [
+        { label: '不限', value: '' },
+        { label: '待签署', value: '0' },
+        { label: '已签署', value: '1' },
+        { label: '已退房', value: '2' },
+        { label: '租约快到期', value: '3' },
+    ];
+
+    const statusLabel = computed(() => {
+        const val = localSearchForm.value.status;
+        const opt = statusOptions.find((o) => o.value === val);
+        return opt ? opt.label : '租约状态';
     });
 
     // 更新日期
@@ -266,11 +269,7 @@
     const handleConfirm = () => {
         uDropdown.value?.close();
 
-        // 处理状态值:将 -1 转换为空字符串
         const formData = { ...localSearchForm.value };
-        if (formData.status === -1) {
-            formData.status = '';
-        }
 
         // 更新父组件并触发搜索
         emit('update:modelValue', {

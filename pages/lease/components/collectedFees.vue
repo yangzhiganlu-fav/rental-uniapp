@@ -74,7 +74,7 @@
     ]);
 
     const onFeeCardClick = (item) => {
-        sheep.$router.go('/pages/lease/leaseFeeDetail', {
+        sheep.$router.go('pages/bill/billDetail', {
             type: 'paid',
         });
     };

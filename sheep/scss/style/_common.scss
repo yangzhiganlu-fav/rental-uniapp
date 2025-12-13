@@ -85,3 +85,35 @@
     padding: 24rpx 0 !important;
     background-color: $bg-page;
 }
+
+.u-tag--primary {
+    background-color: #ebf8ff !important;
+    border-color: #7bc3f1 !important;
+
+    .u-tag__text--primary {
+        color: #7bc3f1 !important;
+    }
+}
+
+.u-tag--danger {
+    background-color: #f85742 !important;
+    border-color: #f85742 !important;
+
+    .u-tag__text--danger {
+        color: #fff !important;
+    }
+}
+
+.u-tag--success {
+    background-color: #64c8b0 !important;
+    border-color: #64c8b0 !important;
+
+    .u-tag__text--success {
+        color: #fff !important;
+    }
+}
+
+.u-tag__text {
+    display: flex !important;
+    align-items: center !important;
+}

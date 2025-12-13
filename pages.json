@@ -62,6 +62,20 @@
             }
         },
         {
+            "path": "pages/bill/index",
+            "style": {
+                "navigationBarTitleText": "账单",
+                "enablePullDownRefresh": true,
+                "onReachBottomDistance": 50
+            },
+            "meta": {
+                "auth": true,
+                "sync": true,
+                "title": "账单",
+                "group": "账单"
+            }
+        },
+        {
             "path": "pages/mine/index",
             "style": {
                 "navigationBarTitleText": "我的"
@@ -218,17 +232,6 @@
                     }
                 },
                 {
-                    "path": "leaseFeeDetail",
-                    "style": {
-                        "navigationBarTitleText": "费用详情"
-                    },
-                    "meta": {
-                        "sync": true,
-                        "title": "费用详情",
-                        "group": "租约"
-                    }
-                },
-                {
                     "path": "leaseHistory",
                     "style": {
                         "navigationBarTitleText": "历史租约"
@@ -237,6 +240,23 @@
                         "sync": true,
                         "title": "历史租约",
                         "group": "租约"
+                    }
+                }
+            ]
+        },
+        {
+            "root": "pages/bill",
+            "pages": [
+                {
+                    "path": "billDetail",
+                    "style": {
+                        "navigationBarTitleText": "账单详情",
+                        "enablePullDownRefresh": true
+                    },
+                    "meta": {
+                        "sync": true,
+                        "title": "账单详情",
+                        "group": "账单"
                     }
                 }
             ]

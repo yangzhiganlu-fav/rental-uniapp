@@ -4,7 +4,7 @@
         tools="search"
         searchClearButton="auto"
         v-model:searchText="searchForm.searchText"
-        placeholderText="小区/门牌号/房间号/姓名/手机号"
+        placeholderText="小区/门牌/房间/姓名/手机"
         @search="onCommunitySearch"
     >
         <template #right>
@@ -45,6 +45,33 @@
         communityIds: [],
         pageSize: 5,
         pageNo: 1,
+    });
+
+    onLoad(() => {
+        if (uni.getStorageSync('rentalStatus')) {
+            searchForm.value.rentalStatus = uni.getStorageSync('rentalStatus');
+            uni.removeStorageSync('rentalStatus');
+        }
+        uni.hideTabBar({
+            fail: () => {},
+        });
+    });
+
+    onShow(() => {
+        onSearch();
+    });
+
+    onPullDownRefresh(async () => {
+        searchForm.value.pageNo = 1;
+        await onSearch(true);
+        uni.stopPullDownRefresh();
+    });
+
+    onReachBottom(async () => {
+        if (loadStatus.value === 'loadmore' && communityList.value.length < total.value) {
+            searchForm.value.pageNo += 1;
+            onSearch(false);
+        }
     });
 
     const communityList = ref([]);
@@ -144,27 +171,4 @@
             houseId: house.houseId,
         });
     };
-
-    onLoad(() => {
-        uni.hideTabBar({
-            fail: () => {},
-        });
-    });
-
-    onShow(() => {
-        onSearch();
-    });
-
-    onPullDownRefresh(async () => {
-        searchForm.value.pageNo = 1;
-        await onSearch(true);
-        uni.stopPullDownRefresh();
-    });
-
-    onReachBottom(async () => {
-        if (loadStatus.value === 'loadmore' && communityList.value.length < total.value) {
-            searchForm.value.pageNo += 1;
-            onSearch(false);
-        }
-    });
 </script>

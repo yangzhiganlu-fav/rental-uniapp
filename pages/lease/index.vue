@@ -4,7 +4,7 @@
         tools="search"
         searchClearButton="auto"
         v-model:searchText="searchForm.searchText"
-        placeholderText="小区/门牌号/房间号/姓名/手机号"
+        placeholderText="小区/门牌/房间/姓名/手机"
         @search="handleSearch"
     >
         <!-- 租约筛选组件 -->
@@ -95,6 +95,10 @@
     };
 
     onLoad(() => {
+        if (uni.getStorageSync('leaseStatus')) {
+            searchForm.value.status = uni.getStorageSync('leaseStatus');
+            uni.removeStorageSync('leaseStatus');
+        }
         uni.hideTabBar({
             fail: () => {},
         });
